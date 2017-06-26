@@ -1,0 +1,13 @@
+<resources>
+
+    <color name="black_overlay">#66000000</color>
+
+    <color name="bg_view_gray">#F0F0F0</color>
+    <color name="btn_gray">#F9F9F9</color>
+    <color name="btn_gray_pressed">#E3E3E3</color>
+    
+    <color name="text_color_white">#FFFFFF</color>
+    
+    <color name="text_color_gray">#767D91</color>
+    <color name="text_color_black">#43484C</color>
+</resources>

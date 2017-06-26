@@ -2,8 +2,96 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/common/DiskLruCache.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/libs/bcprov-jdk15on-151.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/common/FileUtils.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/screenmanager/MediaInfoRef.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/screenmanager/SubWindowInfoRef.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/AudioView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/ControlView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/DateTimeView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/GalleryView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/MarqueeView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/MultiMediaView.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/PosterBaseView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/ProgressBarView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/RunningView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/SoundView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/TimerView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/WaitingDialog.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/YSHorizontalScrollView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/YSTextView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/YSWebView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable-en-rUS-hdpi" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable-en-rUS-land-hdpi" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable-en-rUS-port-hdpi" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable-hdpi" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable-land-hdpi" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable-port-hdpi" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/Thumbs.db" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/alertdialog_left_selector.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/alertdialog_right_selector.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/auth_getdevinfo_sel.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/auth_importauthcode_sel.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/auth_importkey_sel.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/auth_updatekey_sel.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/back.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/btn_gray.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/del.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/dialog_background.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/dlpbarhorizontal.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/forward.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/frame_run.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/memory_pwd_sel.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/open.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_about.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_btn_about.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_btn_clock.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_btn_filemanage.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_btn_network.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_btn_server.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_btn_system.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_btn_tools.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_clock.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_filemanage.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_login_sel.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_mabout_sel.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_mclock_sel.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_mfilemanage_sel.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_mserver_sel.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_msystem_sel.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_mtools_sel.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_network.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_server.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_system.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/osd_tools.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/pause.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/play.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/play.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/reset_pwd_sel.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/set_about.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/set_clock.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/set_filemanage.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/set_home.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/set_server.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/set_system.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/set_tools.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/sound_line.bmp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/sound_line1.bmp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/sounddisable.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/soundenable.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/stepbackward.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable/stepforward.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/layout/controler.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/layout/view_audio.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/layout/view_datetime.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/layout/view_gallery.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/layout/view_marquee.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/layout/view_multimedia.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/layout/view_pro_running.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/layout/view_progressbar.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/layout/view_timer.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/layout/view_web.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/values/colors.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/values/strings.xml" charset="GBK" />
   </component>
 </project>

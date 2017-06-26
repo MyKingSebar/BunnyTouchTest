@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/running_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/loadingIv"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:background="@drawable/frame_run"/>
+
+    <TextView
+        android:id="@+id/loadingTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_alignBottom="@+id/loadingIv"
+		android:layout_centerHorizontal="true"
+		android:textSize="15sp" />
+
+</RelativeLayout>

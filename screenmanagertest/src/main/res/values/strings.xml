@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">商业显示终端</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- 设置界面的四项大分类 -->
+    <string name="str_server">服务器设置</string>
+    <string name="str_clock">定时开关机</string>
+    <string name="str_about">关于产品</string>
+    <string name="str_tools">系统工具</string>
+    <string name="str_on">定时开机了</string>
+    <string name="str_off">定时关机了</string>
+
+    <!-- 服务器设置 -->
+    <string name="server_weburl">Web URL:&#160;</string>
+    
+    <string name="server_ftp_port">Ftp 端口:&#160;</string>
+    <string name="server_ftp_id">Ftp 账号:&#160;</string>
+    <string name="server_ftp_pwd">Ftp 密码:&#160;</string>
+    <string name="server_ntp_port">Ntp 端口:&#160;</string>
+    <!-- 同步播放 -->
+    <string name="multicast_display_control">同步播放控制</string>
+    <string name="multicast_group_leader">组长</string>
+    <string name="multicast_group_member">组员</string>
+    <string name="multicast_close">关闭</string>
+    <string name="multicast_ip_address">组播地址:</string>
+    <string name="multicast_local_port">本地端口:</string>
+    <string name="multicast_port">组播端口:</string>
+    
+
+    <!-- 系统工具 -->
+    <string name="tools_format_disk">清空磁盘节目</string>
+    <string name="tools_usb_update_program">U盘更新节目</string>
+    <string name="tools_configuration_file_backup">配置文件备份</string>
+    <string name="tools_configuration_file_restore">配置文件恢复</string>
+    <string name="tools_upgrage_kernel">升级平台软件</string>
+    <string name="tools_upgrage_app">升级应用软件</string>
+    <string name="tools_reload_webview">网页刷新控制</string>
+    <string name="tools_boot_screen_update">开机画面更新</string>
+    <string name="tools_standby_screen_update">待机画面更新</string>
+    <string name="tools_restore_factory_setting">恢复出厂设置</string>
+    <string name="tools_DVB_auto_searching">DVB自动搜台</string>
+    <string name="tools_check_conn">检测网络</string>
+    <string name="tools_log_manager">日志管理</string>
+    <string name="tools_cancel_savepwd">清除记录密码</string>
+
+    <!-- 关于产品 -->
+    <string name="about_cfe">Android 版 本 号:</string>
+    <string name="about_kernelver">内 核 版 本 号:</string>
+    <string name="about_swver">软 件 版 本 号:</string>
+    <string name="about_hwver">硬 件 版 本 号:</string>
+    <string name="about_id">终端 I D:</string>
+    <string name="about_mac">M A C 地 址:</string>
+    <string name="about_connStatus">网 络 连 接 状 态:</string>
+    <string name="about_certNum">入 网 许 可 证 号:</string>
+    <string name="about_termGrp">终 端 所 属 群 组:</string>
+    <string name="about_diskStatus">磁 盘 状 态:</string>
+    <string name="title_activity_normal_displayer">NormalDisplayerActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="about_ip">I P 地 址:</string>
+
+    <!-- clock -->
+    <string name="clock_title_top">(长按条目增加/更改/删除时间段)</string>
+    <string name="clock_header">开机时间--关机时间</string>
+    <string name="clock_boottime">开机时间：</string>
+    <string name="clock_Shutdowntime">关机时间：</string>
+    <string name="clock_addbtn">新增时间</string>
+
+    <!-- clock dialog -->
+    <string name="clock_dialog_header">定时开关机参数设置</string>
+    <string name="clock_dialog_refrech">刷新列表</string>
+    <string name="clock_dialog_add">增加时间段</string>
+    <string name="clock_dialog_modify">修改时间段</string>
+    <string name="clock_dialog_del">删除时间段</string>
+    <string name="clock_dialog_delall">清空所有时间段</string>
+    <string name="clock_dialog_warn_invalidtime">请注意输入正确的时间格式（时:分:秒）！</string>
+    <string name="clock_dialog_warn_format">关机时间必须大于开机时间,请注意输入的格式</string>
+    <string name="clock_dialog_warn_timeconfilct">当前时间与已有的时间段冲突</string>
+    <string name="clock_dialog_warn_timeinvalid">开关机时间间隔必须大于%1$d分钟</string>
+    <string name="clock_dialog_warn_timenumtransfinite">开关机时间段已超出最大组数(10组), 不能继续添加.</string>
+
+    <!-- tools dialog -->
+    <string name="tools_dialog_u_disk_update_header">请检查是否已经插入U盘，是否现在更新？</string>
+    <string name="tools_dialog_factory_header">恢复出厂设置后系统参数将更改，是否需要执行此操作？</string>
+    <string name="tools_dialog_clearallporgram">此操作将清空磁盘中的所有节目，是否确定要执行此操作？</string>
+    <string name="tools_dialog_back_warn_success">配置文件恢复成功！</string>
+    <string name="tools_dialog_back_warn_failure">配置文件恢复失败！</string>
+    <string name="tools_dialog_backup_warn_success">配置文件备份成功！</string>
+    <string name="tools_dialog_backup_warn_failure">配置文件备份失败！</string>
+    <string name="tools_dialog_u_disk_update_titles">节目更新</string>
+    <string name="tools_dialog_u_disk_update_message">正在更新, 请稍等...</string>
+    <string name="tools_dialog_u_disk_update_success">节目更新成功！</string>
+    <string name="tools_dialog_u_disk_update_failure">节目更新失败，请重试！</string>
+    <string name="tools_dialog_factory_titles">恢复出厂设置</string>
+    <string name="tools_dialog_factory_message">正在恢复出厂参数, 请稍等......</string>
+    <string name="tools_dialog_factory_success">出厂设置恢复成功！</string>
+    <string name="tools_dialog_boot_update_failure">开机画面更新失败，请重试！</string>
+    <string name="tools_dialog_boot_update_success">开机画面更新成功！</string>
+    <string name="tools_dialog_standby_update_failure">待机画面更新失败，请重试！</string>
+    <string name="tools_dialog_standby_update_success">待机画面更新成功！</string>
+    <string name="tools_dialog_sw_update_failure">软件更新失败，请重试！</string>
+    <string name="tools_dialog_sw_update_success">软件更新成功</string>
+    <string name="tools_dialog_cancel_title">注意：该操作将清除密码的记录</string>
+    <string name="tools_dialog_cancel_success">取消记住密码成功</string>
+
+    <!-- tools clear pgm -->
+    <string name="tools_dialog_clear_title">清空节目</string>
+    <string name="tools_dialog_clear_message">正在清空磁盘节目, 请稍等......</string>
+    <string name="tools_dialog_clear_success">节目已清空！</string>
+    <string name="tools_dialog_clear_failure">节目清空失败，请重试！</string>
+
+    <!-- tools log manager	-->
+    <string name="tools_dialog_log_header">日志管理</string>
+    <string name="tools_dialog_log_playlog">记录播放日志</string>
+    <string name="tools_dialog_log_commonlog">记录系统日志</string>
+    <string name="tools_dialog_log_upload">上传</string>
+    <string name="tools_dialog_log_clear">清除日志</string>
+    
+
+    <!-- tools checknet -->
+    <string name="tools_dialog_checknet_header">网络检测</string>
+    <string name="tools_dialog_checknet_ipadress">I P 地址:</string>
+    <string name="tools_dialog_checknet_ipstate">IP地址连接状态:</string>
+    <string name="tools_dialog_checknet_serverstate">服务器连接状态:</string>
+    <string name="tools_dialog_checknet_testip">测试IP</string>
+    <string name="tools_dialog_checknet_testserver">测试服务器</string>
+    <string name="tools_dialog_checknet_message">正在检测网络的连通性, 请稍等...</string>
+    <string name="tools_dialog_checknet_ipsuccess">IP连接成功！</string>
+    <string name="tools_dialog_checknet_ipfailure">IP连接失败！</string>
+    <string name="tools_dialog_checknet_serversuccess">服务器连接成功！</string>
+    <string name="tools_dialog_checknet_serverfailure">服务器连接失败！</string>
+
+    <!-- tools apkupdate -->
+    <string name="tools_dialog_apkupdate_title">正在检测软件新版本</string>
+    <string name="tools_dialog_apkupdate_message">请稍候...</string>
+    <string name="tools_dialog_apkupdate_currentcode">当前版本:</string>
+    <string name="tools_dialog_apkupdate_message_noupdate">,\n已是最新版,无需更新!</string>
+    <string name="tools_dialog_apkupdate_update">软件更新</string>
+    <string name="tools_dialog_apkupdate_findnewcode">, 发现新版本:</string>
+    <string name="tools_dialog_apkupdate_isupdate">, 是否更新?</string>
+    <string name="tools_dialog_apkupdate_downtitle">正在下载</string>
+    <string name="tools_dialog_apkupdate_noupdate">暂不更新</string>
+    <string name="tools_dialog_apkupdate_failure_yzerror">软件更新失败，验证错误</string>
+    <string name="tools_dialog_apkupdate_failure_downcancel">软件更新失败，下载取消</string>
+    <string name="tools_dialog_apkupdate_failure_downfailure">软件更新失败，下载失败</string>
+    <string name="tools_dialog_apkupdate_failure_detectfailure">检测更新软件失败</string>
+    <string name="tools_dialog_apkupdate_update_remind">软件更新提醒</string>
+    
+    <!-- reload webview -->
+    <string name="reload_webview_for_period">网页刷新：</string>
+    <string name="reload_period">刷新时间（秒）</string>
+    <string name="reload_webview">网页区刷新</string>
+
+    <!-- osd login -->
+    <string name="login_hint">请输入密码</string>
+    <string name="login_come">进入</string>
+    <string name="login_remembermsg">记住密码</string>
+    <string name="login_modifyrmsg">修改密码</string>
+    <string name="login_dialog_nullmsg">输入密码不可为空</string>
+    <string name="login_dialog_msgerror">密码不正确，请重新输入</string>
+    <string name="login_dialog_writetruemsg">请先输入正确的密码</string>
+    <string name="login_dialog_msgmodifysuccess">密码修改成功</string>
+    <string name="login_dialog_newpwddifferent">新密码不可与原密码相同</string>
+    <string name="login_dialog_retrywrite">原密码不正确,请重新输入原密码</string>
+    <string name="login_dialog_reset_oldmsg">旧密码</string>
+    <string name="login_dialog_reset_newmsg">新密码</string>
+
+    <!-- other -->
+    <string name="enter">确定</string>
+    <string name="retry1">重试</string>
+    <string name="cancel">取消</string>
+    <string name="close">关闭</string>
+    <string name="update">更新</string>
+    <string name="wait1">请稍候...</string>
+    <string name="dialog_quit">退出</string>
+
+    <!-- 下载节目进度 -->
+    <string name="downnomaltitle">正在下载普通节目</string>
+    <string name="downurgenttitle">正在下载紧急节目</string>
+    
+    <!-- 自动关屏提示 -->
+    <string name="autoscreenoff_prompt_title">自动关机</string>
+    <string name="autoscreenoff_prompt_msg">当前时间为关机时间，系统将在%1$d分钟后自动关机！\n如有需要，请通过服务端或者OSD菜单调整自动开关机时间。</string>
+    <string name="autoscreenoff_prompt_positive">确定</string>
+    
+    <!-- 重新连接服务器提示 -->
+    <string name="poweroff_prompt_msg">已连接到新的服务器，系统将重启以响应新服务器设置。</string>
+    
+    <!-- 系统授权 -->
+    <string name="getdevinfo_btntxt">获取设备信息</string>
+    <string name="importauthcode_btntxt">导入授权码</string>
+    <string name="importkey_btntxt">导入密钥</string>
+    <string name="updatekey_btntxt">更新密钥</string>
+    
+    <string name="unauthorized_msg">设备未授权</string>
+    <string name="active_auth_code_online">授权码在线激活</string>
+    <string name="auth_code">授权码:</string>
+    <string name="hint_auth_code">请输入16位产品授权码</string>
+    <string name="auth_company_name">公司编码：</string>
+    <string name="hint_auth_company_name">请输入公司编码</string>
+    <string name="loading">正在加载 &#8230;&#8230;&#8230;</string>
+    <string name="auth_success_msg">授权码激活成功</string>
+    <string name="keynotexist_info">密钥文件不存在，请导入密钥！</string>
+    <string name="importauth_info">请导入授权码！</string>
+    
+    <string name="importauth_warning">请先导入密钥！</string>
+    
+    <string name="auth_mac_info">MAC地址：</string>
+    <string name="auth_cpuid_info">设备标识：</string>
+    
+    <string name="dialog_devinfo_title">设备信息</string>
+    <string name="dialog_authcode_title">导入授权码</string>
+    <string name="dialog_importkey_title">导入密钥</string>
+    <string name="dialog_updatekey_title">更新密钥</string>
+    <string name="dialog_devinfo_postxt">导出设备信息到U盘</string>
+    <string name="dialog_devinfo_negtxt">确定</string>
+    <string name="dialog_authcode_postxt">U盘导入</string>
+    <string name="dialog_authcode_negtxt">取消</string>
+    <string name="dialog_importkey_postxt">U盘导入</string>
+    <string name="dialog_updatekey_postxt">U盘更新</string>
+    <string name="dialog_key_negtxt">取消</string>
+    
+    <string name="pdlg_exportdevinfo_title">导出设备信息</string>
+    <string name="pdlg_importauthcode_title">导入授权码</string>
+    <string name="pdlg_importkey_title">导入密钥</string>
+    <string name="pdlg_updatekey_title">更新密钥</string>
+    <string name="pdlg_exportdevinfo_msg">正在导出设备信息，请稍等。。。</string>
+    <string name="pdlg_importauthcode_msg">正在导入授权码，请稍等。。。</string>
+    <string name="pdlg_importkey_msg">正在导入密钥，请稍等。。。</string>
+    <string name="pdlg_updatekey_msg">正在更新密钥，请稍等。。。</string>
+    
+    <string name="auth_success_submsg">系统将在%1$d秒钟后自动进入正常播放状态，请稍等！</string>
+    <string name="auth_failure_submsg">激活失败，请重新导入正确的授权码！</string>
+    
+    <string name="exportdevinfo_success_title">设备信息导出成功！</string>
+    <string name="exportdevinfo_failure_title">设备信息导出失败，请重试！</string>
+    <string name="importauthcode_success_title">设备授权码导入成功！</string>
+    <string name="importauthcode_failure_title">设备授权码导入失败，请重试！</string>
+    <string name="importkey_success_title">密钥导入成功！</string>
+    <string name="importkey_failure_title">密钥导入失败，请重试！</string>
+    <string name="updatekey_success_title">密钥更新成功！</string>
+    <string name="updatekey_failure_title">密钥更新失败，请重试！</string>
+    
+    <string name="dlg_title_serverparam">更改服务器参数</string>
+    
+    
+    <string name="toast_network_failed">网络连接错误，请检查后重试</string>
+    <string name="toast_wrong_register_code">授权码或公司标识错误，请重新输入</string>
+    <string name="toast_exceed_register_count">授权码注册产品数量已达到上限</string>
+    <string name="toast_wrong_service_param">服务器参数错误</string>
+    <string name="txt_progbar">数据加载中......</string>
+    <string name="serv_online">已连接上服务器</string>
+    <string name="serv_offline">未连接上服务器</string>
+
+    <string name="week_sunday">日</string>
+    <string name="week_monday">一</string>
+    <string name="week_tuesday">二</string>
+    <string name="week_wednesday">三</string>
+    <string name="week_thursday">四</string>
+    <string name="week_friday">五</string>
+    <string name="week_saturday">六</string>
+    
+    <string name="udisk_update_pgm">节目更新</string>
+    <string name="udisk_content">检测到U盘中存在节目素材，是否更新节目？</string>
+    <string name="udisk_title">更新</string>
+    <string name="udisk_btn_cancel">取消</string>
+    
+    <string name="udisk_update_apk">软件更新</string>
+    <string name="udisk_content_apk">检测到U盘中有新的软件版本，是否更新软件？</string>
+    
+</resources>
