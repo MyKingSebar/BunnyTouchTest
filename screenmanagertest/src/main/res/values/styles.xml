@@ -1,11 +1,152 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="transActivity" parent="android:Theme.Translucent.NoTitleBar">
+        <item name="android:windowBackground">@color/dialog_back</item>
     </style>
 
+    <!-- 自定义loading dialog -->
+    <style name="loading_dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/dialog_back</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="FloatNormalDialogStyle" parent="@android:style/Theme.Holo.Dialog">
+        <!-- 设置为浮动窗口 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 设置无边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 设置无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 设置完全透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 设置屏幕变暗 -->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+    
+    <style name="osdAnimation" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/in</item>
+        <item name="android:windowExitAnimation">@anim/out</item>
+    </style>
+
+    <style name="osdbtnStyle">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="netdialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/network_back</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="menubutton">
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize"> 40sp</item>
+        <item name="android:paddingTop">40dp</item>
+    </style>
+
+    <!-- 定义一种字体格式,描述一种白色字体 -->
+    <style name="textstyle1">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:lines">1</item>
+        <item name="android:gravity">right</item>
+    </style>
+
+    <!-- 定义一种字体格式,描述一种黑色字体 -->
+    <style name="textstyle2">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="pageStyle">
+        <item name="android:paddingTop">@dimen/padingTop</item>
+        <item name="android:paddingBottom">@dimen/padingBottom</item>
+        <item name="android:paddingLeft">@dimen/padingLeft</item>
+        <item name="android:paddingRight">@dimen/padingRight</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center_vertical|left</item>
+    </style>
+
+    <style name="title_style">
+        <item name="android:textSize">50sp</item>
+        <item name="android:textColor">#ffffffff</item>
+    </style>
+
+    <style name="network_font">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="network_message_font">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/hotpink</item>
+    </style>
+
+    <style name="dialog_title_font">
+        <item name="android:textSize">29sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="ContentOverlay" parent="@android:style/Theme.Light">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="buttonBarStyle">@style/ButtonBar</item>
+        <item name="buttonBarButtonStyle">@style/ButtonBarButton</item>
+    </style>
+
+    <style name="ButtonBar">
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:background">@android:drawable/bottom_bar</item>
+    </style>
+
+    <style name="ButtonBarButton" />
+
+    <style name="logsetdialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/network_back</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    <style name="osd_tools_text">
+        <item name="android:textSize">22sp</item>       
+    </style>
+    
+    <style name="stl_auth_maininfo">
+        <item name="android:textSize">60sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <style name="stl_auth_subinfo">
+        <item name="android:textSize">25sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <style name="stl_auth_btn">
+        <item name="android:textSize">20sp</item>       
+    </style>
+    
 </resources>

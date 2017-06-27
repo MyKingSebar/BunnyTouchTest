@@ -54,6 +54,7 @@ public class ScreenManager {
     private final static int EVENT_MEDIA_READY_SHOW_PROGRAM = 0x8004;
 
     private Context mContext = null;
+    private ScreenDaemon         mScreenDaemonThread       = null;
     private static ScreenManager mScreenManagerInstance = null;
 
     // 节目信息
@@ -782,4 +783,33 @@ public class ScreenManager {
     };
 
 
+    /**********************************************
+     * Start Screen Daemon Thread *
+     **********************************************/
+    public void startRun()
+    {
+        stopRun();
+        mStatus = IDLE_STATE;
+        mScreenDaemonThread = new ScreenDaemon();
+        mScreenDaemonThread.setRunFlag(true);
+        mScreenDaemonThread.start();
+    }
+
+    /**********************************************
+     * Stop Screen Daemon Thread *
+     **********************************************/
+    public void stopRun()
+    {
+        if (mScreenDaemonThread != null)
+        {
+            mScreenDaemonThread.setRunFlag(false);
+            mScreenDaemonThread.interrupt();
+            mScreenDaemonThread = null;
+        }
+
+
+        mHandler.removeMessages(EVENT_SHOW_IDLE_PROGRAM);
+        mHandler.removeMessages(EVENT_SHOW_NORMAL_PROGRAM);
+        mHandler.removeMessages(EVENT_MEDIA_READY_SHOW_PROGRAM);
+    }
 }

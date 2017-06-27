@@ -17,7 +17,9 @@ import java.util.Random;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -27,6 +29,7 @@ import android.graphics.Typeface;
 import android.graphics.Paint.FontMetrics;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
@@ -57,6 +60,10 @@ import com.example.screenmanagertest.PosterApplication;
 import com.example.screenmanagertest.R;
 import com.example.screenmanagertest.common.FileUtils;
 import com.example.screenmanagertest.common.Logger;
+import com.example.screenmanagertest.gifdecode.GifAction;
+import com.example.screenmanagertest.gifdecode.GifDecodeInfo;
+import com.example.screenmanagertest.gifdecode.GifDecoder;
+import com.example.screenmanagertest.gifdecode.GifFrame;
 import com.example.screenmanagertest.screenmanager.MediaInfoRef;
 import com.example.screenmanagertest.screenmanager.ScreenManager;
 
@@ -121,7 +128,7 @@ public class MultiMediaView extends PosterBaseView
     private boolean                               mIsPlayingVideo            = false;
     private int                                   mCurrentShowType           = SHOWTYPE_NONE;
     
-    // ±£´æËùÓĞµÄGIF decoderĞÅÏ¢
+    // ä¿å­˜æ‰€æœ‰çš„GIF decoderä¿¡æ¯
     private GifDecoder                            mGifDecoder                = null;
     private GifDecodeInfo                         mDecodeInfo                = null;
     private HashMap<String, GifDecodeInfo>        mGifDecodeInfoMap          = null;
@@ -488,7 +495,7 @@ public class MultiMediaView extends PosterBaseView
             Logger.i("Media list is null.");
             if ("Main".equals(mViewType))
             {
-                ScreenManager.getInstance().setPrgFinishedFlag(true);
+//                ScreenManager.getInstance().setPrgFinishedFlag(true);
                 Logger.i("No media info for main window, Program play finished.");
             }
             return;
@@ -498,7 +505,7 @@ public class MultiMediaView extends PosterBaseView
             Logger.i("No media in the list.");
             if ("Main".equals(mViewType))
             {
-                ScreenManager.getInstance().setPrgFinishedFlag(true);
+//                ScreenManager.getInstance().setPrgFinishedFlag(true);
                 Logger.i("No media info for main window, Program play finished.");
             }
             return;
@@ -681,22 +688,22 @@ public class MultiMediaView extends PosterBaseView
         int nWidth = media.containerwidth;
         int nHeight = media.containerheight;
 
-        // ´´½¨»­±Ê
+        // åˆ›å»ºç”»ç¬”
         Paint paint = new Paint();
-        paint.setTextSize(fSize); // ×ÖºÅ
-//        paint.setColor(fColor); // ÑÕÉ«
-        paint.setAlpha(0xff); // ×ÖÌå²»Í¸Ã÷
-//        paint.setTypeface(font); // ×ÖÌå
-        paint.setAntiAlias(true); // È¥³ı¾â³İ
-        paint.setFilterBitmap(true); // ¶ÔÎ»Í¼½øĞĞÂË²¨´¦Àí
+        paint.setTextSize(fSize); // å­—å·
+//        paint.setColor(fColor); // é¢œè‰²
+        paint.setAlpha(0xff); // å­—ä½“ä¸é€æ˜
+//        paint.setTypeface(font); // å­—ä½“
+        paint.setAntiAlias(true); // å»é™¤é”¯é½¿
+        paint.setFilterBitmap(true); // å¯¹ä½å›¾è¿›è¡Œæ»¤æ³¢å¤„ç†
 
-        // ¼ÆËãÒ³Êı
+        // è®¡ç®—é¡µæ•°
         FontMetrics fm = paint.getFontMetrics();
-        float lineHeight = (float)Math.ceil(fm.descent - fm.ascent); // Ã¿ĞĞ¸ß¶È
-        int linesPerPage = (int) (nHeight / (lineHeight + fm.leading)); // Ã¿Ò»Ò³µÄĞĞÊı
-        ArrayList<String> textList = autoSplit(strText, paint, (nWidth - 10)); // ×Ô¶¯·ÖĞĞ
-        int lineCount = textList.size(); // ×ÜĞĞÊı
-        int pages = 1; // ×ÜÒ³Êı
+        float lineHeight = (float)Math.ceil(fm.descent - fm.ascent); // æ¯è¡Œé«˜åº¦
+        int linesPerPage = (int) (nHeight / (lineHeight + fm.leading)); // æ¯ä¸€é¡µçš„è¡Œæ•°
+        ArrayList<String> textList = autoSplit(strText, paint, (nWidth - 10)); // è‡ªåŠ¨åˆ†è¡Œ
+        int lineCount = textList.size(); // æ€»è¡Œæ•°
+        int pages = 1; // æ€»é¡µæ•°
         if ((lineCount % linesPerPage) == 0)
         {
             pages = lineCount / linesPerPage;
@@ -706,12 +713,12 @@ public class MultiMediaView extends PosterBaseView
             pages = lineCount / linesPerPage + 1;
         }
 
-        // ´´½¨canvas
+        // åˆ›å»ºcanvas
         Bitmap bmp = Bitmap.createBitmap(nWidth, nHeight, Bitmap.Config.ARGB_4444);
         Canvas canvas = new Canvas(bmp);
 
 
-        // »­ÎÄ±¾
+        // ç”»æ–‡æœ¬
         float x = 5;
         float y = lineHeight;
         int nIdx = 0;
@@ -719,11 +726,11 @@ public class MultiMediaView extends PosterBaseView
         {
             x = 5;
             y = lineHeight;
-            nIdx = i * linesPerPage; // Ò³µÄÆğÊ¼ĞĞ
+            nIdx = i * linesPerPage; // é¡µçš„èµ·å§‹è¡Œ
 
             if (nIdx >= textList.size() || TextUtils.isEmpty(textList.get(nIdx)))
             {
-                continue; // ¿Õ°×Ò³ÔòÌø¹ı
+                continue; // ç©ºç™½é¡µåˆ™è·³è¿‡
             }
 
             canvas.drawColor(Color.TRANSPARENT, Mode.CLEAR);
@@ -732,19 +739,19 @@ public class MultiMediaView extends PosterBaseView
                 nIdx = i * linesPerPage + j;
                 if (nIdx >= textList.size())
                 {
-                    break; // ×îºóÒ»Ò³²»ÂúÒ»ÆÁµÄÇé¿ö
+                    break; // æœ€åä¸€é¡µä¸æ»¡ä¸€å±çš„æƒ…å†µ
                 }
                 else if (textList.get(nIdx) != null)
                 {
                     canvas.drawText(textList.get(nIdx), x, y, paint);
-                    y = y + lineHeight + fm.leading; // (×Ö¸ß+ĞĞ¼ä¾à)
+                    y = y + lineHeight + fm.leading; // (å­—é«˜+è¡Œé—´è·)
                 }
             }
 
-            // ÏÔÊ¾ÎÄ×Ö
+            // æ˜¾ç¤ºæ–‡å­—
             showPicture(bmp, media.mode);
 
-            // µÈ´ıÏÔÊ¾ÏÂÒ»Ò³
+            // ç­‰å¾…æ˜¾ç¤ºä¸‹ä¸€é¡µ
             Thread.sleep(durationPerPage);
         }
     }
@@ -928,16 +935,6 @@ public class MultiMediaView extends PosterBaseView
                                 mGifDecodeInfoMap = new HashMap<String, GifDecodeInfo>();
                             }
 
-                            LogUtils.getInstance().toAddPLog(Contants.INFO, Contants.PlayMediaStart, mCurrentMedia.mid, mViewName, "");
-                            if (playGif(mCurrentMedia))
-                            {
-                                LogUtils.getInstance().toAddPLog(Contants.INFO, Contants.PlayMediaEnd, mCurrentMedia.mid, mViewName, Contants.NOMALSTOP);
-                            }
-                            else
-                            {
-                                LogUtils.getInstance().toAddPLog(Contants.INFO, Contants.PlayMediaEnd, mCurrentMedia.mid, mViewName, Contants.ERRORSTOP);
-                            }
-                            FileUtils.updateFileLastTime(mCurrentMedia.filePath);
                             mCurrentMedia.playedtimes++;   // if media has error, the played times will increase.
                             continue;
                         }
@@ -961,29 +958,18 @@ public class MultiMediaView extends PosterBaseView
                             }
                             if (media.filePath.equals(PosterApplication.getStandbyScreenImgPath()) && !FileUtils.isExist(media.filePath))
                         	{
-                        		// Èç¹û´ı»ú»­Ãæ²»´æÔÚ£¬Ôò²¥·ÅÄ¬ÈÏµÄ´ı»ú»­Ãæ
-                        		Bitmap img = PosterApplication.getInstance().getDefaultScreenImg();
+
+                        		// å¦‚æœå¾…æœºç”»é¢ä¸å­˜åœ¨ï¼Œåˆ™æ’­æ”¾é»˜è®¤çš„å¾…æœºç”»é¢
+//                        		Bitmap img = PosterApplication.getInstance().getDefaultScreenImg();
+                                Resources resources = mContext.getResources();
+                                Drawable drawable = resources.getDrawable(R.drawable.del);
+                                BitmapDrawable bd = (BitmapDrawable) drawable;
+                                Bitmap img = bd.getBitmap();
                                 showPicture(img, media.mode);
-                                if (!MulticastManager.getInstance().memberIsValid())
-                                {
-                                    Thread.sleep(DEFAULT_THREAD_QUICKPERIOD);
-                                }
                         	}
                             else
                             {
                                 playImage(mCurrentMedia);
-                                FileUtils.updateFileLastTime(mCurrentMedia.filePath);
-                                if (!MulticastManager.getInstance().memberIsValid())
-                                {
-                                    if (mViewName.startsWith("Weather"))
-                                    {
-                                        Thread.sleep(Math.max(mCurrentMedia.duration, DEFAULT_MEDIA_DURATION));
-                                    }
-                                    else
-                                    {
-                                        Thread.sleep(Math.max(mCurrentMedia.durationPerPage, DEFAULT_MEDIA_DURATION));
-                                    }
-                                }
                             }
                             mCurrentMedia.playedtimes++;
                             continue;
@@ -1106,7 +1092,7 @@ public class MultiMediaView extends PosterBaseView
             mMediaPlayer.setScreenOnWhilePlaying(true);
             mMediaPlayer.prepareAsync();
 
-            // ½ØÆÁÓÃ(Á÷Ã½Ìå²»Ö§³Ö½ØÆÁ)
+            // æˆªå±ç”¨(æµåª’ä½“ä¸æ”¯æŒæˆªå±)
             if (FileUtils.mediaIsFile(media) && FileUtils.isExist(media.filePath))
             {
                 mMediaRetriever = new MediaMetadataRetriever();
@@ -1435,7 +1421,7 @@ public class MultiMediaView extends PosterBaseView
         boolean isComplated = isDecodeComplated(picInfo);
         GifDecodeInfo decodeInfo = getGifDecodeInfo(picInfo);
         if ((decodeInfo == null) ||
-            (isComplated && !gifImgIsExsit(picInfo)))   // Î´½âÂë»òÒÑ½âÂëµ«ÎÄ¼ş²»´æÔÚ£¬ÔòÆô¶¯½âÂë
+            (isComplated && !gifImgIsExsit(picInfo)))   // æœªè§£ç æˆ–å·²è§£ç ä½†æ–‡ä»¶ä¸å­˜åœ¨ï¼Œåˆ™å¯åŠ¨è§£ç 
         {
             // Start decode
             decodeGifPicture(picInfo);

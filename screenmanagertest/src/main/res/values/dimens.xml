@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- 系统设置中的字体 -->
+    <dimen name="system">30sp</dimen>
+    <!-- 系统设置中TableLayout中间的距离 -->
+    <dimen name="system_gap">100sp</dimen>
+    <!-- 距离四个边的距离 -->
+    <dimen name="padingLeft">130dp</dimen>
+    <dimen name="padingRight">130dp</dimen>
+    <dimen name="padingTop">30dp</dimen>
+    <dimen name="padingBottom">90dp</dimen>
+
+</resources>

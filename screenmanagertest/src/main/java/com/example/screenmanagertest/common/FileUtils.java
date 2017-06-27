@@ -190,7 +190,6 @@ public class FileUtils
      *
      * 获取文件夹中所有的文件列表
      *
-     * @param filename
      *            文件名
      *
      * @return
@@ -234,8 +233,6 @@ public class FileUtils
      *
      * 获取文件夹中所有的文件列表,并组成相应String返回服务器
      *
-     * @param filename
-     *            文件名
      *
      * @return
      */
@@ -279,7 +276,6 @@ public class FileUtils
     /**
      * 删除一个目录（可以是非空目录）
      *
-     * @param dir
      */
     public static boolean delDir(String dirName)
     {
@@ -340,8 +336,6 @@ public class FileUtils
     /**
      * 拷贝目录下的所有文件到指定目录
      *
-     * @param srcDir
-     * @param destDir
      * @return
      * @throws IOException
      */
@@ -391,8 +385,6 @@ public class FileUtils
     /**
      * 移动目录下的所有文件到指定目录
      *
-     * @param srcDir
-     * @param destDir
      * @return
      * @throws IOException
      */
@@ -452,7 +444,6 @@ public class FileUtils
     /**
      * Delete a file
      *
-     * @param fileName
      * @return
      * @throws IOException
      */
@@ -562,7 +553,6 @@ public class FileUtils
     /**
      * Determine whether SD card is mount
      *
-     * @param fileName
      * @return
      */
     public static boolean isSDCardMount()
@@ -573,7 +563,6 @@ public class FileUtils
     /**
      * Write text data to the SD card file
      *
-     * @param path
      * @param fileName
      * @param text
      * @return
@@ -595,7 +584,6 @@ public class FileUtils
     /**
      * Write byte data to the SD card file
      *
-     * @param path
      * @param fileName
      * @param data
      * @return
@@ -643,7 +631,6 @@ public class FileUtils
     /**
      * Write a input stream to the SD card file
      *
-     * @param path
      * @param fileName
      * @param input
      * @return
@@ -795,9 +782,7 @@ public class FileUtils
     /**
      * Write byte data to the private file (which is in the 'data/data/' file)
      *
-     * @param path
      * @param fileName
-     * @param data
      * @return
      */
     public static File wirteDataFile(String fileName, String message)

@@ -2,6 +2,7 @@ package com.example.screenmanagertest;
 
 import android.app.Application;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.os.Environment;
 import android.support.v4.util.LruCache;
 import android.util.DisplayMetrics;
@@ -10,6 +11,8 @@ import com.example.screenmanagertest.common.DiskLruCache;
 import com.example.screenmanagertest.common.FileUtils;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by admin on 2017-06-23.
@@ -184,4 +187,73 @@ public class PosterApplication extends Application{
             mImgDiskCache.clearCache();
         }
     }
+
+    public static String getGifImagePath(String subDirName)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append(FileUtils.getExternalStorage());
+        sb.append(File.separator);
+        sb.append("Gif");
+        if (subDirName != null)
+        {
+            sb.append(File.separator);
+            sb.append(subDirName);
+        }
+        if (!FileUtils.isExist(sb.toString()))
+        {
+            FileUtils.createDir(sb.toString());
+        }
+
+        return sb.toString();
+    }
+
+    public static int resizeImage(Bitmap bitmap, String destPath, int width, int height)
+    {
+        int swidth = bitmap.getWidth();
+        int sheight = bitmap.getHeight();
+        float scaleWidht = (float) width / swidth;
+        float scaleHeight = (float) height / sheight;
+        Matrix matrix = new Matrix();
+        matrix.setScale(scaleWidht, scaleHeight);
+        Bitmap newbm = Bitmap.createBitmap(bitmap, 0, 0, swidth, sheight, matrix, true);
+        File saveFile = new File(destPath);
+        FileOutputStream fileOutputStream = null;
+
+        try
+        {
+            saveFile.createNewFile();
+            fileOutputStream = new FileOutputStream(saveFile);
+            if (fileOutputStream != null)
+            {
+                // 把位图的压缩信息写入到一个指定的输出流中
+                // 第一个参数format为压缩的格式
+                // 第二个参数quality为图像压缩比的值,0-100.0 意味着小尺寸压缩,100意味着高质量压缩
+                // 第三个参数stream为输出流
+                newbm.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+            }
+            fileOutputStream.flush();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            return 1;
+        }
+        finally
+        {
+            if (fileOutputStream != null)
+            {
+                try
+                {
+                    fileOutputStream.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return 0;
+    }
+
 }

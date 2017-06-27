@@ -4,6 +4,10 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/common/DiskLruCache.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/libs/bcprov-jdk15on-151.jar" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/common/FileUtils.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/gifdecode/GifAction.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/gifdecode/GifDecodeInfo.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/gifdecode/GifDecoder.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/gifdecode/GifFrame.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/screenmanager/MediaInfoRef.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/screenmanager/SubWindowInfoRef.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/AudioView.java" charset="GBK" />
@@ -11,7 +15,7 @@
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/DateTimeView.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/GalleryView.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/MarqueeView.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/MultiMediaView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/MultiMediaView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/PosterBaseView.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/ProgressBarView.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/RunningView.java" charset="GBK" />
@@ -21,6 +25,7 @@
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/YSHorizontalScrollView.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/YSTextView.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/YSWebView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/anim" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable-en-rUS-hdpi" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable-en-rUS-land-hdpi" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable-en-rUS-port-hdpi" charset="GBK" />
@@ -91,7 +96,10 @@
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/layout/view_progressbar.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/layout/view_timer.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/layout/view_web.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/values/color.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/values/colors.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/values/dimens.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/values/strings.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/values/styles.xml" charset="GBK" />
   </component>
 </project>
