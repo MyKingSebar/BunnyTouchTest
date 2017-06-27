@@ -3,13 +3,10 @@ package com.example.screenmanagertest.screenmanager;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.text.format.Time;
 import android.util.Log;
-import android.view.View;
 
 import com.example.screenmanagertest.MainActivity;
 import com.example.screenmanagertest.PosterApplication;
@@ -22,14 +19,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by admin on 2017-06-22.
  */
 
-public class ScreenManager {
+public class ScreenManager2 {
 
     private static final int IDLE_STATE = 0;
     private static final int PLAYING_NORMAL_PROGRAM = 1;
@@ -56,10 +52,7 @@ public class ScreenManager {
 
     private Context mContext = null;
     private ScreenDaemon         mScreenDaemonThread       = null;
-    private static ScreenManager mScreenManagerInstance = null;
-
-    private String firstPlayListPath=null;
-    private ProgramLists playlists=null;
+    private static ScreenManager2 mScreenManagerInstance = null;
 
     // 节目信息
     private final class ProgramInfo {
@@ -83,7 +76,7 @@ public class ScreenManager {
     }
 
 
-    private ScreenManager(Context context) {
+    private ScreenManager2(Context context) {
         /*
          * This Class is a single instance mode, and define a private constructor to avoid external use the 'new'
          * keyword to instantiate a objects directly.
@@ -91,14 +84,14 @@ public class ScreenManager {
         mContext = context;
     }
 
-    public static ScreenManager createInstance(Context context) {
+    public static ScreenManager2 createInstance(Context context) {
         if (mScreenManagerInstance == null && context != null) {
-            mScreenManagerInstance = new ScreenManager(context);
+            mScreenManagerInstance = new ScreenManager2(context);
         }
         return mScreenManagerInstance;
     }
 
-    public static ScreenManager getInstance() {
+    public static ScreenManager2 getInstance() {
         return mScreenManagerInstance;
     }
 
@@ -127,25 +120,6 @@ public class ScreenManager {
             sb.append(File.separator);
             sb.append(LOCAL_NORMAL_PLAYLIST_FILENAME);
             return sb.toString();
-        }
-        private String obtainNormalPgmListsPath(String path) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(PosterApplication.getProgramPath());
-            sb.append(File.separator);
-            sb.append("template");
-            sb.append(File.separator);
-            sb.append(path);
-            return sb.toString();
-        }
-
-        private ProgramLists getProgramListsFromXml(String filePath){
-            ProgramLists tmpPgmList=null;
-            if (FileUtils.isExist(filePath)) {
-                tmpPgmList = (ProgramLists) XmlFileParse(filePath, ProgramLists.class);
-            } else {
-                return null;
-            }
-            return tmpPgmList;
         }
 
 
@@ -292,19 +266,67 @@ public class ScreenManager {
         public void run() {
             mNormalPgmFilePath = obtainNormalPgmFilePath();
             Log.i("jialei","mNormalPgmFilePath:"+mNormalPgmFilePath);
-//            mNormalProgramInfoList = getProgramScheduleFromXml(mNormalPgmFilePath);
-            firstPlayListPath=((xmlpath) XmlFileParse(mNormalPgmFilePath, xmlpath.class)).start;
-            Log.i("jialei","firstPlayListPath:"+firstPlayListPath);
-            playlists=getProgramListsFromXml(obtainNormalPgmListsPath(firstPlayListPath));
-            if(playlists!=null){
-                try{
+            mNormalProgramInfoList = getProgramScheduleFromXml(mNormalPgmFilePath);
+            Log.i("jialei","mIsRun"+mIsRun);
+            while (mIsRun) {
+                try {
+                    if (!pgmPathIsAvalible()) {
+                        Log.i("jialei","!pgmPathIsAvalible()");
+                        mNormalPgmFilePath = obtainNormalPgmFilePath();
+                        mNormalProgramInfoList = getProgramScheduleFromXml(mNormalPgmFilePath);
+                        mStatus = IDLE_STATE;
+                    }
 
-                    loadProgramContent(EVENT_SHOW_NORMAL_PROGRAM, playlists);
-                }catch (InterruptedException e) {
+                /* 播放状态控制 */
+//                    Log.i("jialei","mStatus:"+mStatus);
+                    switch (mStatus) {
+                        case IDLE_STATE:
+
+                            mNormalProgram = null;
+                            mCurrentPgmVerifyCode = null;
+                            if ((mNormalProgram = obtainNormalProgram()) != null) {
+                            /* check whether has Normal program to play */
+                                Logger.i("Start normal program name is: " + mNormalProgram.programName + " File name is: " + mNormalProgram.pgmFileName);
+                                if (loadProgramContent(EVENT_SHOW_NORMAL_PROGRAM, mNormalProgram)) {
+                                    // 节目加载成功
+                                    mStatus = PLAYING_NORMAL_PROGRAM;
+                                }
+                                continue;
+                            } else if (!mStandbyScreenIsShow) {
+                            /* Show standby screen */
+                                Logger.i("Start standby screen.");
+                                loadProgramContent(EVENT_SHOW_IDLE_PROGRAM, null);
+                            }
+                            break;
+
+                        case PLAYING_NORMAL_PROGRAM:
+
+                            if (normalPgmIsValid()) {
+                            /* 有相同优先级的节目，则循环播放节目 */
+                                if (mNormalProgram.playFinished && mSamePriNormalPgmList != null) {
+                                    if (++mSamePriNormalPgmListIdx >= mSamePriNormalPgmList.size()) {
+                                        mSamePriNormalPgmListIdx = 0;
+                                    }
+                                    mNormalProgram = mSamePriNormalPgmList.get(mSamePriNormalPgmListIdx);
+                                    Logger.i("change normal program is: " + mNormalProgram.programName + " File name is: " + mNormalProgram.pgmFileName);
+                                    loadProgramContent(EVENT_SHOW_NORMAL_PROGRAM, mNormalProgram);
+                                }
+                            } else {
+                                mNormalProgram = null;
+                                mCurrentPgmVerifyCode = null;
+                                mStatus = IDLE_STATE;
+                                Logger.i("Normal program is invalid, go to IDLE status.");
+                                continue;
+                            }
+
+                            break;
+
+
+                    }
+                } catch (InterruptedException e) {
                     Logger.i("ScreenDaemon Thread sleep over, and safe exit, the Thread id is: " + currentThread().getId());
                     return;
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     Logger.e("ScreenDaemon Thread Catch a error");
                     e.printStackTrace();
                     try {
@@ -314,78 +336,9 @@ public class ScreenManager {
                         return;
                     }
                 }
+
+
             }
-//            while (mIsRun) {
-//                try {
-//                    if (!pgmPathIsAvalible()) {
-//                        Log.i("jialei","!pgmPathIsAvalible()");
-//                        mNormalPgmFilePath = obtainNormalPgmFilePath();
-//                        mNormalProgramInfoList = getProgramScheduleFromXml(mNormalPgmFilePath);
-//                        mStatus = IDLE_STATE;
-//                    }
-//
-//                /* 播放状态控制 */
-////                    Log.i("jialei","mStatus:"+mStatus);
-//                    switch (mStatus) {
-//                        case IDLE_STATE:
-//
-//                            mNormalProgram = null;
-//                            mCurrentPgmVerifyCode = null;
-//                            if ((mNormalProgram = obtainNormalProgram()) != null) {
-//                            /* check whether has Normal program to play */
-//                                Logger.i("Start normal program name is: " + mNormalProgram.programName + " File name is: " + mNormalProgram.pgmFileName);
-//                                if (loadProgramContent(EVENT_SHOW_NORMAL_PROGRAM, mNormalProgram)) {
-//                                    // 节目加载成功
-//                                    mStatus = PLAYING_NORMAL_PROGRAM;
-//                                }
-//                                continue;
-//                            } else if (!mStandbyScreenIsShow) {
-//                            /* Show standby screen */
-//                                Logger.i("Start standby screen.");
-//                                loadProgramContent(EVENT_SHOW_IDLE_PROGRAM, null);
-//                            }
-//                            break;
-//
-//                        case PLAYING_NORMAL_PROGRAM:
-//
-//                            if (normalPgmIsValid()) {
-//                            /* 有相同优先级的节目，则循环播放节目 */
-//                                if (mNormalProgram.playFinished && mSamePriNormalPgmList != null) {
-//                                    if (++mSamePriNormalPgmListIdx >= mSamePriNormalPgmList.size()) {
-//                                        mSamePriNormalPgmListIdx = 0;
-//                                    }
-//                                    mNormalProgram = mSamePriNormalPgmList.get(mSamePriNormalPgmListIdx);
-//                                    Logger.i("change normal program is: " + mNormalProgram.programName + " File name is: " + mNormalProgram.pgmFileName);
-//                                    loadProgramContent(EVENT_SHOW_NORMAL_PROGRAM, mNormalProgram);
-//                                }
-//                            } else {
-//                                mNormalProgram = null;
-//                                mCurrentPgmVerifyCode = null;
-//                                mStatus = IDLE_STATE;
-//                                Logger.i("Normal program is invalid, go to IDLE status.");
-//                                continue;
-//                            }
-//
-//                            break;
-//
-//
-//                    }
-//                } catch (InterruptedException e) {
-//                    Logger.i("ScreenDaemon Thread sleep over, and safe exit, the Thread id is: " + currentThread().getId());
-//                    return;
-//                } catch (Exception e) {
-//                    Logger.e("ScreenDaemon Thread Catch a error");
-//                    e.printStackTrace();
-//                    try {
-//                        Thread.sleep(1000);
-//                    } catch (InterruptedException e1) {
-//                        Logger.i("ScreenDaemon Thread sleep over, and safe exit, the Thread id is: " + currentThread().getId());
-//                        return;
-//                    }
-//                }
-//
-//
-//            }
         }
 
         private boolean normalPgmIsValid() {
@@ -465,7 +418,7 @@ public class ScreenManager {
         /*
          * 加载节目内容
          */
-        private boolean loadProgramContent(int msgId, ProgramLists pgmlist) throws InterruptedException {
+        private boolean loadProgramContent(int msgId, ProgramInfo pgmInfo) throws InterruptedException {
             if (!pgmPathIsAvalible()) {
                 /*
                  * 服务器通知节目改变的原因之一
@@ -484,7 +437,7 @@ public class ScreenManager {
             if (msgId == EVENT_SHOW_IDLE_PROGRAM) {
                 subWndList = getStandbyWndInfoList();
             } else {
-                subWndList = getSubWindowCollection(pgmlist);
+                subWndList = getSubWindowCollection(pgmInfo);
             }
             if (subWndList == null) {
                 Logger.e("loadProgramContent(): No subwindow info.");
@@ -493,9 +446,9 @@ public class ScreenManager {
 
             // 清空标志
             mLoadProgramDone = false;
-//            if (pgmInfo != null) {
-//                pgmInfo.playFinished = false;
-//            }
+            if (pgmInfo != null) {
+                pgmInfo.playFinished = false;
+            }
 
             // 准备参数
             Bundle bundle = new Bundle();
@@ -512,14 +465,14 @@ public class ScreenManager {
                 Thread.sleep(100);
             }
 
-//            // 更新当前节目的VerifyCode
-//            if (msgId == EVENT_SHOW_NORMAL_PROGRAM) {
-//                mStandbyScreenIsShow = false;
-//                mCurrentPgmVerifyCode = pgmInfo.verifyCode;
-//            } else if (msgId == EVENT_SHOW_IDLE_PROGRAM) {
-//                mStandbyScreenIsShow = true;
-//                mCurrentPgmVerifyCode = null;
-//            }
+            // 更新当前节目的VerifyCode
+            if (msgId == EVENT_SHOW_NORMAL_PROGRAM) {
+                mStandbyScreenIsShow = false;
+                mCurrentPgmVerifyCode = pgmInfo.verifyCode;
+            } else if (msgId == EVENT_SHOW_IDLE_PROGRAM) {
+                mStandbyScreenIsShow = true;
+                mCurrentPgmVerifyCode = null;
+            }
 
             return true;
 
@@ -581,10 +534,10 @@ public class ScreenManager {
         /*
         * 从节目信息中获取所有窗体信息
         */
-        private ArrayList<SubWindowInfoRef> getSubWindowCollection(ProgramLists pgmlist) {
+        private ArrayList<SubWindowInfoRef> getSubWindowCollection(ProgramInfo pgmInfo) {
             ArrayList<SubWindowInfoRef> subWndCollection = null;
 
-            if (pgmlist != null && pgmlist.Area != null) {
+            if (pgmInfo != null && pgmInfo.programList != null && pgmInfo.programList.Area != null) {
                 // 初始化变量
                 Areas area = null;
                 PlayLists playlist = null;
@@ -596,19 +549,19 @@ public class ScreenManager {
                 String strFileSavePath = null;
                 SubWindowInfoRef tmpSubWndInfo = null;
                 StringBuilder sb = new StringBuilder();
-                List<Areas> areaList = pgmlist.Area;
+                List<Areas> areaList = pgmInfo.programList.Area;
                 int nPgmScreenWidth = 0;
                 int nPgmScreenHeight = 0;
 
 
                 // 获取节目所对应的屏尺寸信息
-                if (pgmlist.Screen != null) {
-                    if (pgmlist.Screen.get("width") != null) {
-                        nPgmScreenWidth = Integer.parseInt(pgmlist.Screen.get("width"));
+                if (pgmInfo.programList.Screen != null) {
+                    if (pgmInfo.programList.Screen.get("width") != null) {
+                        nPgmScreenWidth = Integer.parseInt(pgmInfo.programList.Screen.get("width"));
                     }
 
-                    if (pgmlist.Screen.get("height") != null) {
-                        nPgmScreenHeight = Integer.parseInt(pgmlist.Screen.get("height"));
+                    if (pgmInfo.programList.Screen.get("height") != null) {
+                        nPgmScreenHeight = Integer.parseInt(pgmInfo.programList.Screen.get("height"));
                     }
                 }
 
@@ -633,10 +586,6 @@ public class ScreenManager {
                         tmpSubWndInfo.setHeight(calculateHeightScale(Integer.parseInt(area.Location.get("h")), nPgmScreenHeight));
                         tmpSubWndInfo.setXPos(calculateWidthScale(Integer.parseInt(area.Location.get("x")), nPgmScreenWidth));
                         tmpSubWndInfo.setYPos(calculateHeightScale(Integer.parseInt(area.Location.get("y")), nPgmScreenHeight));
-                    }
-                    if(area.Touch!=null){
-                        Log.i("jialei","area.Touch!=null");
-                        tmpSubWndInfo.setTouch(area.Touch);
                     }
 
                     // Play List
@@ -721,6 +670,7 @@ public class ScreenManager {
                                             }
                                             playMediaInfo.containerwidth = tmpSubWndInfo.getWidth();
                                             playMediaInfo.containerheight = tmpSubWndInfo.getHeight();
+                                            playMediaInfo.isIgnoreDlLimit = pgmInfo.ignoreDLLimit;
 
                                             // 添加到Media list中
                                             if (mediaList == null) {
@@ -868,7 +818,4 @@ public class ScreenManager {
         mHandler.removeMessages(EVENT_SHOW_NORMAL_PROGRAM);
         mHandler.removeMessages(EVENT_MEDIA_READY_SHOW_PROGRAM);
     }
-
-
-
 }

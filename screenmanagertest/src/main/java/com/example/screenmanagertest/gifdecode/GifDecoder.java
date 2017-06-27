@@ -17,13 +17,13 @@ import java.io.InputStream;
 
 public class GifDecoder extends Thread
 {
-    /** ×´Ì¬£ºÕıÔÚ½âÂëÖĞ */
+    /** çŠ¶æ€ï¼šæ­£åœ¨è§£ç ä¸­ */
     public static final int STATUS_PARSING = 0;
-    /** ×´Ì¬£ºÍ¼Æ¬¸ñÊ½´íÎó */
+    /** çŠ¶æ€ï¼šå›¾ç‰‡æ ¼å¼é”™è¯¯ */
     public static final int STATUS_FORMAT_ERROR = 1;
-    /** ×´Ì¬£º´ò¿ªÊ§°Ü */
+    /** çŠ¶æ€ï¼šæ‰“å¼€å¤±è´¥ */
     public static final int STATUS_OPEN_ERROR = 2;
-    /** ×´Ì¬£º½âÂë³É¹¦ */
+    /** çŠ¶æ€ï¼šè§£ç æˆåŠŸ */
     public static final int STATUS_FINISH = -1;
 
     private InputStream in = null;
@@ -121,7 +121,7 @@ public class GifDecoder extends Thread
     }
 
     /**
-     * ÊÍ·Å×ÊÔ´
+     * é‡Šæ”¾èµ„æº
      */
     public void free()
     {
@@ -158,7 +158,7 @@ public class GifDecoder extends Thread
     }
 
     /**
-     * µ±Ç°×´Ì¬
+     * å½“å‰çŠ¶æ€
      *
      * @return
      */
@@ -168,9 +168,9 @@ public class GifDecoder extends Thread
     }
 
     /**
-     * ½âÂëÊÇ·ñ³É¹¦£¬³É¹¦·µ»Øtrue
+     * è§£ç æ˜¯å¦æˆåŠŸï¼ŒæˆåŠŸè¿”å›true
      *
-     * @return ³É¹¦·µ»Øtrue£¬·ñÔò·µ»Øfalse
+     * @return æˆåŠŸè¿”å›trueï¼Œå¦åˆ™è¿”å›false
      */
     public boolean parseOk()
     {
@@ -178,11 +178,11 @@ public class GifDecoder extends Thread
     }
 
     /**
-     * È¡Ä³Ö¡µÄÑÓÊ±Ê±¼ä
+     * å–æŸå¸§çš„å»¶æ—¶æ—¶é—´
      *
      * @param n
-     *            µÚ¼¸Ö¡
-     * @return ÑÓÊ±Ê±¼ä£¬ºÁÃë
+     *            ç¬¬å‡ å¸§
+     * @return å»¶æ—¶æ—¶é—´ï¼Œæ¯«ç§’
      */
     public int getDelay(int n)
     {
@@ -198,7 +198,7 @@ public class GifDecoder extends Thread
     }
 
     /**
-     * È¡ËùÓĞÖ¡µÄÑÓÊ±Ê±¼ä
+     * å–æ‰€æœ‰å¸§çš„å»¶æ—¶æ—¶é—´
      *
      * @return
      */
@@ -217,9 +217,9 @@ public class GifDecoder extends Thread
     }
 
     /**
-     * È¡×ÜÖ¡ Êı
+     * å–æ€»å¸§ æ•°
      *
-     * @return Í¼Æ¬µÄ×ÜÖ¡Êı
+     * @return å›¾ç‰‡çš„æ€»å¸§æ•°
      */
     public int getFrameCount()
     {
@@ -227,7 +227,7 @@ public class GifDecoder extends Thread
     }
 
     /**
-     * È¡µÚÒ»Ö¡Í¼Æ¬
+     * å–ç¬¬ä¸€å¸§å›¾ç‰‡
      *
      * @return
      */
@@ -343,11 +343,11 @@ public class GifDecoder extends Thread
     }
 
     /**
-     * È¡µÚ¼¸Ö¡µÄÍ¼Æ¬
+     * å–ç¬¬å‡ å¸§çš„å›¾ç‰‡
      *
      * @param n
-     *            Ö¡Êı
-     * @return ¿É»­µÄÍ¼Æ¬£¬Èç¹ûÃ»ÓĞ´ËÖ¡»òÕß³ö´í£¬·µ»Ønull
+     *            å¸§æ•°
+     * @return å¯ç”»çš„å›¾ç‰‡ï¼Œå¦‚æœæ²¡æœ‰æ­¤å¸§æˆ–è€…å‡ºé”™ï¼Œè¿”å›null
      */
     public Bitmap getFrameImage(int n)
     {
@@ -361,9 +361,9 @@ public class GifDecoder extends Thread
     }
 
     /**
-     * È¡µ±Ç°Ö¡Í¼Æ¬
+     * å–å½“å‰å¸§å›¾ç‰‡
      *
-     * @return µ±Ç°Ö¡¿É»­µÄÍ¼Æ¬
+     * @return å½“å‰å¸§å¯ç”»çš„å›¾ç‰‡
      */
     public GifFrame getCurrentFrame()
     {
@@ -371,10 +371,10 @@ public class GifDecoder extends Thread
     }
 
     /**
-     * È¡µÚ¼¸Ö¡£¬Ã¿Ö¡°üº¬ÁË¿É»­µÄÍ¼Æ¬ºÍÑÓÊ±Ê±¼ä
+     * å–ç¬¬å‡ å¸§ï¼Œæ¯å¸§åŒ…å«äº†å¯ç”»çš„å›¾ç‰‡å’Œå»¶æ—¶æ—¶é—´
      *
      * @param n
-     *            Ö¡Êı
+     *            å¸§æ•°
      * @return
      */
     public GifFrame getFrame(int n)
@@ -397,7 +397,7 @@ public class GifDecoder extends Thread
     }
 
     /**
-     * ÖØÖÃ£¬½øĞĞ±¾²Ù×÷ºó£¬»áÖ±½Óµ½µÚÒ»Ö¡
+     * é‡ç½®ï¼Œè¿›è¡Œæœ¬æ“ä½œåï¼Œä¼šç›´æ¥åˆ°ç¬¬ä¸€å¸§
      */
     public void reset()
     {
@@ -405,9 +405,9 @@ public class GifDecoder extends Thread
     }
 
     /**
-     * ÏÂÒ»Ö¡£¬½øĞĞ±¾²Ù×÷ºó£¬Í¨¹ıgetCurrentFrameµÃµ½µÄÊÇÏÂÒ»Ö¡
+     * ä¸‹ä¸€å¸§ï¼Œè¿›è¡Œæœ¬æ“ä½œåï¼Œé€šè¿‡getCurrentFrameå¾—åˆ°çš„æ˜¯ä¸‹ä¸€å¸§
      *
-     * @return ·µ»ØÏÂÒ»Ö¡
+     * @return è¿”å›ä¸‹ä¸€å¸§
      */
     public GifFrame next()
     {

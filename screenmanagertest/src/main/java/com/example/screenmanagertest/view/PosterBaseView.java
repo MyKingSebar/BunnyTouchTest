@@ -41,7 +41,17 @@ import com.example.screenmanagertest.screenmanager.ScreenManager;
 
 public abstract class PosterBaseView extends FrameLayout {
     protected Context            mContext      = null;
-    
+
+    protected  String Touch=null;
+
+    public String getViewTouch() {
+        return Touch;
+    }
+
+    public void setViewTouch(String touch) {
+        Touch = touch;
+    }
+
     // View attributes
     protected int                mXPos         = 0;
     protected int                mYPos         = 0;

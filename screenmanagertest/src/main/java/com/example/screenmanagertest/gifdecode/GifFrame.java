@@ -16,12 +16,12 @@ public class GifFrame
     public int delay;
 
     /**
-     * ¹¹Ôìº¯Êý
+     * æž„é€ å‡½æ•°
      *
      * @param im
-     *            Í¼Æ¬
+     *            å›¾ç‰‡
      * @param del
-     *            ÑÓÊ±
+     *            å»¶æ—¶
      */
     public GifFrame(Bitmap im, int del)
     {
@@ -37,6 +37,6 @@ public class GifFrame
 
     public String imageName = null;
 
-    /** ÏÂÒ»Ö¡ */
+    /** ä¸‹ä¸€å¸§ */
     public GifFrame nextFrame = null;
 }

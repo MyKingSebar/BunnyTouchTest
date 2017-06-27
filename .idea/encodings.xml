@@ -5,13 +5,13 @@
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/common/FileUtils.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/gifdecode/GifAction.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/gifdecode/GifDecodeInfo.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/gifdecode/GifDecoder.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/gifdecode/GifFrame.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/gifdecode/GifDecoder.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/gifdecode/GifFrame.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/screenmanager/MediaInfoRef.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/screenmanager/SubWindowInfoRef.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/screenmanager/SubWindowInfoRef.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/AudioView.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/ControlView.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/DateTimeView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/DateTimeView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/GalleryView.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/MarqueeView.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/MultiMediaView.java" charset="UTF-8" />

@@ -15,6 +15,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -33,9 +34,9 @@ public class DateTimeView extends PosterBaseView
     private int mDateFormatType = DATE_FORMAT_TWO_CHINA;
 
     private final static String[] WEEK_LONG =
-    { "ÐÇÆÚÌì", "ÐÇÆÚÒ»", "ÐÇÆÚ¶þ", "ÐÇÆÚÈý", "ÐÇÆÚËÄ", "ÐÇÆÚÎå", "ÐÇÆÚÁù" };
+    { "æ˜ŸæœŸå¤©", "æ˜ŸæœŸä¸€", "æ˜ŸæœŸäºŒ", "æ˜ŸæœŸä¸‰", "æ˜ŸæœŸå››", "æ˜ŸæœŸäº”", "æ˜ŸæœŸå…­" };
     private final static String[] WEEK_SHORT =
-    { "ÖÜÈÕ", "ÖÜÒ»", "ÖÜ¶þ", "ÖÜÈý", "ÖÜËÄ", "ÖÜÎå", "ÖÜÁù" };
+    { "å‘¨æ—¥", "å‘¨ä¸€", "å‘¨äºŒ", "å‘¨ä¸‰", "å‘¨å››", "å‘¨äº”", "å‘¨å…­" };
 
     // Define format
     private static final int DATE_FORMAT_SINGLE_TIME = 0;
@@ -82,6 +83,15 @@ public class DateTimeView extends PosterBaseView
         tv_top = (YSTextView) findViewById(R.id.date_top);
         tv_middle = (YSTextView) findViewById(R.id.date_middle);
         tv_bottom = (YSTextView) findViewById(R.id.date_bottom);
+
+        if(getViewTouch()!=null){
+            tv_top.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i("jialei","touch:"+getViewTouch());
+                }
+            });
+        }
     }
 
     @Override
@@ -152,15 +162,15 @@ public class DateTimeView extends PosterBaseView
             mDateFormatType = DATE_FORMAT_TIME_WEEK_DAY;
         else if("H:i:s\\nl\\nY-m-d".equals(format))
             mDateFormatType = DATE_FORMAT_DAY_WEEK_TIME;
-        else if("YÄêmÔÂdÈÕ(ÖÜD)".equals(format))
+        else if("Yå¹´mæœˆdæ—¥(å‘¨D)".equals(format))
             mDateFormatType = DATE_FORMAT_SINGLE_DAY_WEEK_CHINA;
-        else if("YÄêmÔÂdÈÕ(ÖÜD) H:i".equals(format))
+        else if("Yå¹´mæœˆdæ—¥(å‘¨D) H:i".equals(format))
             mDateFormatType = DATE_FORMAT_SINGLE_DAY_TIME_WEEK_CHINA;
-        else if("YÄêmÔÂdÈÕ\\nÖÜD H:i:s".equals(format))
+        else if("Yå¹´mæœˆdæ—¥\\nå‘¨D H:i:s".equals(format))
             mDateFormatType = DATE_FORMAT_TWO_CHINA;
-        else if("YÄêmÔÂdÈÕ\\nl\\nH:i:s".equals(format))
+        else if("Yå¹´mæœˆdæ—¥\\nl\\nH:i:s".equals(format))
             mDateFormatType = DATE_FORMAT_DAY_WEEK_TIME_CHINA;
-        else if("H:i:s\\nl\\nYÄêmÔÂdÈÕ".equals(format))
+        else if("H:i:s\\nl\\nYå¹´mæœˆdæ—¥".equals(format))
             mDateFormatType = DATE_FORMAT_TIME_WEEK_DAY_CHINA;
 
         return mDateFormatType;
@@ -208,7 +218,7 @@ public class DateTimeView extends PosterBaseView
     {
         if (mediaInfo.format == null)
         {
-            mediaInfo.format = "YÄêmÔÂdÈÕ\\nÖÜD H:i:s";
+            mediaInfo.format = "Yå¹´mæœˆdæ—¥\\nå‘¨D H:i:s";
         }
         if (mediaInfo.fontName == null)
         {
@@ -377,9 +387,9 @@ public class DateTimeView extends PosterBaseView
 
                     // China Date
                     sbDate_china.setLength(0);
-                    sbDate_china.append(nYear).append("Äê");
-                    sbDate_china.append(nMonth).append("ÔÂ");
-                    sbDate_china.append(nDay).append("ÈÕ");
+                    sbDate_china.append(nYear).append("å¹´");
+                    sbDate_china.append(nMonth).append("æœˆ");
+                    sbDate_china.append(nDay).append("æ—¥");
                     strDate_china = sbDate_china.toString();
                     
                     // Date

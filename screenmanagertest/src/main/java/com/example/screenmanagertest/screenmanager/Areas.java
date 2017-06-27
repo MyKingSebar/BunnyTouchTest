@@ -15,4 +15,5 @@ public class Areas
     public HashMap<String, String> Area = null;
     public HashMap<String, String> Location = null;
     public List<PlayLists> Playlist = null;
+    public String Touch =null;
 }

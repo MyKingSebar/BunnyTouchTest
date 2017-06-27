@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.example.screenmanagertest.common.Logger;
@@ -85,6 +86,8 @@ public class MainActivity extends Activity {
             cleanupLayout();
 
             // initialize
+            String touch=null;
+
             int xPos = 0;
             int yPos = 0;
             int width = 0;
@@ -106,6 +109,8 @@ public class MainActivity extends Activity {
                 }
                 wndName = subWndInfo.getSubWindowName();
 
+                touch=subWndInfo.getTouch();
+                Log.i("jialei","loadNewProgram.touch:"+touch);
                 // 窗体位置
                 xPos = subWndInfo.getXPos();
                 yPos = subWndInfo.getYPos();
@@ -141,6 +146,7 @@ public class MainActivity extends Activity {
 
                 // 设置窗口参数，并添加
                 if (tempSubWnd != null) {
+                    tempSubWnd.setViewTouch(touch);
                     tempSubWnd.setViewName(wndName);
                     tempSubWnd.setViewType(wndType);
                     tempSubWnd.setMediaList(mediaList);

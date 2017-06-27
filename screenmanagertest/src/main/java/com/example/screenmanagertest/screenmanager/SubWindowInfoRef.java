@@ -22,7 +22,16 @@ public class SubWindowInfoRef implements Serializable
     private int mXPos = 0;
     private int mYPos = 0;
     private List<MediaInfoRef> mMediaList = null;
-    
+    private String touch=null;
+
+    public String getTouch() {
+        return touch;
+    }
+
+    public void setTouch(String touch) {
+        this.touch = touch;
+    }
+
     public SubWindowInfoRef(){}
     
     public SubWindowInfoRef(String SubWndName, String subWndType, int mScreenWidth, int mScreenHeight, int XPos, int YPos, List<MediaInfoRef> mediaList)
