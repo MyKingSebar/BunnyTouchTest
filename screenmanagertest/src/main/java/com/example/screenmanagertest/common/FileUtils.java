@@ -57,7 +57,7 @@ public class FileUtils
     
 
     /*
-     * »ñÈ¡»ñÈ¡´æ´¢µÄÂ·¾¶
+     * è·å–è·å–å­˜å‚¨çš„è·¯å¾„
      */
     public static String getExternalStorage()
     {
@@ -67,11 +67,11 @@ public class FileUtils
 
 
     /**
-     * ¸ñÊ½»¯ÎÄ¼şÂ·¾¶£¬½«ÆäÖĞ²»¹æ·¶µÄ·Ö¸ô×ª»»Îª±ê×¼µÄ·Ö¸ô·û,²¢ÇÒÈ¥µôÄ©Î²µÄÎÄ¼şÂ·¾¶·Ö¸ô·û¡£ ±¾·½·¨²Ù×÷ÏµÍ³×ÔÊÊÓ¦
+     * æ ¼å¼åŒ–æ–‡ä»¶è·¯å¾„ï¼Œå°†å…¶ä¸­ä¸è§„èŒƒçš„åˆ†éš”è½¬æ¢ä¸ºæ ‡å‡†çš„åˆ†éš”ç¬¦,å¹¶ä¸”å»æ‰æœ«å°¾çš„æ–‡ä»¶è·¯å¾„åˆ†éš”ç¬¦ã€‚ æœ¬æ–¹æ³•æ“ä½œç³»ç»Ÿè‡ªé€‚åº”
      *
      * @param path
-     *            ÎÄ¼şÂ·¾¶
-     * @return ¸ñÊ½»¯ºóµÄÎÄ¼şÂ·¾¶
+     *            æ–‡ä»¶è·¯å¾„
+     * @return æ ¼å¼åŒ–åçš„æ–‡ä»¶è·¯å¾„
      */
     public static String formatPath4File(String path)
     {
@@ -88,11 +88,11 @@ public class FileUtils
     }
 
     /**
-     * ¸ñÊ½»¯ÎÄ¼şÂ·¾¶£¬½«ÆäÖĞ²»¹æ·¶µÄ·Ö¸ô×ª»»Îª±ê×¼µÄ·Ö¸ô·û ²¢ÇÒÈ¥µôÄ©Î²µÄ"/"·ûºÅ(ÊÊÓÃÓÚFTPÔ¶³ÌÎÄ¼şÂ·¾¶»òÕßWeb×ÊÔ´µÄÏà¶ÔÂ·¾¶)¡£
+     * æ ¼å¼åŒ–æ–‡ä»¶è·¯å¾„ï¼Œå°†å…¶ä¸­ä¸è§„èŒƒçš„åˆ†éš”è½¬æ¢ä¸ºæ ‡å‡†çš„åˆ†éš”ç¬¦ å¹¶ä¸”å»æ‰æœ«å°¾çš„"/"ç¬¦å·(é€‚ç”¨äºFTPè¿œç¨‹æ–‡ä»¶è·¯å¾„æˆ–è€…Webèµ„æºçš„ç›¸å¯¹è·¯å¾„)ã€‚
      *
      * @param path
-     *            ÎÄ¼şÂ·¾¶
-     * @return ¸ñÊ½»¯ºóµÄÎÄ¼şÂ·¾¶
+     *            æ–‡ä»¶è·¯å¾„
+     * @return æ ¼å¼åŒ–åçš„æ–‡ä»¶è·¯å¾„
      */
     public static String formatPath4FTP(String path)
     {
@@ -150,10 +150,10 @@ public class FileUtils
 
     /**
      *
-     * ´ÓÎÄ¼şÂ·¾¶ÖĞ»ñÈ¡ÎÄ¼şÃû³Æ
+     * ä»æ–‡ä»¶è·¯å¾„ä¸­è·å–æ–‡ä»¶åç§°
      *
      * @param path
-     *            ÎÄ¼şÂ·¾¶
+     *            æ–‡ä»¶è·¯å¾„
      *
      * @return
      */
@@ -166,10 +166,10 @@ public class FileUtils
 
     /**
      *
-     * »ñÈ¡ÎÄ¼şÀ©Õ¹Ãû
+     * è·å–æ–‡ä»¶æ‰©å±•å
      *
      * @param filename
-     *            ÎÄ¼şÃû
+     *            æ–‡ä»¶å
      *
      * @return
      */
@@ -188,9 +188,9 @@ public class FileUtils
 
     /**
      *
-     * »ñÈ¡ÎÄ¼ş¼ĞÖĞËùÓĞµÄÎÄ¼şÁĞ±í
+     * è·å–æ–‡ä»¶å¤¹ä¸­æ‰€æœ‰çš„æ–‡ä»¶åˆ—è¡¨
      *
-     *            ÎÄ¼şÃû
+     *            æ–‡ä»¶å
      *
      * @return
      */
@@ -231,7 +231,7 @@ public class FileUtils
 
     /**
      *
-     * »ñÈ¡ÎÄ¼ş¼ĞÖĞËùÓĞµÄÎÄ¼şÁĞ±í,²¢×é³ÉÏàÓ¦String·µ»Ø·şÎñÆ÷
+     * è·å–æ–‡ä»¶å¤¹ä¸­æ‰€æœ‰çš„æ–‡ä»¶åˆ—è¡¨,å¹¶ç»„æˆç›¸åº”Stringè¿”å›æœåŠ¡å™¨
      *
      *
      * @return
@@ -274,7 +274,7 @@ public class FileUtils
     }
 
     /**
-     * É¾³ıÒ»¸öÄ¿Â¼£¨¿ÉÒÔÊÇ·Ç¿ÕÄ¿Â¼£©
+     * åˆ é™¤ä¸€ä¸ªç›®å½•ï¼ˆå¯ä»¥æ˜¯éç©ºç›®å½•ï¼‰
      *
      */
     public static boolean delDir(String dirName)
@@ -294,7 +294,7 @@ public class FileUtils
             }
             else if (file.isDirectory())
             {
-                delDir(file.getAbsolutePath());// µİ¹é
+                delDir(file.getAbsolutePath());// é€’å½’
             }
         }
 
@@ -311,7 +311,7 @@ public class FileUtils
     }
 
     /**
-     * Çå¿ÕÖ¸¶¨Ä¿Â¼
+     * æ¸…ç©ºæŒ‡å®šç›®å½•
      *
      * @param dir
      */
@@ -334,7 +334,7 @@ public class FileUtils
     }
 
     /**
-     * ¿½±´Ä¿Â¼ÏÂµÄËùÓĞÎÄ¼şµ½Ö¸¶¨Ä¿Â¼
+     * æ‹·è´ç›®å½•ä¸‹çš„æ‰€æœ‰æ–‡ä»¶åˆ°æŒ‡å®šç›®å½•
      *
      * @return
      * @throws IOException
@@ -350,7 +350,7 @@ public class FileUtils
 
         if (!srcDir.isDirectory())
         {
-            return false;// ÅĞ¶ÏÊÇ·ñÊÇÄ¿Â¼
+            return false;// åˆ¤æ–­æ˜¯å¦æ˜¯ç›®å½•
         }
 
         if (!destDir.exists())
@@ -383,7 +383,7 @@ public class FileUtils
     }
 
     /**
-     * ÒÆ¶¯Ä¿Â¼ÏÂµÄËùÓĞÎÄ¼şµ½Ö¸¶¨Ä¿Â¼
+     * ç§»åŠ¨ç›®å½•ä¸‹çš„æ‰€æœ‰æ–‡ä»¶åˆ°æŒ‡å®šç›®å½•
      *
      * @return
      * @throws IOException
@@ -484,7 +484,7 @@ public class FileUtils
     }
 
     /**
-     * ¿½±´Ò»¸öÎÄ¼ş,srcFileÔ´ÎÄ¼ş£¬destFileÄ¿±êÎÄ¼ş
+     * æ‹·è´ä¸€ä¸ªæ–‡ä»¶,srcFileæºæ–‡ä»¶ï¼ŒdestFileç›®æ ‡æ–‡ä»¶
      *
      * @param srcFile
      * @param destFile
@@ -514,7 +514,7 @@ public class FileUtils
     }
 
     /**
-     * ÒÆ¶¯Ò»¸öÎÄ¼ş
+     * ç§»åŠ¨ä¸€ä¸ªæ–‡ä»¶
      *
      * @param srcFile
      * @param destFile
@@ -697,14 +697,14 @@ public class FileUtils
         try
         {
             fIn = new FileInputStream(strFileName);
-            int length = fIn.available(); // »ñÈ¡ÎÄ¼ş³¤¶È
-            buffer = new byte[length]; // ´´½¨byteÊı×éÓÃÓÚ¶ÁÈëÊı¾İ
-            fIn.read(buffer); // ½«ÎÄ¼şÄÚÈİ¶ÁÈëµ½byteÊı×éÖĞ
+            int length = fIn.available(); // è·å–æ–‡ä»¶é•¿åº¦
+            buffer = new byte[length]; // åˆ›å»ºbyteæ•°ç»„ç”¨äºè¯»å…¥æ•°æ®
+            fIn.read(buffer); // å°†æ–‡ä»¶å†…å®¹è¯»å…¥åˆ°byteæ•°ç»„ä¸­
         }
         catch (Exception e)
         {
             Logger.e("readSDFileData() has error.");
-            e.printStackTrace();// ²¶»ñÒì³£²¢´òÓ¡
+            e.printStackTrace();// æ•è·å¼‚å¸¸å¹¶æ‰“å°
         }
         finally
         {
@@ -837,7 +837,7 @@ public class FileUtils
                 sb.append(str + "\n");
             }
 
-            // È¥µô·Ç·¨×Ö·û
+            // å»æ‰éæ³•å­—ç¬¦
             Pattern p = Pattern.compile("(\ufeff)");
             Matcher m = p.matcher(sb.toString());
             dest = m.replaceAll("");
@@ -874,10 +874,10 @@ public class FileUtils
     }
 
     /**
-     * »ñÈ¡·şÎñÆ÷ÎÄ¼ş
-     * @param remoteurl Ô¶¶ËÎÄ¼ş£¨URL£©
-     * @param localfile ±¾µØÎÄ¼ş£¨È«Â·¾¶£©
-     * @return file ±¾µØÎÄ¼ş
+     * è·å–æœåŠ¡å™¨æ–‡ä»¶
+     * @param remoteurl è¿œç«¯æ–‡ä»¶ï¼ˆURLï¼‰
+     * @param localfile æœ¬åœ°æ–‡ä»¶ï¼ˆå…¨è·¯å¾„ï¼‰
+     * @return file æœ¬åœ°æ–‡ä»¶
      */
     public static File getServerFile(String remoteurl, String localfile)
     {

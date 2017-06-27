@@ -5,13 +5,13 @@
     android:id="@+id/marqueelayout"
 >    
 
-    <com.youngsee.customview.ProgressBarView 
+    <com.example.screenmanagertest.view.ProgressBarView
     	    android:id="@+id/marquee_progressbar"
     	    android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"/>
 
-    <com.youngsee.customview.YSTextView 
+    <com.example.screenmanagertest.view.YSTextView
         android:id="@+id/marqueetext"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

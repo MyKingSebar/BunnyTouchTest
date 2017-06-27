@@ -4,7 +4,7 @@
     android:layout_height="match_parent" 
     android:id="@+id/mainlayout">
 
-    	<com.youngsee.customview.ProgressBarView 
+    	<com.example.screenmanagertest.view.ProgressBarView
     	    android:id="@+id/multimedia_progressbar"
     	    android:layout_width="match_parent"
             android:layout_height="match_parent"

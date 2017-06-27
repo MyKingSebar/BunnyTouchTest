@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.text.format.Time;
+import android.util.Log;
 import android.view.View;
 
 import com.example.screenmanagertest.MainActivity;
@@ -35,7 +36,7 @@ public class ScreenManager {
 
     private static final int NORMAL_PROGRAM = 1;
 
-    public static final String LOCAL_NORMAL_PLAYLIST_FILENAME = "playlist.xml";
+    public static final String LOCAL_NORMAL_PLAYLIST_FILENAME = "playliste.xml";
 
     private boolean mLoadProgramDone = false;
     private boolean mStandbyScreenIsShow = false;
@@ -154,6 +155,7 @@ public class ScreenManager {
                 StringBuilder sbPgmFileName = new StringBuilder();
 
                 // 遍历所有的Schedule
+                Log.i("jialei","scheduList.Schedule.size():"+scheduList.Schedule.size());
                 for (int i = 0; i < scheduList.Schedule.size(); i++) {
                     // 获取schedule中的信息
                     schedule = scheduList.Schedule.get(i);
@@ -163,6 +165,7 @@ public class ScreenManager {
                     }
 
                     // 遍历Schedule中所有的playbill
+                    Log.i("jialei","schedule.Playbill.size():"+schedule.Playbill.size());
                     for (int j = 0; j < schedule.Playbill.size(); j++) {
                         // 获取playbill中的信息
                         playbill = schedule.Playbill.get(j);
@@ -174,6 +177,7 @@ public class ScreenManager {
                         }
 
                         // 遍历playbill中所有的program
+                        Log.i("jialei","playbill.Program.size():"+playbill.Program.size());
                         for (int k = 0; k < playbill.Program.size(); k++) {
                             // 获取program中的信息
                             program = playbill.Program.get(k);
@@ -234,6 +238,8 @@ public class ScreenManager {
                         }
                     }
                 }
+            }else{
+                Log.i("jialei","ScheduleNULL");
             }
 
             return programSchedule;
@@ -263,16 +269,20 @@ public class ScreenManager {
         @Override
         public void run() {
             mNormalPgmFilePath = obtainNormalPgmFilePath();
+            Log.i("jialei","mNormalPgmFilePath:"+mNormalPgmFilePath);
             mNormalProgramInfoList = getProgramScheduleFromXml(mNormalPgmFilePath);
+            Log.i("jialei","mIsRun"+mIsRun);
             while (mIsRun) {
                 try {
                     if (!pgmPathIsAvalible()) {
+                        Log.i("jialei","!pgmPathIsAvalible()");
                         mNormalPgmFilePath = obtainNormalPgmFilePath();
                         mNormalProgramInfoList = getProgramScheduleFromXml(mNormalPgmFilePath);
                         mStatus = IDLE_STATE;
                     }
 
                 /* 播放状态控制 */
+//                    Log.i("jialei","mStatus:"+mStatus);
                     switch (mStatus) {
                         case IDLE_STATE:
 

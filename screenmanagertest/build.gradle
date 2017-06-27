@@ -30,12 +30,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-    compile files('libs/bcprov-jdk15on-151.jar')
-    compile files('libs/commons-codec-1.10.jar')
-    compile files('libs/commons-logging-1.1.jar')
-    compile files('libs/commons-net-3.6.jar')
-    compile files('libs/ftp4j-1.7.2.jar')
-    compile files('libs/ksoap2-android-assembly-3.0.0-jar-with-dependencies.jar')
-    compile files('libs/log4j-1.2.13.jar')
-    compile files('libs/tbs_sdk_thirdapp_v3.1.0.1034_43100_sharewithdownload_obfs_20170301_182143.jar')
+
 }

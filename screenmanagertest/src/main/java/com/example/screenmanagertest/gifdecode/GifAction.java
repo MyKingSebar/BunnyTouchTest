@@ -10,11 +10,10 @@ package com.example.screenmanagertest.gifdecode;
 public interface GifAction
 {
     /**
-     * gif½âÂë¹Û²ìÕß
+     * gifè§£ç è§‚å¯Ÿè€…
      *
      * @hide
-     * @param parseStaus
-     *            ½âÂëÊÇ·ñ³É¹¦£¬³É¹¦»áÎªtrue
+     *            è§£ç æ˜¯å¦æˆåŠŸï¼ŒæˆåŠŸä¼šä¸ºtrue
      */
     public void parseOk(boolean parseStatus, int frameIndex);
 }

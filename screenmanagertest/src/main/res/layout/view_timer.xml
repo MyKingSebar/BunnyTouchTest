@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
    	android:id="@+id/timerlayout">    
     
-    <com.youngsee.customview.YSTextView 
+    <com.example.screenmanagertest.view.YSTextView
         android:id="@+id/timer_txtv"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
