@@ -31,12 +31,12 @@ public class RunningView extends FrameLayout {
 	}
 	
 	private void initData(){
-		mLoadingTip="½ÚÄ¿¸üĞÂÖĞ...";
+		mLoadingTip="èŠ‚ç›®æ›´æ–°ä¸­...";
 		mImageView.setBackgroundResource(R.drawable.frame_run);
 
-		// Í¨¹ıImageView¶ÔÏóÄÃµ½±³¾°ÏÔÊ¾µÄAnimationDrawable
+		// é€šè¿‡ImageViewå¯¹è±¡æ‹¿åˆ°èƒŒæ™¯æ˜¾ç¤ºçš„AnimationDrawable
 		mAnimation = (AnimationDrawable) mImageView.getBackground();
-		// ÎªÁË·ÀÖ¹ÔÚonCreate·½·¨ÖĞÖ»ÏÔÊ¾µÚÒ»Ö¡µÄ½â¾ö·½°¸Ö®Ò»
+		// ä¸ºäº†é˜²æ­¢åœ¨onCreateæ–¹æ³•ä¸­åªæ˜¾ç¤ºç¬¬ä¸€å¸§çš„è§£å†³æ–¹æ¡ˆä¹‹ä¸€
 		mImageView.post(new Runnable() {
 			@Override
 			public void run() {

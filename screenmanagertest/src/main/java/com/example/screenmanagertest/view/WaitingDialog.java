@@ -7,8 +7,8 @@ import android.content.Context;
 import com.example.screenmanagertest.R;
 
 /**
- * Í³Ò»µ÷ÓÃµÈ´ı¶Ô»°¿òµÄ½Ó¿Ú
- *  ×¢£ºÎªÔö¼ÓĞ§ÂÊÃ»ÓĞÔö¼ÓÍ¬²½»úÖÆ£¬Òò´ËÒª±£Ö¤ÔÚÍ¬Ò»¸öÏß³ÌÏÂÊ¹ÓÃ
+ * ç»Ÿä¸€è°ƒç”¨ç­‰å¾…å¯¹è¯æ¡†çš„æ¥å£
+ *  æ³¨ï¼šä¸ºå¢åŠ æ•ˆç‡æ²¡æœ‰å¢åŠ åŒæ­¥æœºåˆ¶ï¼Œå› æ­¤è¦ä¿è¯åœ¨åŒä¸€ä¸ªçº¿ç¨‹ä¸‹ä½¿ç”¨
  * @author Administrator
  *
  */
@@ -27,7 +27,7 @@ public class WaitingDialog{
         return mInstance;
     }
 
-    //ÏÔÊ¾¶Ô»°¿ò
+    //æ˜¾ç¤ºå¯¹è¯æ¡†
     public void show(Context context){
         if((mDialog != null) && mDialog.isShowing()){
             mDialog.dismiss();
@@ -36,13 +36,13 @@ public class WaitingDialog{
         mDialog = new ProgressDialog(context);
         mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mDialog.setMessage(context.getResources().getString(R.string.loading));
-        // ÉèÖÃProgressDialog µÄ½ø¶ÈÌõÎª²»Ã÷È·
+        // è®¾ç½®ProgressDialog çš„è¿›åº¦æ¡ä¸ºä¸æ˜ç¡®
         mDialog.setIndeterminate(false);
-        //²»ÏìÓ¦back¼ü
+        //ä¸å“åº”backé”®
         mDialog.setCancelable(false);
         mDialog.show();
     }
-    //¹Ø±Õ¶Ô»°¿ò
+    //å…³é—­å¯¹è¯æ¡†
     public void dissmiss(){
         if((mDialog != null) && mDialog.isShowing()){
             mDialog.dismiss();

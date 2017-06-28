@@ -166,7 +166,7 @@ public abstract class PosterBaseView extends FrameLayout {
         InputStream in = createImgInputStream(picInfo);
         if (in != null)
         {
-            // »ñÈ¡Í¼Æ¬Êµ¼Ê´óĞ¡
+            // è·å–å›¾ç‰‡å®é™…å¤§å°
             opt.inJustDecodeBounds = true;
             BitmapFactory.decodeStream(in, null, opt);
 
@@ -175,7 +175,7 @@ public abstract class PosterBaseView extends FrameLayout {
             int nWndWidth = picInfo.containerwidth;
             int nWndHeight = picInfo.containerheight;
 
-            // ÉèÖÃÑ¹Ëõ±ÈÀı
+            // è®¾ç½®å‹ç¼©æ¯”ä¾‹
             opt.inSampleSize = 1;
             if (outWidth > nWndWidth || outHeight > nWndHeight)
             {
@@ -185,7 +185,7 @@ public abstract class PosterBaseView extends FrameLayout {
             opt.inDither = false;
             opt.inJustDecodeBounds = false;
 
-            // ¹Ø±ÕÊäÈë??
+            // å…³é—­è¾“å…¥??
             try
             {
                 in.close();
@@ -257,7 +257,7 @@ public abstract class PosterBaseView extends FrameLayout {
                 sb.append(str + "\n");
             }
 
-            // È¥µô·Ç·¨×Ö·û
+            // å»æ‰éæ³•å­—ç¬¦
             Pattern p = Pattern.compile("(\ufeff)");
             Matcher m = p.matcher(sb.toString());
             dest = m.replaceAll("");
@@ -294,15 +294,15 @@ public abstract class PosterBaseView extends FrameLayout {
     }
 
     /**
-     * ×Ô¶¯·Ö¸îÎÄ±¾
+     * è‡ªåŠ¨åˆ†å‰²æ–‡æœ¬
      *
      * @param content
-     *            ĞèÒª·Ö¸îµÄÎÄ±¾
+     *            éœ€è¦åˆ†å‰²çš„æ–‡æœ¬
      * @param p
-     *            »­±Ê£¬ÓÃÀ´¸ù¾İ×ÖÌå²âÁ¿ÎÄ±¾µÄ¿í¶È
+     *            ç”»ç¬”ï¼Œç”¨æ¥æ ¹æ®å­—ä½“æµ‹é‡æ–‡æœ¬çš„å®½åº¦
      * @param width
-     *            ×î´óµÄ¿ÉÏÔÊ¾ÏñËØ£¨Ò»°ãÎª¿Ø¼şµÄ¿í¶È£©
-     * @return Ò»¸ö×Ö·û´®Êı×é£¬±£´æÃ¿ĞĞµÄÎÄ±¾
+     *            æœ€å¤§çš„å¯æ˜¾ç¤ºåƒç´ ï¼ˆä¸€èˆ¬ä¸ºæ§ä»¶çš„å®½åº¦ï¼‰
+     * @return ä¸€ä¸ªå­—ç¬¦ä¸²æ•°ç»„ï¼Œä¿å­˜æ¯è¡Œçš„æ–‡æœ¬
      */
     protected ArrayList<String> autoSplit(String content, Paint p, float width)
     {
@@ -351,7 +351,7 @@ public abstract class PosterBaseView extends FrameLayout {
         return retList;
     }
 
-    // Ìæ»»¡¢¹ıÂËÌØÊâ×Ö·û
+    // æ›¿æ¢ã€è¿‡æ»¤ç‰¹æ®Šå­—ç¬¦
     protected String StringFilter(String str)
     {
         if (str == null)
@@ -359,8 +359,8 @@ public abstract class PosterBaseView extends FrameLayout {
             return null;
         }
 
-        str = str.replaceAll("¡¾", "[").replaceAll("¡¿", "]").replaceAll("£¡", "!");// Ìæ»»ÖĞÎÄ±êºÅ
-        String regEx = "[¡º¡»]"; // Çå³ıµôÌØÊâ×Ö·û
+        str = str.replaceAll("ã€", "[").replaceAll("ã€‘", "]").replaceAll("ï¼", "!");// æ›¿æ¢ä¸­æ–‡æ ‡å·
+        String regEx = "[ã€ã€]"; // æ¸…é™¤æ‰ç‰¹æ®Šå­—ç¬¦
         Pattern p = Pattern.compile(regEx);
         Matcher m = p.matcher(str);
         return m.replaceAll("").trim();
@@ -499,7 +499,7 @@ public abstract class PosterBaseView extends FrameLayout {
             {
             	if (mediaInfo.filePath.equals(PosterApplication.getStandbyScreenImgPath()))
             	{
-            		// ¼ÓÔØ´ı»ú»­Ãæ²»ĞèÒªÏÔÊ¾ProgressBar
+            		// åŠ è½½å¾…æœºç”»é¢ä¸éœ€è¦æ˜¾ç¤ºProgressBar
             		return false;
             	}
             	else if (FileUtils.mediaIsFile(mediaInfo) &&

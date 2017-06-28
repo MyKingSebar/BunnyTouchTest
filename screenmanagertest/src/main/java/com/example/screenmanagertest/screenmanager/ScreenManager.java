@@ -1,7 +1,10 @@
 package com.example.screenmanagertest.screenmanager;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -31,6 +34,7 @@ import java.util.List;
 
 public class ScreenManager {
 
+    private boolean receiverun=false;
     private static final int IDLE_STATE = 0;
     private static final int PLAYING_NORMAL_PROGRAM = 1;
 
@@ -55,11 +59,12 @@ public class ScreenManager {
     private final static int EVENT_MEDIA_READY_SHOW_PROGRAM = 0x8004;
 
     private Context mContext = null;
-    private ScreenDaemon         mScreenDaemonThread       = null;
+    private ScreenDaemon mScreenDaemonThread = null;
     private static ScreenManager mScreenManagerInstance = null;
 
-    private String firstPlayListPath=null;
-    private ProgramLists playlists=null;
+    private String firstPlayListPath = null;
+    private ProgramLists playlists = null;
+    private String receiveXML = null;
 
     // 节目信息
     private final class ProgramInfo {
@@ -128,6 +133,7 @@ public class ScreenManager {
             sb.append(LOCAL_NORMAL_PLAYLIST_FILENAME);
             return sb.toString();
         }
+
         private String obtainNormalPgmListsPath(String path) {
             StringBuilder sb = new StringBuilder();
             sb.append(PosterApplication.getProgramPath());
@@ -138,8 +144,8 @@ public class ScreenManager {
             return sb.toString();
         }
 
-        private ProgramLists getProgramListsFromXml(String filePath){
-            ProgramLists tmpPgmList=null;
+        private ProgramLists getProgramListsFromXml(String filePath) {
+            ProgramLists tmpPgmList = null;
             if (FileUtils.isExist(filePath)) {
                 tmpPgmList = (ProgramLists) XmlFileParse(filePath, ProgramLists.class);
             } else {
@@ -177,7 +183,7 @@ public class ScreenManager {
                 StringBuilder sbPgmFileName = new StringBuilder();
 
                 // 遍历所有的Schedule
-                Log.i("jialei","scheduList.Schedule.size():"+scheduList.Schedule.size());
+                Log.i("jialei", "scheduList.Schedule.size():" + scheduList.Schedule.size());
                 for (int i = 0; i < scheduList.Schedule.size(); i++) {
                     // 获取schedule中的信息
                     schedule = scheduList.Schedule.get(i);
@@ -187,7 +193,7 @@ public class ScreenManager {
                     }
 
                     // 遍历Schedule中所有的playbill
-                    Log.i("jialei","schedule.Playbill.size():"+schedule.Playbill.size());
+                    Log.i("jialei", "schedule.Playbill.size():" + schedule.Playbill.size());
                     for (int j = 0; j < schedule.Playbill.size(); j++) {
                         // 获取playbill中的信息
                         playbill = schedule.Playbill.get(j);
@@ -199,7 +205,7 @@ public class ScreenManager {
                         }
 
                         // 遍历playbill中所有的program
-                        Log.i("jialei","playbill.Program.size():"+playbill.Program.size());
+                        Log.i("jialei", "playbill.Program.size():" + playbill.Program.size());
                         for (int k = 0; k < playbill.Program.size(); k++) {
                             // 获取program中的信息
                             program = playbill.Program.get(k);
@@ -260,8 +266,8 @@ public class ScreenManager {
                         }
                     }
                 }
-            }else{
-                Log.i("jialei","ScheduleNULL");
+            } else {
+                Log.i("jialei", "ScheduleNULL");
             }
 
             return programSchedule;
@@ -288,33 +294,32 @@ public class ScreenManager {
             return obj;
         }
 
-        @Override
-        public void run() {
-            mNormalPgmFilePath = obtainNormalPgmFilePath();
-            Log.i("jialei","mNormalPgmFilePath:"+mNormalPgmFilePath);
-//            mNormalProgramInfoList = getProgramScheduleFromXml(mNormalPgmFilePath);
-            firstPlayListPath=((xmlpath) XmlFileParse(mNormalPgmFilePath, xmlpath.class)).start;
-            Log.i("jialei","firstPlayListPath:"+firstPlayListPath);
-            playlists=getProgramListsFromXml(obtainNormalPgmListsPath(firstPlayListPath));
-            if(playlists!=null){
-                try{
+        private void load(String firstPlayListPath) {
+            playlists = getProgramListsFromXml(obtainNormalPgmListsPath(firstPlayListPath));
+            if (playlists != null) {
+                try {
 
                     loadProgramContent(EVENT_SHOW_NORMAL_PROGRAM, playlists);
-                }catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     Logger.i("ScreenDaemon Thread sleep over, and safe exit, the Thread id is: " + currentThread().getId());
                     return;
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     Logger.e("ScreenDaemon Thread Catch a error");
                     e.printStackTrace();
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e1) {
-                        Logger.i("ScreenDaemon Thread sleep over, and safe exit, the Thread id is: " + currentThread().getId());
-                        return;
-                    }
                 }
             }
+        }
+
+        @Override
+        public void run() {
+            bindReceiver();
+            mNormalPgmFilePath = obtainNormalPgmFilePath();
+            Log.i("jialei", "mNormalPgmFilePath:" + mNormalPgmFilePath);
+//            mNormalProgramInfoList = getProgramScheduleFromXml(mNormalPgmFilePath);
+            firstPlayListPath = ((xmlpath) XmlFileParse(mNormalPgmFilePath, xmlpath.class)).start;
+            Log.i("jialei", "firstPlayListPath:" + firstPlayListPath);
+            load(firstPlayListPath);
+            intentThread.start();
 //            while (mIsRun) {
 //                try {
 //                    if (!pgmPathIsAvalible()) {
@@ -526,6 +531,51 @@ public class ScreenManager {
 
         }
 
+        private void bindReceiver() {
+            IntentFilter udpRcvIntentFilter = new IntentFilter("touchBroadcast");
+            ((MainActivity) mContext).registerReceiver(broadcastReceiver, udpRcvIntentFilter);
+        }
+
+        private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.hasExtra("xml")) {
+                    receiveXML = intent.getStringExtra("xml");
+                    Log.i("jialei", "receiveXML:" + receiveXML);
+                    if (receiveXML != null && !TextUtils.isEmpty(receiveXML)) {
+//                        load(receiveXML);
+//                        handler.sendEmptyMessage(1);
+//                        aThread.start();
+                        receiverun=true;
+                    }
+
+                }
+            }
+        };
+        Thread intentThread = new Thread() {
+            @Override
+            public void run() {
+                while(true){
+                    if(receiverun){
+
+                        load(receiveXML);
+//                    load(firstPlayListPath);
+                        receiverun=false;
+                    }
+                    try
+                    {
+                        Thread.sleep(100);
+                    }
+                    catch (InterruptedException e)
+                    {
+                        break;
+                    }
+                }
+
+//                load(receiveXML);
+            }
+        };
+
         private boolean pgmPathIsAvalible() {
             String extPath = PosterApplication.getProgramPath();
             if (!TextUtils.isEmpty(mNormalPgmFilePath) && !mNormalPgmFilePath.startsWith(extPath)) {
@@ -634,8 +684,8 @@ public class ScreenManager {
                         tmpSubWndInfo.setXPos(calculateWidthScale(Integer.parseInt(area.Location.get("x")), nPgmScreenWidth));
                         tmpSubWndInfo.setYPos(calculateHeightScale(Integer.parseInt(area.Location.get("y")), nPgmScreenHeight));
                     }
-                    if(area.Touch!=null){
-                        Log.i("jialei","area.Touch!=null");
+                    if (area.Touch != null) {
+                        Log.i("jialei", "area.Touch!=null");
                         tmpSubWndInfo.setTouch(area.Touch);
                     }
 
@@ -842,8 +892,7 @@ public class ScreenManager {
     /**********************************************
      * Start Screen Daemon Thread *
      **********************************************/
-    public void startRun()
-    {
+    public void startRun() {
         stopRun();
         mStatus = IDLE_STATE;
         mScreenDaemonThread = new ScreenDaemon();
@@ -854,10 +903,8 @@ public class ScreenManager {
     /**********************************************
      * Stop Screen Daemon Thread *
      **********************************************/
-    public void stopRun()
-    {
-        if (mScreenDaemonThread != null)
-        {
+    public void stopRun() {
+        if (mScreenDaemonThread != null) {
             mScreenDaemonThread.setRunFlag(false);
             mScreenDaemonThread.interrupt();
             mScreenDaemonThread = null;
@@ -868,7 +915,6 @@ public class ScreenManager {
         mHandler.removeMessages(EVENT_SHOW_NORMAL_PROGRAM);
         mHandler.removeMessages(EVENT_MEDIA_READY_SHOW_PROGRAM);
     }
-
 
 
 }

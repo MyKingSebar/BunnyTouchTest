@@ -13,6 +13,7 @@ import java.util.Locale;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -26,6 +27,8 @@ import com.example.screenmanagertest.screenmanager.MediaInfoRef;
 
 public class DateTimeView extends PosterBaseView
 {
+    private Context context;
+    private Intent intent=null;
     private YSTextView tv_top = null;
     private YSTextView tv_middle = null;
     private YSTextView tv_bottom = null;
@@ -74,6 +77,8 @@ public class DateTimeView extends PosterBaseView
     {
         Logger.d("DateTime View initialize......");
 
+        this.context=context;
+
         // Get layout from XML file
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.view_datetime, this);
@@ -84,14 +89,6 @@ public class DateTimeView extends PosterBaseView
         tv_middle = (YSTextView) findViewById(R.id.date_middle);
         tv_bottom = (YSTextView) findViewById(R.id.date_bottom);
 
-        if(getViewTouch()!=null){
-            tv_top.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.i("jialei","touch:"+getViewTouch());
-                }
-            });
-        }
     }
 
     @Override
@@ -125,6 +122,19 @@ public class DateTimeView extends PosterBaseView
         {
             Logger.i("No media in the list.");
             return;
+        }
+        Log.i("jialei","touch1:"+getViewTouch());
+        if(getViewTouch()!=null){
+            tv_top.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i("jialei","touch2:"+getViewTouch());
+                    intent = new Intent();
+                    intent.setAction("touchBroadcast");
+                    intent.putExtra("xml",getViewTouch());
+                    context.sendBroadcast(intent);
+                }
+            });
         }
 
         mCurrentIdx = 0;

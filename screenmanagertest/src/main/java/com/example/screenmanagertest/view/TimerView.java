@@ -124,13 +124,13 @@ public class TimerView extends PosterBaseView
     {
         if("d".equals(txtInfo.format))
         	return TIMER_FORMAT_DAY_ONLYNUM;
-        else if("dÃÏ".equals(txtInfo.format))
+        else if("dÂ§©".equals(txtInfo.format))
         	return TIMER_FORMAT_DAY;
-        else if("dÃÏH–° ±".equals(txtInfo.format))
+        else if("dÂ§©HÂ∞èÊó∂".equals(txtInfo.format))
         	return TIMER_FORMAT_DAY_HOUR;
-        else if("dÃÏH–° ±i∑÷".equals(txtInfo.format))
+        else if("dÂ§©HÂ∞èÊó∂iÂàÜ".equals(txtInfo.format))
         	return TIMER_FORMAT_DAY_HOUR_MIN;
-        else if("dÃÏH–° ±i∑÷s√Î".equals(txtInfo.format))
+        else if("dÂ§©HÂ∞èÊó∂iÂàÜsÁßí".equals(txtInfo.format))
         	return TIMER_FORMAT_DAY_HOUR_MIN_SEC;
         else
         	return TIMER_FORMAT_DAY_HOUR_MIN_SEC;
@@ -360,7 +360,7 @@ public class TimerView extends PosterBaseView
                     	{
                     		sb.append("0");
                     	}
-                    	sb.append(day).append("ÃÏ");
+                    	sb.append(day).append("Â§©");
                     	strTime = sb.toString();
                     	break;
                     case TIMER_FORMAT_DAY_HOUR:
@@ -386,12 +386,12 @@ public class TimerView extends PosterBaseView
                     	{
                     		sb.append("0");
                     	}
-                    	sb.append(day).append("ÃÏ");
+                    	sb.append(day).append("Â§©");
                     	if (hour < 10)
                     	{
                     		sb.append("0");
                     	}
-                    	sb.append(hour).append("–° ±");
+                    	sb.append(hour).append("Â∞èÊó∂");
                     	strTime = sb.toString();
                     	break;
                     case TIMER_FORMAT_DAY_HOUR_MIN:
@@ -424,17 +424,17 @@ public class TimerView extends PosterBaseView
                     	{
                     		sb.append("0");
                     	}
-                    	sb.append(day).append("ÃÏ");
+                    	sb.append(day).append("Â§©");
                     	if (hour < 10)
                     	{
                     		sb.append("0");
                     	}
-                    	sb.append(hour).append("–° ±");
+                    	sb.append(hour).append("Â∞èÊó∂");
                     	if (minute < 10)
                     	{
                     		sb.append("0");
                     	}
-                    	sb.append(minute).append("∑÷");
+                    	sb.append(minute).append("ÂàÜ");
                     	strTime = sb.toString();
                     	break;
                     case TIMER_FORMAT_DAY_HOUR_MIN_SEC:
@@ -447,22 +447,22 @@ public class TimerView extends PosterBaseView
                     	{
                     		sb.append("0");
                     	}
-                    	sb.append(day).append("ÃÏ");
+                    	sb.append(day).append("Â§©");
                     	if (hour < 10)
                     	{
                     		sb.append("0");
                     	}
-                    	sb.append(hour).append("–° ±");
+                    	sb.append(hour).append("Â∞èÊó∂");
                     	if (minute < 10)
                     	{
                     		sb.append("0");
                     	}
-                    	sb.append(minute).append("∑÷");
+                    	sb.append(minute).append("ÂàÜ");
                     	if (second < 10)
                     	{
                     		sb.append("0");
                     	}
-                    	sb.append(second).append("√Î");
+                    	sb.append(second).append("Áßí");
                     	strTime = sb.toString();
                     	break;
                     default:

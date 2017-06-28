@@ -39,7 +39,7 @@ public class MarqueeView extends PosterBaseView
     private int                     mMoveSpeed             = 1;
     private int                     mMoveDirection         = 0;
     
-    private boolean                 mIsMoving              = false;         // ÊÇ·ñ¹ö¶¯
+    private boolean                 mIsMoving              = false;         // æ˜¯å¦æ»šåŠ¨
     private UpdateThread            mUpdateThreadHandle    = null;
 
     private final static int        MOVE_LEFT              = 1;
@@ -372,25 +372,25 @@ public class MarqueeView extends PosterBaseView
             boolean ret = false;
             if (mTextView != null)
             {
-                // »ñÈ¡ÎÄ×ÖÄÚÈİ
+                // è·å–æ–‡å­—å†…å®¹
                 String message = getText(mediaInfo);
                 if (message != null)
                 {
-                    // ÉèÖÃÒÆ¶¯·½ÏòºÍËÙÂÊ
+                    // è®¾ç½®ç§»åŠ¨æ–¹å‘å’Œé€Ÿç‡
                     setScrollMode(mediaInfo.mode);
                     setSpeedLevel(mediaInfo.speed);
 
-                    // »ñÈ¡×ÖÌå²ÎÊı£¬²¢´´½¨»­±Ê
+                    // è·å–å­—ä½“å‚æ•°ï¼Œå¹¶åˆ›å»ºç”»ç¬”
                     Paint paint = new Paint();
-//                    paint.setColor(getFontColor(mediaInfo)); // ÑÕÉ«
-                    paint.setTextSize(getFontSize(mediaInfo)); // ×ÖºÅ
-                    paint.setAlpha(0xff); // ×ÖÌå²»Í¸Ã÷
-//                    paint.setTypeface(getFont(mediaInfo)); // ×ÖÌå
-                    paint.setAntiAlias(true); // È¥³ı¾â³İ
-                    paint.setFilterBitmap(true); // ¶ÔÎ»Í¼½øĞĞÂË²¨´¦Àí
+//                    paint.setColor(getFontColor(mediaInfo)); // é¢œè‰²
+                    paint.setTextSize(getFontSize(mediaInfo)); // å­—å·
+                    paint.setAlpha(0xff); // å­—ä½“ä¸é€æ˜
+//                    paint.setTypeface(getFont(mediaInfo)); // å­—ä½“
+                    paint.setAntiAlias(true); // å»é™¤é”¯é½¿
+                    paint.setFilterBitmap(true); // å¯¹ä½å›¾è¿›è¡Œæ»¤æ³¢å¤„ç†
 
 
-                    // ³õÊ¼»¯²ÎÊı
+                    // åˆå§‹åŒ–å‚æ•°
                     float xPos = 0.0f;
                     float yPos = 0.0f;
                     int nViewWidth = mediaInfo.containerwidth;
@@ -409,7 +409,7 @@ public class MarqueeView extends PosterBaseView
                         mViewPlusDoubleTextLen = nViewWidth + mTextLength * 2;
                         xPos = nViewWidth;
                         yPos = paint.getTextSize() + mTextView.getPaddingTop();
-                        mTextView.setViewAttribute(textList, xPos, yPos, paint); // Éè¶¨³õÊ¼Öµ
+                        mTextView.setViewAttribute(textList, xPos, yPos, paint); // è®¾å®šåˆå§‹å€¼
                         mTextView.postInvalidate();
                         ret = true;
                     }
@@ -417,16 +417,16 @@ public class MarqueeView extends PosterBaseView
 
                     case MOVE_UP:
                     {
-                        textList = autoSplit(message, paint, nViewWidth);  // ×Ô¶¯·ÖĞĞ
+                        textList = autoSplit(message, paint, nViewWidth);  // è‡ªåŠ¨åˆ†è¡Œ
                         FontMetrics fm = paint.getFontMetrics();
-                        float fontHeight = (float)Math.ceil(fm.descent - fm.ascent) + fm.leading; // Ã¿ĞĞ¸ß¶È
+                        float fontHeight = (float)Math.ceil(fm.descent - fm.ascent) + fm.leading; // æ¯è¡Œé«˜åº¦
                         mTextLength = textList.size() * fontHeight;
                         mStep = mTextLength;
                         mViewPlusTextLen = nViewHeight + mTextLength;
                         mViewPlusDoubleTextLen = nViewHeight + mTextLength * 2;
                         xPos = mTextView.getPaddingLeft();
                         yPos = nViewHeight;
-                        mTextView.setViewAttribute(textList, xPos, yPos, paint); // Éè¶¨³õÊ¼Öµ
+                        mTextView.setViewAttribute(textList, xPos, yPos, paint); // è®¾å®šåˆå§‹å€¼
                         mTextView.postInvalidate();
                         ret = true;
                     }

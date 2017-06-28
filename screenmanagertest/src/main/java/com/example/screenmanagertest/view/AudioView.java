@@ -235,9 +235,9 @@ public class AudioView extends PosterBaseView {
         }
 
         try {
-            mMediaPlayer.reset(); // ÖØÖÃ
-            mMediaPlayer.setDataSource(path); // ÉèÖÃÊı¾İÔ´
-            mMediaPlayer.prepareAsync(); // Òì²½×¼±¸
+            mMediaPlayer.reset(); // é‡ç½®
+            mMediaPlayer.setDataSource(path); // è®¾ç½®æ•°æ®æº
+            mMediaPlayer.prepareAsync(); // å¼‚æ­¥å‡†å¤‡
         } catch (IOException e) {
             e.printStackTrace();
             mIsPlayingMusic = false;

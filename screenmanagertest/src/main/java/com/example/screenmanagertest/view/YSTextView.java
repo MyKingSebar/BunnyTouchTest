@@ -72,11 +72,11 @@ public class YSTextView extends TextView
 
             float yPos = mYPos;
             FontMetrics fm = mPaint.getFontMetrics();
-            float lineHeight = (float)Math.ceil(fm.descent - fm.ascent); // ÿ�и߶�
+            float lineHeight = (float)Math.ceil(fm.descent - fm.ascent); // 每行高度
             for (String text : mContent)
             {
                 canvas.drawText(text, mXPos, yPos, mPaint);
-                yPos = yPos + lineHeight + fm.leading; // (�ָ�+�м��)
+                yPos = yPos + lineHeight + fm.leading; // (字高+行间距)
             }
         }
         super.onDraw(canvas);

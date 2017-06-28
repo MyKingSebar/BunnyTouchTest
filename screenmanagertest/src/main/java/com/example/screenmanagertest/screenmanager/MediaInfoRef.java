@@ -12,11 +12,11 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class MediaInfoRef implements Serializable
 {
-    public String mediaType = null;   // ËØ²ÄÀàĞÍ£¨Video, Image, Text, Audio, WebPage)
-    public String source = null;      // ËØ²ÄÀ´Ô´£º(File, Url, Rss) ±¾µØÎÄ¼ş»òÍøÂçÎÄ¼ş
-    public String filePath = null;    // ËØ²ÄÎ»ÖÃ£¨ÎÄ¼şÂ·¾¶¡¢Link Address)
-    public String verifyCode = null;  // ËØ²ÄĞ£ÑéÂë
-    public String remotePath = null;  // ·şÎñÆ÷ÉÏµÄÎ»ÖÃ
+    public String mediaType = null;   // ç´ æç±»å‹ï¼ˆVideo, Image, Text, Audio, WebPage)
+    public String source = null;      // ç´ ææ¥æºï¼š(File, Url, Rss) æœ¬åœ°æ–‡ä»¶æˆ–ç½‘ç»œæ–‡ä»¶
+    public String filePath = null;    // ç´ æä½ç½®ï¼ˆæ–‡ä»¶è·¯å¾„ã€Link Address)
+    public String verifyCode = null;  // ç´ ææ ¡éªŒç 
+    public String remotePath = null;  // æœåŠ¡å™¨ä¸Šçš„ä½ç½®
     public String mid = null;
     public String vType = null;
     public int md5Key = 0;
@@ -38,8 +38,8 @@ public class MediaInfoRef implements Serializable
     public String deadline = null;
     public int containerwidth = 0;
     public int containerheight = 0;
-    public int playedtimes = 0; // ÒÑ¾­²¥·Å¶àÉÙ´Î
-    public boolean isIgnoreDlLimit = false;  // ÊÇ·ñºöÂÔÏÂÔØÏŞÖÆ
+    public int playedtimes = 0; // å·²ç»æ’­æ”¾å¤šå°‘æ¬¡
+    public boolean isIgnoreDlLimit = false;  // æ˜¯å¦å¿½ç•¥ä¸‹è½½é™åˆ¶
 
     @Override
     public String toString() {
