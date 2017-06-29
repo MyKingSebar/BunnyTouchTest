@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.example.screenmanagertest.common.Logger;
+import com.example.screenmanagertest.fragment.NewLoadFragment;
 import com.example.screenmanagertest.screenmanager.MediaInfoRef;
 import com.example.screenmanagertest.screenmanager.ScreenManager;
 import com.example.screenmanagertest.screenmanager.SubWindowInfoRef;
@@ -25,7 +26,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class MainActivity extends Activity {
+import me.yokeyword.fragmentation.SupportActivity;
+
+public class MainActivity extends SupportActivity {
     private Context mContext = null;
     private FrameLayout mMainLayout = null;
 
@@ -37,6 +40,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        if (savedInstanceState == null) {
+//            loadRootFragment(R.id.fl, NewLoadFragment.newInstance(null,this));  // 加载根Fragment
+//        }
+
         mContext = this;
         initScreen();
 
@@ -75,95 +82,102 @@ public class MainActivity extends Activity {
 
         return screenWidth;
     }
-
+    public void loadNewProgram2(ArrayList<SubWindowInfoRef> subWndList) {
+        start(NewLoadFragment.newInstance(subWndList,this));
+    }
     // 加载新节目
     public void loadNewProgram(ArrayList<SubWindowInfoRef> subWndList) {
-        // Create new program windows
-        if (subWndList != null) {
-            Logger.i("Window number is: " + subWndList.size());
-
-            // Clean old program
-            cleanupLayout();
-
-            // initialize
-            String touch=null;
-
-            int xPos = 0;
-            int yPos = 0;
-            int width = 0;
-            int height = 0;
-            String wndName = null;
-            String wndType = null;
-            List<MediaInfoRef> mediaList = null;
-
-            PosterBaseView tempSubWnd = null;
-            mSubWndCollection = new HashSet<PosterBaseView>();
-
-            // Through the sub window list, and create the correct view for it.
-            for (SubWindowInfoRef subWndInfo : subWndList) {
-                tempSubWnd = null;
-
-                // 窗体类型和名称
-                if ((wndType = subWndInfo.getSubWindowType()) == null) {
-                    continue;
-                }
-                wndName = subWndInfo.getSubWindowName();
-
-                touch=subWndInfo.getTouch();
-                Log.i("jialei","loadNewProgram.touch:"+touch);
-                // 窗体位置
-                xPos = subWndInfo.getXPos();
-                yPos = subWndInfo.getYPos();
-                width = subWndInfo.getWidth();
-                height = subWndInfo.getHeight();
-
-                // 素材
-                mediaList = subWndInfo.getSubWndMediaList();
-
-                // 创建窗口
-                if (wndType.contains("Main") || wndType.contains("StandbyScreen")) {
-                    tempSubWnd = new MultiMediaView(this, true);
-                } else if (wndType.contains("Background")) {
-                    // 背景图片
-                    if (mediaList != null && mediaList.size() > 0 && "File".equals(mediaList.get(0).source)) {
-                        mBgImgInfo = mediaList.get(0);
-//                        setWindowBackgroud();
-                    }
-                    continue;
-                } else if (wndType.contains("Image") || wndType.contains("Weather")) {
-                    tempSubWnd = new MultiMediaView(this);
-                } else if (wndType.contains("Audio")) {
-                    tempSubWnd = new AudioView(this);
-                } else if (wndType.contains("Scroll")) {
-                    tempSubWnd = new MarqueeView(this);
-                } else if (wndType.contains("Clock")) {
-                    tempSubWnd = new DateTimeView(this);
-                } else if (wndType.contains("Gallery")) {
-                    tempSubWnd = new GalleryView(this);
-                } else if (wndType.contains("Timer")) {
-                    tempSubWnd = new TimerView(this);
-                }
-
-                // 设置窗口参数，并添加
-                if (tempSubWnd != null) {
-                    tempSubWnd.setViewTouch(touch);
-                    tempSubWnd.setViewName(wndName);
-                    tempSubWnd.setViewType(wndType);
-                    tempSubWnd.setMediaList(mediaList);
-                    tempSubWnd.setViewPosition(xPos, yPos);
-                    tempSubWnd.setViewSize(width, height);
-                    mMainLayout.addView(tempSubWnd);
-                    mSubWndCollection.add(tempSubWnd);
-                }
-            }
-        }
-
-        if (mSubWndCollection != null) {
-            for (PosterBaseView subWnd : mSubWndCollection) {
-                subWnd.startWork();
-            }
-        }
+        loadRootFragment(R.id.fl, NewLoadFragment.newInstance(subWndList,this))  ;
     }
+
+
+//    public void loadNewProgram(ArrayList<SubWindowInfoRef> subWndList) {
+//        // Create new program windows
+//        if (subWndList != null) {
+//            Logger.i("Window number is: " + subWndList.size());
+//
+//            // Clean old program
+//            cleanupLayout();
+//
+//            // initialize
+//            String touch=null;
+//
+//            int xPos = 0;
+//            int yPos = 0;
+//            int width = 0;
+//            int height = 0;
+//            String wndName = null;
+//            String wndType = null;
+//            List<MediaInfoRef> mediaList = null;
+//
+//            PosterBaseView tempSubWnd = null;
+//            mSubWndCollection = new HashSet<PosterBaseView>();
+//
+//            // Through the sub window list, and create the correct view for it.
+//            for (SubWindowInfoRef subWndInfo : subWndList) {
+//                tempSubWnd = null;
+//
+//                // 窗体类型和名称
+//                if ((wndType = subWndInfo.getSubWindowType()) == null) {
+//                    continue;
+//                }
+//                wndName = subWndInfo.getSubWindowName();
+//
+//                touch=subWndInfo.getTouch();
+//                Log.i("jialei","loadNewProgram.touch:"+touch);
+//                // 窗体位置
+//                xPos = subWndInfo.getXPos();
+//                yPos = subWndInfo.getYPos();
+//                width = subWndInfo.getWidth();
+//                height = subWndInfo.getHeight();
+//
+//                // 素材
+//                mediaList = subWndInfo.getSubWndMediaList();
+//
+//                // 创建窗口
+//                if (wndType.contains("Main") || wndType.contains("StandbyScreen")) {
+//                    tempSubWnd = new MultiMediaView(this, true);
+//                } else if (wndType.contains("Background")) {
+//                    // 背景图片
+//                    if (mediaList != null && mediaList.size() > 0 && "File".equals(mediaList.get(0).source)) {
+//                        mBgImgInfo = mediaList.get(0);
+////                        setWindowBackgroud();
+//                    }
+//                    continue;
+//                } else if (wndType.contains("Image") || wndType.contains("Weather")) {
+//                    tempSubWnd = new MultiMediaView(this);
+//                } else if (wndType.contains("Audio")) {
+//                    tempSubWnd = new AudioView(this);
+//                } else if (wndType.contains("Scroll")) {
+//                    tempSubWnd = new MarqueeView(this);
+//                } else if (wndType.contains("Clock")) {
+//                    tempSubWnd = new DateTimeView(this);
+//                } else if (wndType.contains("Gallery")) {
+//                    tempSubWnd = new GalleryView(this);
+//                } else if (wndType.contains("Timer")) {
+//                    tempSubWnd = new TimerView(this);
+//                }
+//
+//                // 设置窗口参数，并添加
+//                if (tempSubWnd != null) {
+//                    tempSubWnd.setViewTouch(touch);
+//                    tempSubWnd.setViewName(wndName);
+//                    tempSubWnd.setViewType(wndType);
+//                    tempSubWnd.setMediaList(mediaList);
+//                    tempSubWnd.setViewPosition(xPos, yPos);
+//                    tempSubWnd.setViewSize(width, height);
+//                    mMainLayout.addView(tempSubWnd);
+//                    mSubWndCollection.add(tempSubWnd);
+//                }
+//            }
+//        }
+//
+//        if (mSubWndCollection != null) {
+//            for (PosterBaseView subWnd : mSubWndCollection) {
+//                subWnd.startWork();
+//            }
+//        }
+//    }
 
 
     private void cleanupLayout() {

@@ -958,7 +958,6 @@ public class MultiMediaView extends PosterBaseView
                             }
                             if (media.filePath.equals(PosterApplication.getStandbyScreenImgPath()) && !FileUtils.isExist(media.filePath))
                         	{
-
                         		// 如果待机画面不存在，则播放默认的待机画面
 //                        		Bitmap img = PosterApplication.getInstance().getDefaultScreenImg();
                                 Resources resources = mContext.getResources();

@@ -9,18 +9,18 @@
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/screenmanager/MediaInfoRef.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/screenmanager/SubWindowInfoRef.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/AudioView.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/ControlView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/ControlView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/DateTimeView.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/GalleryView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/GalleryView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/MarqueeView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/MultiMediaView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/PosterBaseView.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/ProgressBarView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/ProgressBarView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/RunningView.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/SoundView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/SoundView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/TimerView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/WaitingDialog.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/YSHorizontalScrollView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/YSHorizontalScrollView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/YSTextView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/anim" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/res/drawable-en-rUS-hdpi" charset="GBK" />

@@ -56,6 +56,7 @@ public class ScreenManager {
     // Define message Id
     private static final int EVENT_SHOW_IDLE_PROGRAM = 0x8001;
     private final static int EVENT_SHOW_NORMAL_PROGRAM = 0x8002;
+    private final static int EVENT_NEW = 0x8005;
     private final static int EVENT_MEDIA_READY_SHOW_PROGRAM = 0x8004;
 
     private Context mContext = null;
@@ -309,6 +310,21 @@ public class ScreenManager {
                 }
             }
         }
+        private void load2(String firstPlayListPath) {
+            playlists = getProgramListsFromXml(obtainNormalPgmListsPath(firstPlayListPath));
+            if (playlists != null) {
+                try {
+
+                    loadProgramContent(EVENT_NEW, playlists);
+                } catch (InterruptedException e) {
+                    Logger.i("ScreenDaemon Thread sleep over, and safe exit, the Thread id is: " + currentThread().getId());
+                    return;
+                } catch (Exception e) {
+                    Logger.e("ScreenDaemon Thread Catch a error");
+                    e.printStackTrace();
+                }
+            }
+        }
 
         @Override
         public void run() {
@@ -319,7 +335,7 @@ public class ScreenManager {
             firstPlayListPath = ((xmlpath) XmlFileParse(mNormalPgmFilePath, xmlpath.class)).start;
             Log.i("jialei", "firstPlayListPath:" + firstPlayListPath);
             load(firstPlayListPath);
-            intentThread.start();
+            aThread.start();
 //            while (mIsRun) {
 //                try {
 //                    if (!pgmPathIsAvalible()) {
@@ -552,13 +568,13 @@ public class ScreenManager {
                 }
             }
         };
-        Thread intentThread = new Thread() {
+        Thread aThread = new Thread() {
             @Override
             public void run() {
                 while(true){
                     if(receiverun){
 
-                        load(receiveXML);
+                        load2(receiveXML);
 //                    load(firstPlayListPath);
                         receiverun=false;
                     }
@@ -869,6 +885,12 @@ public class ScreenManager {
                 case EVENT_SHOW_NORMAL_PROGRAM:
                     if (mContext instanceof MainActivity) {
                         ((MainActivity) mContext).loadNewProgram((ArrayList<SubWindowInfoRef>) msg.getData().getSerializable("subwindowlist"));
+                    }
+                    mLoadProgramDone = true;
+                    return;
+                case EVENT_NEW:
+                    if (mContext instanceof MainActivity) {
+                        ((MainActivity) mContext).loadNewProgram2((ArrayList<SubWindowInfoRef>) msg.getData().getSerializable("subwindowlist"));
                     }
                     mLoadProgramDone = true;
                     return;

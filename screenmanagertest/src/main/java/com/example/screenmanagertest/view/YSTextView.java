@@ -7,10 +7,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-public class YSTextView extends TextView
+public class YSTextView extends AppCompatTextView
 {
     private ArrayList<String> mContent = null;
     private float  mXPos    = 0;
