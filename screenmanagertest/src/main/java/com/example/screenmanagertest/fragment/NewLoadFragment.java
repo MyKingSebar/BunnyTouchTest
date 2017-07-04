@@ -83,7 +83,6 @@ public class NewLoadFragment extends SupportFragment {
     }
 
 
-
     private void initView(View view) {
         mMainLayout = (FrameLayout) view.findViewById(R.id.fl);
         mMainLayout.setBackgroundColor(Color.BLACK);
@@ -92,6 +91,30 @@ public class NewLoadFragment extends SupportFragment {
             loadNewProgram(loadList);
         } else {
             Log.i("jialei", "NewLoadFragment.loadList=null");
+        }
+    }
+
+    @Override
+    public void onSupportInvisible() {
+        Log.i("jialei1", "onSupportInvisible");
+        super.onSupportInvisible();
+        if (mSubWndCollection != null) {
+            for (PosterBaseView wnd : mSubWndCollection) {
+                wnd.onViewPause();
+            }
+        }
+    }
+
+    @Override
+    public void onSupportVisible() {
+        Log.i("jialei1", "onSupportVisible");
+        super.onSupportVisible();
+        if (mSubWndCollection != null) {
+            for (PosterBaseView wnd : mSubWndCollection) {
+                wnd.onViewResume();
+
+            }
+
         }
     }
 
@@ -118,6 +141,7 @@ public class NewLoadFragment extends SupportFragment {
         Log.i("jialei1", "onStop");
         super.onStop();
     }
+
     @Override
     public void onResume() {
         Log.i("jialei1", "onResume");
