@@ -35,21 +35,21 @@ import me.yokeyword.fragmentation.SupportFragment;
  */
 
 public class NewLoadFragment extends SupportFragment {
-    private String bundleKey="sublist";
-    private ArrayList<SubWindowInfoRef> loadList=null;
+    private String bundleKey = "sublist";
+    private ArrayList<SubWindowInfoRef> loadList = null;
     private FrameLayout mMainLayout = null;
-    private Context context=null;
+    private Context context = null;
     private Set<PosterBaseView> mSubWndCollection = null; // 屏幕布局信息
 
 
-    public static NewLoadFragment newInstance(ArrayList<SubWindowInfoRef> subWndList,Context context) {
+    public static NewLoadFragment newInstance(ArrayList<SubWindowInfoRef> subWndList, Context context) {
 //        this.context=context;
         NewLoadFragment fragment = new NewLoadFragment();
         Bundle bundle = new Bundle();
         ArrayList list = new ArrayList(); //这个list用于在budnle中传递 需要传递的ArrayList<Object>
         list.add(subWndList);
         list.add(context);
-        bundle.putParcelableArrayList("bundleKey",list);
+        bundle.putParcelableArrayList("bundleKey", list);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -62,12 +62,12 @@ public class NewLoadFragment extends SupportFragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             ArrayList list = bundle.getParcelableArrayList("bundleKey");
-            if(list.size()>0){
+            if (list.size() > 0) {
 
-                loadList= (ArrayList<SubWindowInfoRef>) list.get(0);//强转成你自己定义的list，这样list2就是你传过来的那个list了。
-                this.context=(Context)list.get(1);
-            }else{
-                Log.i("jialei","loadList.size=0");
+                loadList = (ArrayList<SubWindowInfoRef>) list.get(0);//强转成你自己定义的list，这样list2就是你传过来的那个list了。
+                this.context = (Context) list.get(1);
+            } else {
+                Log.i("jialei", "loadList.size=0");
             }
         }
 
@@ -82,15 +82,71 @@ public class NewLoadFragment extends SupportFragment {
         return view;
     }
 
-    private void initView(View view) {
-        mMainLayout= (FrameLayout) view.findViewById(R.id.fl);
-        mMainLayout.setBackgroundColor(Color.BLACK);
-if(loadList!=null){
 
-    loadNewProgram(loadList);
-}else{
-    Log.i("jialei","NewLoadFragment.loadList=null");
-}
+
+    private void initView(View view) {
+        mMainLayout = (FrameLayout) view.findViewById(R.id.fl);
+        mMainLayout.setBackgroundColor(Color.BLACK);
+        if (loadList != null) {
+
+            loadNewProgram(loadList);
+        } else {
+            Log.i("jialei", "NewLoadFragment.loadList=null");
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.i("jialei1", "onDestroy");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onStart() {
+        Log.i("jialei1", "onStart");
+        super.onStart();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.i("jialei1", "onDestroyView");
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onStop() {
+        Log.i("jialei1", "onStop");
+        super.onStop();
+    }
+    @Override
+    public void onResume() {
+        Log.i("jialei1", "onResume");
+        if (mSubWndCollection != null) {
+            if (mMainLayout.getChildCount() > 0) {
+                for (PosterBaseView wnd : mSubWndCollection) {
+                    wnd.onViewResume();
+                }
+            } else {
+                for (PosterBaseView wnd : mSubWndCollection) {
+                    mMainLayout.addView(wnd);
+                    wnd.onViewResume();
+                }
+            }
+
+        }
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Log.i("jialei1", "onPause");
+        if (mSubWndCollection != null) {
+            for (PosterBaseView wnd : mSubWndCollection) {
+                wnd.onViewPause();
+            }
+        }
+        mMainLayout.removeAllViews();
+        super.onPause();
     }
 
     // 加载新节目
@@ -103,7 +159,7 @@ if(loadList!=null){
 //            cleanupLayout();
 
             // initialize
-            String touch=null;
+            String touch = null;
 
             int xPos = 0;
             int yPos = 0;
@@ -116,7 +172,7 @@ if(loadList!=null){
             PosterBaseView tempSubWnd = null;
             mSubWndCollection = new HashSet<PosterBaseView>();
 
-            // Through the sub window list, and create the correct view for it.
+            // Through the sub window list, and create the correct vie
             for (SubWindowInfoRef subWndInfo : subWndList) {
                 tempSubWnd = null;
 
@@ -126,8 +182,8 @@ if(loadList!=null){
                 }
                 wndName = subWndInfo.getSubWindowName();
 
-                touch=subWndInfo.getTouch();
-                Log.i("jialei","loadNewProgram.touch:"+touch);
+                touch = subWndInfo.getTouch();
+                Log.i("jialei", "loadNewProgram.touch:" + touch);
                 // 窗体位置
                 xPos = subWndInfo.getXPos();
                 yPos = subWndInfo.getYPos();

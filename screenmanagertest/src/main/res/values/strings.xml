@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">商业显示终端</string>
+    <string name="app_name">商业查询终端</string>
     <string name="action_settings">Settings</string>
 
     <!-- 设置界面的四项大分类 -->

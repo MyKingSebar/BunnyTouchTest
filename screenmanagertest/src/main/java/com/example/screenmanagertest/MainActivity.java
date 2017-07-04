@@ -40,9 +40,9 @@ public class MainActivity extends SupportActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        if (savedInstanceState == null) {
-//            loadRootFragment(R.id.fl, NewLoadFragment.newInstance(null,this));  // 加载根Fragment
-//        }
+        if (savedInstanceState == null) {
+            loadRootFragment(R.id.fl, NewLoadFragment.newInstance(null,this));  // 加载根Fragment
+        }
 
         mContext = this;
         initScreen();
@@ -87,7 +87,8 @@ public class MainActivity extends SupportActivity {
     }
     // 加载新节目
     public void loadNewProgram(ArrayList<SubWindowInfoRef> subWndList) {
-        loadRootFragment(R.id.fl, NewLoadFragment.newInstance(subWndList,this))  ;
+//        loadRootFragment(R.id.fl, NewLoadFragment.newInstance(subWndList,this))  ;
+        start(NewLoadFragment.newInstance(subWndList,this));
     }
 
 

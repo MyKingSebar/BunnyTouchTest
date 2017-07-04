@@ -39,6 +39,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -69,6 +70,8 @@ import com.example.screenmanagertest.screenmanager.ScreenManager;
 
 public class MultiMediaView extends PosterBaseView
 {
+    private Intent intent=null;
+    private Context context=null;
     private final static int                             EVENT_BASE                 = 0x9000;
     private final static int                             EVENT_SHOWPROGBAR          = EVENT_BASE + 0;
     private final static int                             EVENT_SHOWSURFACEVIEW      = EVENT_BASE + 1;
@@ -86,6 +89,8 @@ public class MultiMediaView extends PosterBaseView
     private final static long                            DEFAULT_ANIMATION_DURATION = 1000;
     private final static int                             DEFAULT_VOLUME_VALUE       = 3;
     private final static int                             CONTROLBAR_STAY_TIME       = 5000;
+
+    private int PICTURE_DURING=1000;
     
     // Define special effects for picture shown
     private static final int                      NONE                       = 0;
@@ -159,6 +164,7 @@ public class MultiMediaView extends PosterBaseView
 
     private void initView(Context context, boolean isShowSurface)
     {
+        this.context=context;
         Logger.d("[" + mViewName + "] MultiMedia View initialize......");
 
         // Get layout from XML file
@@ -176,6 +182,7 @@ public class MultiMediaView extends PosterBaseView
         mSurfaceHolder.setFormat(PixelFormat.TRANSLUCENT);
         mSurfaceHolder.addCallback(new SurfaceHolderCallBack());
         //mSurfaceView.setFocusable(true);
+//        mSurfaceView.setZOrderOnTop(true);
         mSurfaceView.setFocusableInTouchMode(true);
 		if (isShowSurface) {
 			doShowSurfaceView();
@@ -490,6 +497,7 @@ public class MultiMediaView extends PosterBaseView
     @Override
     public void startWork()
     {
+        Log.i("jialei","startwork");
         if (mMediaList == null)
         {
             Logger.i("Media list is null.");
@@ -510,7 +518,17 @@ public class MultiMediaView extends PosterBaseView
             }
             return;
         }
-
+        if(getViewTouch()!=null){
+            mImageSwitcher.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    intent = new Intent();
+                    intent.setAction("touchBroadcast");
+                    intent.putExtra("xml",getViewTouch());
+                    context.sendBroadcast(intent);
+                }
+            });
+        }
         startUpdateThread();
     }
 
@@ -661,7 +679,7 @@ public class MultiMediaView extends PosterBaseView
 
     private void playImage(MediaInfoRef media) throws InterruptedException
     {
-        Logger.i("Play image '" + media.filePath + "'.");
+//        Logger.i("Play image '" + media.filePath + "'.");
 
         boolean bIsUseCache = mViewType.contains("Weather") ? false : true;
         Bitmap img = getBitMap(media, bIsUseCache);
@@ -944,8 +962,7 @@ public class MultiMediaView extends PosterBaseView
                         		FileUtils.mediaIsFile(media) &&
                         		mCurrentMedia.filePath.equals(media.filePath))
                         	{
-
-                        		Thread.sleep(DEFAULT_THREAD_QUICKPERIOD);
+                                Thread.sleep(DEFAULT_THREAD_QUICKPERIOD);
                         		continue;
                         	}
 
@@ -971,6 +988,8 @@ public class MultiMediaView extends PosterBaseView
                                 playImage(mCurrentMedia);
                             }
                             mCurrentMedia.playedtimes++;
+                            //TODO
+                            sleep(PICTURE_DURING);
                             continue;
                         }
                         else if (FileUtils.mediaIsTextFromFile(media) || FileUtils.mediaIsTextFromNet(media))
@@ -997,7 +1016,6 @@ public class MultiMediaView extends PosterBaseView
                             Thread.sleep(DEFAULT_THREAD_QUICKPERIOD);
                             continue;
                         }
-
                         Thread.sleep(DEFAULT_THREAD_PERIOD);
                     }
                 }
