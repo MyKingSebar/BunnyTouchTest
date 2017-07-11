@@ -12,11 +12,13 @@ import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -291,7 +293,7 @@ public class MarqueeView extends PosterBaseView
 
                     if (!mIsMoving)
                     {
-                    	media = findNextOrSyncMedia();
+                        media = findNextOrSyncMedia();
 
                         if (media == null)
                         {
@@ -309,8 +311,6 @@ public class MarqueeView extends PosterBaseView
                         else
                         {
                             mCurrentMedia = media;
-
-
                             showMarqueeTextView();
                             mIsMoving = initScrollViewParam(mCurrentMedia);
                             Thread.sleep(MOVE_INTERVAL);
@@ -383,6 +383,8 @@ public class MarqueeView extends PosterBaseView
                     // 获取字体参数，并创建画笔
                     Paint paint = new Paint();
 //                    paint.setColor(getFontColor(mediaInfo)); // 颜色
+                    //TODO
+                    paint.setColor(Color.WHITE); // 颜色
                     paint.setTextSize(getFontSize(mediaInfo)); // 字号
                     paint.setAlpha(0xff); // 字体不透明
 //                    paint.setTypeface(getFont(mediaInfo)); // 字体

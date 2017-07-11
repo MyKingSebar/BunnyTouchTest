@@ -1,1 +1,1 @@
-include ':screenmanagertest'
+include ':screenmanagertest', 'fragmentation'

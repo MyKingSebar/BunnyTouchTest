@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.format.Time;
 import android.util.AttributeSet;
@@ -66,6 +67,8 @@ public class TimerView extends PosterBaseView
         
         // Get widgets from XML file
         mTimerTxtv = (YSTextView) findViewById(R.id.timer_txtv);
+        //TODO 临时color
+        mTimerTxtv.setTextColor(Color.WHITE);
     }
 
     @Override
