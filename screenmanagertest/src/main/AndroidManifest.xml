@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    coreApp="true"
     package="com.example.screenmanagertest">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -36,6 +37,10 @@
     <!-- <uses-permission android:name="android.permission.SENSOR_ENABLE" /> -->
     <uses-permission android:name="com.android.voicemail.permission.ADD_VOICEMAIL" />
     <uses-permission android:name="com.android.voicemail.permission.READ_WRITE_ALL_VOICEMAIL" />
+    <user-permission android:name="android.permission.DEVICE_POWER" />
+    <user-permission android:name="android.permission.REBOOT" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <user-permission android:name="android.permission.WAKE_LOCK" />
 
 
 
@@ -55,6 +60,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--<service-->
+            <!--android:name="com.example.screenmanagertest.power.onoffserver.SysCtrlService" >-->
+            <!--<intent-filter android:priority="1000">-->
+                <!--<action android:name="com.ys.powerservice.sysctrlservice" />-->
+            <!--</intent-filter>-->
+        <!--</service>-->
+
+        <receiver
+            android:name="com.example.screenmanagertest.power.onoffserver.SysCtrlReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name="com.example.screenmanagertest.power.provider.AdProvider"
+            android:authorities="com.ys.poweronoff.provider"
+            android:exported="true"/>
     </application>
 
 </manifest>

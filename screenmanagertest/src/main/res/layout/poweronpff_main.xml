@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/pageStyle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_clock"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_clock" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clock_title_top"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/osd_clock_addbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#70ffffff"
+            android:text="@string/clock_addbtn"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="630dp"
+        android:layout_height="50dp"
+        android:background="@color/half_transparent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/clock_header"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:text="@string/week_sunday"
+            android:textColor="@color/white"
+            android:textSize="24dp" />
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:text="@string/week_monday"
+            android:textColor="@color/white"
+            android:textSize="24dp" />
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:text="@string/week_tuesday"
+            android:textColor="@color/white"
+            android:textSize="24dp" />
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:text="@string/week_wednesday"
+            android:textColor="@color/white"
+            android:textSize="24dp" />
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:text="@string/week_thursday"
+            android:textColor="@color/white"
+            android:textSize="24dp" />
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:text="@string/week_friday"
+            android:textColor="@color/white"
+            android:textSize="24dp" />
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:text="@string/week_saturday"
+            android:textColor="@color/white"
+            android:textSize="24dp" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="640dp"
+        android:layout_height="2dp"
+        android:background="@color/white" />
+
+    <ListView
+        android:id="@+id/clock_listview"
+        android:layout_width="630dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dip"
+        android:layout_weight="1"
+        android:background="@color/half_transparent"
+        android:divider="@null"
+        android:dividerHeight="1px"
+        android:scrollbars="none" >
+    </ListView>
+
+</LinearLayout>

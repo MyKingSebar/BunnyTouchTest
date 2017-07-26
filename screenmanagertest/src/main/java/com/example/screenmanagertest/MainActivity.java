@@ -1,34 +1,32 @@
 package com.example.screenmanagertest;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.FrameLayout;
 
-import com.example.screenmanagertest.common.Logger;
 import com.example.screenmanagertest.fragment.NewLoadFragment;
+import com.example.screenmanagertest.fragment.PowerOnOffFragment;
+import com.example.screenmanagertest.power.PowerOnOffManager;
 import com.example.screenmanagertest.screenmanager.MediaInfoRef;
 import com.example.screenmanagertest.screenmanager.ScreenManager;
 import com.example.screenmanagertest.screenmanager.SubWindowInfoRef;
-import com.example.screenmanagertest.view.AudioView;
-import com.example.screenmanagertest.view.DateTimeView;
-import com.example.screenmanagertest.view.GalleryView;
-import com.example.screenmanagertest.view.MarqueeView;
-import com.example.screenmanagertest.view.MultiMediaView;
 import com.example.screenmanagertest.view.PosterBaseView;
-import com.example.screenmanagertest.view.TimerView;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import me.yokeyword.fragmentation.SupportActivity;
 
 public class MainActivity extends SupportActivity {
+    private float mouseX=0;
+    private float mouseY=0;
+
+
     private Context mContext = null;
     private FrameLayout mMainLayout = null;
 
@@ -39,7 +37,7 @@ public class MainActivity extends SupportActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main);
 //        if (savedInstanceState == null) {
 //            loadRootFragment(R.id.fl, NewLoadFragment.newInstance(null,this));  // 加载根Fragment
 //        }
@@ -58,6 +56,15 @@ public class MainActivity extends SupportActivity {
             Log.i("jialei","ScreenManager.getInstance() != null");
             ScreenManager.getInstance().startRun();
         }
+//        PosterApplication.getInstance().initAppParam();
+        PowerOnOffManager.getInstance().checkAndSetOnOffTime(PowerOnOffManager.AUTOSCREENOFF_COMMON);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initService();
+        PowerOnOffManager.getInstance().checkAndSetOnOffTime(PowerOnOffManager.AUTOSCREENOFF_COMMON);
     }
 
     @Override
@@ -83,6 +90,13 @@ public class MainActivity extends SupportActivity {
         PosterApplication.setScreenHeight(getScreenHeigth());
         PosterApplication.setScreenWidth(getScreenWidth());
     }
+
+    private void initService(){
+        Intent service = new Intent();
+        service.setAction("com.ys.powerservice.sysctrlservice");
+        startService(service);
+    }
+
 
     public int getScreenHeigth() {
         int screenHeight = 0;
@@ -244,5 +258,30 @@ public class MainActivity extends SupportActivity {
                 }
             }
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+switch (event.getAction()){
+    case MotionEvent.ACTION_DOWN:
+        mouseX=event.getX();
+        mouseY=event.getY();
+        break;
+    case MotionEvent.ACTION_UP:
+        if((event.getX()-mouseX)>200|(mouseX-event.getX())>200){
+            start(PowerOnOffFragment.newInstance(this));
+        }
+
+        break;
+    case MotionEvent.ACTION_MOVE:
+
+        break;
+
+}
+
+
+
+        return super.onTouchEvent(event);
     }
 }

@@ -6,6 +6,11 @@
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/gifdecode/GifDecodeInfo.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/gifdecode/GifDecoder.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/gifdecode/GifFrame.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/power/PowerOnOffManager.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/power/SysCtrlService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/power/common/CommonActions.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/power/onoffserver/SysCtrlReceiver.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/power/onoffserver/SysCtrlService.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/screenmanager/MediaInfoRef.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/screenmanager/SubWindowInfoRef.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/view/AudioView.java" charset="UTF-8" />

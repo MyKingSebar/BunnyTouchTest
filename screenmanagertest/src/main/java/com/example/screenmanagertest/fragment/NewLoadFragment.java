@@ -89,7 +89,6 @@ public class NewLoadFragment extends SupportFragment {
         mMainLayout = (FrameLayout) view.findViewById(R.id.fl);
         mMainLayout.setBackgroundColor(Color.BLACK);
         if (loadList != null) {
-
             loadNewProgram(loadList);
         } else {
             Log.i("jialei", "NewLoadFragment.loadList=null");
