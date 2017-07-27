@@ -75,6 +75,7 @@ public class MainActivity extends SupportActivity {
         if (ScreenManager.getInstance() != null) {
             ScreenManager.getInstance().stopRun();
         }
+        pop();
     }
 
     @Override

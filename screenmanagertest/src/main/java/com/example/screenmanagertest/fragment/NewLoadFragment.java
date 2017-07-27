@@ -266,17 +266,17 @@ public class NewLoadFragment extends SupportFragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        if(misFirst){
-        try {
-            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
-            childFragmentManager.setAccessible(true);
-            childFragmentManager.set(this, null);
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-        }
+//        if(misFirst){
+//        try {
+//            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+//            childFragmentManager.setAccessible(true);
+//            childFragmentManager.set(this, null);
+//        } catch (NoSuchFieldException e) {
+//            throw new RuntimeException(e);
+//        } catch (IllegalAccessException e) {
+//            throw new RuntimeException(e);
+//        }
+//        }
 
 
     }
@@ -296,7 +296,6 @@ public class NewLoadFragment extends SupportFragment {
 //    }
 //@Override
 //public void onDestroyView() {
-//// TODO Auto-generated method stub
 //    super.onDestroyView();
 //    try {
 //        Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
