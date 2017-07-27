@@ -68,103 +68,97 @@ import com.example.screenmanagertest.gifdecode.GifFrame;
 import com.example.screenmanagertest.screenmanager.MediaInfoRef;
 import com.example.screenmanagertest.screenmanager.ScreenManager;
 
-public class MultiMediaView extends PosterBaseView
-{
-    private Intent intent=null;
-    private Context context=null;
-    private final static int                             EVENT_BASE                 = 0x9000;
-    private final static int                             EVENT_SHOWPROGBAR          = EVENT_BASE + 0;
-    private final static int                             EVENT_SHOWSURFACEVIEW      = EVENT_BASE + 1;
-    private final static int                             EVENT_PLAYVIDEO            = EVENT_BASE + 2;
-    private final static int                             EVENT_SHOWPICTURE          = EVENT_BASE + 3;
-    private final static int                             EVENT_HIDE_CONTROLER       = EVENT_BASE + 4;
-    private final static int                             EVENT_PROGRESS_CHANGED     = EVENT_BASE + 5;
+public class MultiMediaView extends PosterBaseView {
+    private Intent intent = null;
+    private Context context = null;
+    private final static int EVENT_BASE = 0x9000;
+    private final static int EVENT_SHOWPROGBAR = EVENT_BASE + 0;
+    private final static int EVENT_SHOWSURFACEVIEW = EVENT_BASE + 1;
+    private final static int EVENT_PLAYVIDEO = EVENT_BASE + 2;
+    private final static int EVENT_SHOWPICTURE = EVENT_BASE + 3;
+    private final static int EVENT_HIDE_CONTROLER = EVENT_BASE + 4;
+    private final static int EVENT_PROGRESS_CHANGED = EVENT_BASE + 5;
 
-    private final static int                             SHOWTYPE_NONE              = 0;
-    private final static int                             SHOWTYPE_PROGBAR           = 1;
-    private final static int                             SHOWTYPE_VIDEO             = 2;
-    private final static int                             SHOWTYPE_PICTURE           = 3;
-    
-    private final static long                            DEFAULT_MEDIA_DURATION     = 1000;
-    private final static long                            DEFAULT_ANIMATION_DURATION = 1000;
-    private final static int                             DEFAULT_VOLUME_VALUE       = 3;
-    private final static int                             CONTROLBAR_STAY_TIME       = 5000;
+    private final static int SHOWTYPE_NONE = 0;
+    private final static int SHOWTYPE_PROGBAR = 1;
+    private final static int SHOWTYPE_VIDEO = 2;
+    private final static int SHOWTYPE_PICTURE = 3;
 
-    private int PICTURE_DURING=1000;
-    
+    private final static long DEFAULT_MEDIA_DURATION = 1000;
+    private final static long DEFAULT_ANIMATION_DURATION = 1000;
+    private final static int DEFAULT_VOLUME_VALUE = 3;
+    private final static int CONTROLBAR_STAY_TIME = 5000;
+
+    private int PICTURE_DURING = 1000;
+
     // Define special effects for picture shown
-    private static final int                      NONE                       = 0;
-    private static final int                      MOVE_LEFTTORIGHT           = 1;
-    private static final int                      MOVE_RIGHTTOLEFT           = 2;
-    private static final int                      MOVE_TOPTOBOTTOM           = 3;
-    private static final int                      MOVE_BOTTOMTOTOP           = 4;
-    private static final int                      MOVE_LEFTTOPTORIGHTBOTTOM  = 5;
-    private static final int                      MOVE_RIGHTTOPTOLEFTBOTTON  = 6;
-    private static final int                      INSIDETOSIDE               = 7;
-    private static final int                      SIDETOINSIDE               = 8;
-    private static final int                      LAND_LOUVER                = 9;
-    private static final int                      VERT_LOUBER                = 10;
-    private static final int                      LAND_PUSH                  = 11;
-    private static final int                      VERT_PUSH                  = 12;
-    private static final int                      RANDOM                     = 255;
-    
-    private ProgressBarView                       mProgressbar               = null;
-    private SurfaceView                           mSurfaceView               = null;
-    private ImageSwitcher                         mImageSwitcher             = null;
-    
-    private ControlView                           mControlView               = null;
-    private PopupWindow                           mControlWindow             = null;
-    private SoundView                             mSoundView                 = null;
-    private PopupWindow                           mSoundWindow               = null;
-    
-    private int                                   mCurrentVolume             = 0;
-    private int                                   mControlWidth              = 0;
-    private int                                   mControlHeight             = 0;
-    private int                                   mControlXPos               = 0;
-    private int                                   mControlYPos               = 0;
+    private static final int NONE = 0;
+    private static final int MOVE_LEFTTORIGHT = 1;
+    private static final int MOVE_RIGHTTOLEFT = 2;
+    private static final int MOVE_TOPTOBOTTOM = 3;
+    private static final int MOVE_BOTTOMTOTOP = 4;
+    private static final int MOVE_LEFTTOPTORIGHTBOTTOM = 5;
+    private static final int MOVE_RIGHTTOPTOLEFTBOTTON = 6;
+    private static final int INSIDETOSIDE = 7;
+    private static final int SIDETOINSIDE = 8;
+    private static final int LAND_LOUVER = 9;
+    private static final int VERT_LOUBER = 10;
+    private static final int LAND_PUSH = 11;
+    private static final int VERT_PUSH = 12;
+    private static final int RANDOM = 255;
 
-    private SurfaceHolder                         mSurfaceHolder             = null;
-    private MediaPlayer                           mMediaPlayer               = null;
-    private MediaMetadataRetriever                mMediaRetriever            = null;
-    private MyThread                              mMyThread                  = null;
+    private ProgressBarView mProgressbar = null;
+    private SurfaceView mSurfaceView = null;
+    private ImageSwitcher mImageSwitcher = null;
 
-    private int                                   mMediaPosition             = -1;
-    private boolean                               mSurfaceIsReady            = false;
-    private boolean                               mIsPlayingVideo            = false;
-    private int                                   mCurrentShowType           = SHOWTYPE_NONE;
-    
+    private ControlView mControlView = null;
+    private PopupWindow mControlWindow = null;
+    private SoundView mSoundView = null;
+    private PopupWindow mSoundWindow = null;
+
+    private int mCurrentVolume = 0;
+    private int mControlWidth = 0;
+    private int mControlHeight = 0;
+    private int mControlXPos = 0;
+    private int mControlYPos = 0;
+
+    private SurfaceHolder mSurfaceHolder = null;
+    private MediaPlayer mMediaPlayer = null;
+    private MediaMetadataRetriever mMediaRetriever = null;
+    private MyThread mMyThread = null;
+
+    private int mMediaPosition = -1;
+    private boolean mSurfaceIsReady = false;
+    private boolean mIsPlayingVideo = false;
+    private int mCurrentShowType = SHOWTYPE_NONE;
+
     // 保存所有的GIF decoder信息
-    private GifDecoder                            mGifDecoder                = null;
-    private GifDecodeInfo                         mDecodeInfo                = null;
-    private HashMap<String, GifDecodeInfo>        mGifDecodeInfoMap          = null;
+    private GifDecoder mGifDecoder = null;
+    private GifDecodeInfo mDecodeInfo = null;
+    private HashMap<String, GifDecodeInfo> mGifDecodeInfoMap = null;
 
-    public MultiMediaView(Context context)
-    {
+    public MultiMediaView(Context context) {
         super(context);
         initView(context, false);
     }
 
-    public MultiMediaView(Context context, AttributeSet attrs)
-    {
+    public MultiMediaView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView(context, false);
     }
 
-    public MultiMediaView(Context context, AttributeSet attrs, int defStyle)
-    {
+    public MultiMediaView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initView(context, false);
     }
 
-    public MultiMediaView(Context context, boolean hasSurface)
-    {
+    public MultiMediaView(Context context, boolean hasSurface) {
         super(context);
         initView(context, hasSurface);
     }
 
-    private void initView(Context context, boolean isShowSurface)
-    {
-        this.context=context;
+    private void initView(Context context, boolean isShowSurface) {
+        this.context = context;
         Logger.d("[" + mViewName + "] MultiMedia View initialize......");
 
         // Get layout from XML file
@@ -184,16 +178,14 @@ public class MultiMediaView extends PosterBaseView
         //mSurfaceView.setFocusable(true);
 //        mSurfaceView.setZOrderOnTop(true);
         mSurfaceView.setFocusableInTouchMode(true);
-		if (isShowSurface) {
-			doShowSurfaceView();
-		}
+        if (isShowSurface) {
+            doShowSurfaceView();
+        }
 
         // Init imageswithcher parameters
-        ViewFactory factory = new ViewFactory()
-        {
+        ViewFactory factory = new ViewFactory() {
             @Override
-            public View makeView()
-            {
+            public View makeView() {
                 ImageView iv = new ImageView(mContext);
                 iv.setScaleType(ScaleType.FIT_XY);
                 iv.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
@@ -206,8 +198,7 @@ public class MultiMediaView extends PosterBaseView
         mSoundView = new SoundView(mContext);
         mSoundView.setOnVolumeChangeListener(new SoundView.OnVolumeChangedListener() {
             @Override
-            public void setYourVolume(int index)
-            {
+            public void setYourVolume(int index) {
                 mHandler.removeMessages(EVENT_HIDE_CONTROLER);
                 updateVolume(index);
                 hideControllerDelay();
@@ -221,19 +212,15 @@ public class MultiMediaView extends PosterBaseView
 
         // Create Control Window
         mControlView = new ControlView(mContext);
-        if (mCurrentVolume <= 0)
-        {
+        if (mCurrentVolume <= 0) {
             mControlView.setVolumeButtonImage(R.drawable.sounddisable);
         }
         mControlView.setOnControlChangedListener(new ControlView.OnControlChangedListener() {
             @Override
-            public void onSeekBarProgressChanged(SeekBar seekbar, int progress, boolean fromUser)
-            {
-                if (fromUser && mMediaPlayer != null)
-                {
+            public void onSeekBarProgressChanged(SeekBar seekbar, int progress, boolean fromUser) {
+                if (fromUser && mMediaPlayer != null) {
                     mMediaPlayer.seekTo(progress);
-                    if (!mMediaPlayer.isPlaying())
-                    {
+                    if (!mMediaPlayer.isPlaying()) {
                         mMediaPlayer.start();
                         resumeUpdateThread();
                     }
@@ -241,31 +228,24 @@ public class MultiMediaView extends PosterBaseView
             }
 
             @Override
-            public void onSeekBarStartTrackingTouch(SeekBar arg0)
-            {
+            public void onSeekBarStartTrackingTouch(SeekBar arg0) {
                 mHandler.removeMessages(EVENT_HIDE_CONTROLER);
             }
 
             @Override
-            public void onSeekBarStopTrackingTouch(SeekBar mSeekBar)
-            {
+            public void onSeekBarStopTrackingTouch(SeekBar mSeekBar) {
                 hideControllerDelay();
             }
 
             @Override
-            public void onPlayButtonClick(View v)
-            {
+            public void onPlayButtonClick(View v) {
                 mHandler.removeMessages(EVENT_HIDE_CONTROLER);
-                if (mMediaPlayer != null)
-                {
-                    if (mMediaPlayer.isPlaying())
-                    {
+                if (mMediaPlayer != null) {
+                    if (mMediaPlayer.isPlaying()) {
                         pauseUpdateThread();
                         mMediaPlayer.pause();
                         mControlView.setPlayButtonImage(R.drawable.play);
-                    }
-                    else
-                    {
+                    } else {
                         mMediaPlayer.start();
                         mControlView.setPlayButtonImage(R.drawable.pause);
                         resumeUpdateThread();
@@ -275,39 +255,30 @@ public class MultiMediaView extends PosterBaseView
             }
 
             @Override
-            public void onVolumeButtonClick(View v)
-            {
+            public void onVolumeButtonClick(View v) {
                 mHandler.removeMessages(EVENT_HIDE_CONTROLER);
-                if (mSoundWindow.isShowing())
-                {
+                if (mSoundWindow.isShowing()) {
                     hideSoundView();
-                }
-                else
-                {
+                } else {
                     showSoundView();
                 }
                 hideControllerDelay();
             }
 
             @Override
-            public void onVolumeButtonLongPress(View v)
-            {
+            public void onVolumeButtonLongPress(View v) {
                 mHandler.removeMessages(EVENT_HIDE_CONTROLER);
 
-                if (mSoundWindow != null && mSoundWindow.isShowing())
-                {
+                if (mSoundWindow != null && mSoundWindow.isShowing()) {
                     hideSoundView();
                 }
 
                 // Update the system Volume
-                if (mCurrentVolume > 0)
-                {
+                if (mCurrentVolume > 0) {
                     // change volume to Slient
                     updateVolume(0);
                     mControlView.setVolumeButtonImage(R.drawable.sounddisable);
-                }
-                else
-                {
+                } else {
                     // change volume to Default
                     updateVolume(DEFAULT_VOLUME_VALUE);
                     mControlView.setVolumeButtonImage(R.drawable.soundenable);
@@ -322,13 +293,11 @@ public class MultiMediaView extends PosterBaseView
         // defined the hover listener
         this.setOnHoverListener(new OnHoverListener() {
             @Override
-            public boolean onHover(View v, MotionEvent event)
-            {
+            public boolean onHover(View v, MotionEvent event) {
                 if ((mMediaPlayer != null &&
-                     mMediaPlayer.isPlaying() &&
-                    (mXPos + event.getX()) > mControlXPos) &&
-                    (mYPos + event.getY()) > mControlYPos)
-                {
+                        mMediaPlayer.isPlaying() &&
+                        (mXPos + event.getX()) > mControlXPos) &&
+                        (mYPos + event.getY()) > mControlYPos) {
                     showController();
                 }
                 return false;
@@ -336,39 +305,32 @@ public class MultiMediaView extends PosterBaseView
         });
     }
 
-    private final class SurfaceHolderCallBack implements SurfaceHolder.Callback
-    {
+    private final class SurfaceHolderCallBack implements SurfaceHolder.Callback {
         @Override
-        public void surfaceChanged(SurfaceHolder holder, int format, int width, int height)
-        {
+        public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
             Logger.i("Surface is changed, holder = " + holder);
         }
 
         @Override
-        public void surfaceCreated(SurfaceHolder holder)
-        {
+        public void surfaceCreated(SurfaceHolder holder) {
             Logger.i("Surface is created, holder = " + holder);
             mSurfaceIsReady = true;
         }
 
         @Override
-        public void surfaceDestroyed(SurfaceHolder holder)
-        {
+        public void surfaceDestroyed(SurfaceHolder holder) {
             Logger.i("Surface is destroyed, holder = " + holder);
             mSurfaceIsReady = false;
             releaseMediaPlayer();
         }
     }
 
-    private MediaPlayer.OnPreparedListener mMediaPlayerPreparedListener = new MediaPlayer.OnPreparedListener()
-    {
+    private MediaPlayer.OnPreparedListener mMediaPlayerPreparedListener = new MediaPlayer.OnPreparedListener() {
         @Override
-        public void onPrepared(MediaPlayer mp)
-        {
+        public void onPrepared(MediaPlayer mp) {
             Logger.i("Media player prepared.");
 
-            if (mMediaPosition != -1)
-            {
+            if (mMediaPosition != -1) {
                 mMediaPlayer.seekTo(mMediaPosition);
                 mMediaPosition = -1;
             }
@@ -380,33 +342,27 @@ public class MultiMediaView extends PosterBaseView
         }
     };
 
-    private MediaPlayer.OnCompletionListener mMediaPlayerCompletionListener = new MediaPlayer.OnCompletionListener()
-    {
+    private MediaPlayer.OnCompletionListener mMediaPlayerCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
-        public void onCompletion(MediaPlayer mp)
-        {
+        public void onCompletion(MediaPlayer mp) {
             Logger.i("Media player completion.");
 
             hideController();
-            if (mCurrentMedia != null)
-            {
+            if (mCurrentMedia != null) {
                 mCurrentMedia.playedtimes++;
             }
             mIsPlayingVideo = false;
         }
     };
 
-    private MediaPlayer.OnErrorListener mMediaPlayerErrorListener = new MediaPlayer.OnErrorListener()
-    {
+    private MediaPlayer.OnErrorListener mMediaPlayerErrorListener = new MediaPlayer.OnErrorListener() {
         @Override
-        public boolean onError(MediaPlayer mp, int what, int extra)
-        {
+        public boolean onError(MediaPlayer mp, int what, int extra) {
             Logger.i("Media player error.");
 
             hideController();
             releaseMediaPlayer();
-            if (mCurrentMedia != null)
-            {
+            if (mCurrentMedia != null) {
                 mCurrentMedia.playedtimes++;
             }
             mIsPlayingVideo = false;
@@ -414,39 +370,32 @@ public class MultiMediaView extends PosterBaseView
         }
     };
 
-    private void releaseMediaPlayer()
-    {
-        if (mMediaPlayer != null)
-        {
-            if (mMediaPlayer.isPlaying())
-            {
+    private void releaseMediaPlayer() {
+        if (mMediaPlayer != null) {
+            if (mMediaPlayer.isPlaying()) {
                 mMediaPlayer.stop();
             }
             try {
-				mMediaPlayer.reset();
-				mMediaPlayer.release();
-				mMediaPlayer = null;
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+                mMediaPlayer.reset();
+                mMediaPlayer.release();
+                mMediaPlayer = null;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
-        if (mMediaRetriever != null)
-        {
+        if (mMediaRetriever != null) {
             mMediaRetriever.release();
         }
     }
 
     @Override
-    public void onViewPause()
-    {
+    public void onViewPause() {
         pauseUpdateThread();
         cleanupMsg();
 
-        if (mIsPlayingVideo)
-        {
-            if (mMediaPlayer != null && mMediaPlayer.isPlaying())
-            {
+        if (mIsPlayingVideo) {
+            if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
                 mMediaPosition = mMediaPlayer.getCurrentPosition();
             }
             releaseMediaPlayer();
@@ -455,17 +404,12 @@ public class MultiMediaView extends PosterBaseView
     }
 
     @Override
-    public void onViewResume()
-    {
-        if (mIsPlayingVideo)
-        {
-            if (mCurrentMedia != null && FileUtils.mediaIsVideo(mCurrentMedia))
-            {
+    public void onViewResume() {
+        if (mIsPlayingVideo) {
+            if (mCurrentMedia != null && FileUtils.mediaIsVideo(mCurrentMedia)) {
                 doShowSurfaceView();
                 playVideo(mCurrentMedia);
-            }
-            else
-            {
+            } else {
                 mIsPlayingVideo = false;
             }
         }
@@ -474,8 +418,7 @@ public class MultiMediaView extends PosterBaseView
     }
 
     @Override
-    public void onViewDestroy()
-    {
+    public void onViewDestroy() {
         cancelUpdateThread();
         cleanupMsg();
         hideController();
@@ -484,8 +427,7 @@ public class MultiMediaView extends PosterBaseView
         this.removeAllViews();
     }
 
-    private void cleanupMsg()
-    {
+    private void cleanupMsg() {
         mHandler.removeMessages(EVENT_SHOWPROGBAR);
         mHandler.removeMessages(EVENT_SHOWSURFACEVIEW);
         mHandler.removeMessages(EVENT_PLAYVIDEO);
@@ -495,36 +437,30 @@ public class MultiMediaView extends PosterBaseView
     }
 
     @Override
-    public void startWork()
-    {
-        Log.i("jialei","startwork");
-        if (mMediaList == null)
-        {
+    public void startWork() {
+        Log.i("jialei", "startwork");
+        if (mMediaList == null) {
             Logger.i("Media list is null.");
-            if ("Main".equals(mViewType))
-            {
+            if ("Main".equals(mViewType)) {
 //                ScreenManager.getInstance().setPrgFinishedFlag(true);
                 Logger.i("No media info for main window, Program play finished.");
             }
             return;
-        }
-        else if (mMediaList.isEmpty())
-        {
+        } else if (mMediaList.isEmpty()) {
             Logger.i("No media in the list.");
-            if ("Main".equals(mViewType))
-            {
+            if ("Main".equals(mViewType)) {
 //                ScreenManager.getInstance().setPrgFinishedFlag(true);
                 Logger.i("No media info for main window, Program play finished.");
             }
             return;
         }
-        if(getViewTouch()!=null){
+        if (getViewTouch() != null) {
             mImageSwitcher.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     intent = new Intent();
                     intent.setAction("touchBroadcast");
-                    intent.putExtra("xml",getViewTouch());
+                    intent.putExtra("xml", getViewTouch());
                     context.sendBroadcast(intent);
                 }
             });
@@ -533,16 +469,17 @@ public class MultiMediaView extends PosterBaseView
     }
 
     @Override
-    public void stopWork()
-    {
+    public void stopWork() {
         cancelUpdateThread();
         cleanupMsg();
         releaseMediaPlayer();
         doHideAllViews();
+        if (mMediaList != null) {
+            mMediaList.clear();
+            mMediaList = null;
+        }
 
-        mMediaList.clear();
-        mMediaList = null;
-        mCurrentIdx   = -1;
+        mCurrentIdx = -1;
         mCurrentMedia = null;
 
         mMediaPosition = -1;
@@ -550,61 +487,48 @@ public class MultiMediaView extends PosterBaseView
         mSurfaceIsReady = false;
     }
 
-    private void startUpdateThread()
-    {
+    private void startUpdateThread() {
         cancelUpdateThread();
         mMyThread = new MyThread("multiMediaThread");
         mMyThread.start();
     }
 
-    private void cancelUpdateThread()
-    {
-        if (mMyThread != null)
-        {
+    private void cancelUpdateThread() {
+        if (mMyThread != null) {
             mMyThread.cancel();
             mMyThread = null;
         }
     }
 
-    private void pauseUpdateThread()
-    {
-        if (mMyThread != null && !mMyThread.isPaused())
-        {
+    private void pauseUpdateThread() {
+        if (mMyThread != null && !mMyThread.isPaused()) {
             mMyThread.onPause();
         }
     }
 
-    private void resumeUpdateThread()
-    {
-        if (mMyThread != null && mMyThread.isPaused())
-        {
+    private void resumeUpdateThread() {
+        if (mMyThread != null && mMyThread.isPaused()) {
             mMyThread.onResume();
         }
     }
 
-    private void updateVolume(int index)
-    {
+    private void updateVolume(int index) {
         // Get System Volume Information
         AudioManager audioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-        if (audioManager != null)
-        {
+        if (audioManager != null) {
             audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, index, AudioManager.FLAG_PLAY_SOUND);
             mCurrentVolume = index;
         }
     }
 
-    private void hideSoundView()
-    {
-        if (mSoundWindow != null && mSoundWindow.isShowing())
-        {
+    private void hideSoundView() {
+        if (mSoundWindow != null && mSoundWindow.isShowing()) {
             mSoundWindow.dismiss();
         }
     }
 
-    private void showSoundView()
-    {
-        if (mMediaPlayer != null && mMediaPlayer.isPlaying() && mSoundWindow != null && !mSoundWindow.isShowing())
-        {
+    private void showSoundView() {
+        if (mMediaPlayer != null && mMediaPlayer.isPlaying() && mSoundWindow != null && !mSoundWindow.isShowing()) {
             int xPos = mWidth - SoundView.MY_WIDTH - 10;
             int yPos = mHeight - mControlHeight - SoundView.MY_HEIGHT;
             mSoundWindow.showAtLocation(mSurfaceView, Gravity.NO_GRAVITY, xPos, yPos);
@@ -612,25 +536,21 @@ public class MultiMediaView extends PosterBaseView
         }
     }
 
-    private void hideController()
-    {
+    private void hideController() {
         mHandler.removeMessages(EVENT_HIDE_CONTROLER);
 
         hideSoundView();
 
-        if (mControlWindow != null && mControlWindow.isShowing())
-        {
+        if (mControlWindow != null && mControlWindow.isShowing()) {
             mControlWindow.dismiss();
         }
 
         mHandler.removeMessages(EVENT_PROGRESS_CHANGED);
     }
 
-    private void showController()
-    {
-        if (mMediaPlayer != null && mMediaPlayer.isPlaying() && mControlWindow != null && !mControlWindow.isShowing())
-        {
-           // initialize control bar size and position
+    private void showController() {
+        if (mMediaPlayer != null && mMediaPlayer.isPlaying() && mControlWindow != null && !mControlWindow.isShowing()) {
+            // initialize control bar size and position
             mControlWidth = mWidth;
             mControlHeight = mHeight / 6;
             mControlXPos = mXPos;
@@ -642,23 +562,19 @@ public class MultiMediaView extends PosterBaseView
         }
     }
 
-    private void hideControllerDelay()
-    {
+    private void hideControllerDelay() {
         mHandler.sendEmptyMessageDelayed(EVENT_HIDE_CONTROLER, CONTROLBAR_STAY_TIME);
     }
 
-    private void showProgressBar()
-    {
+    private void showProgressBar() {
         mHandler.sendEmptyMessage(EVENT_SHOWPROGBAR);
     }
 
-    private void showSurfaceView()
-    {
+    private void showSurfaceView() {
         mHandler.sendEmptyMessage(EVENT_SHOWSURFACEVIEW);
     }
 
-    private void playVideo(MediaInfoRef media)
-    {
+    private void playVideo(MediaInfoRef media) {
         Logger.i("Play video '" + media.filePath + "'.");
         // sync play: start load video
 
@@ -668,8 +584,7 @@ public class MultiMediaView extends PosterBaseView
         msg.sendToTarget();
     }
 
-    private void showPicture(Bitmap pic, int mode)
-    {
+    private void showPicture(Bitmap pic, int mode) {
         Message msg = mHandler.obtainMessage();
         msg.what = EVENT_SHOWPICTURE;
         msg.obj = pic;
@@ -677,8 +592,7 @@ public class MultiMediaView extends PosterBaseView
         msg.sendToTarget();
     }
 
-    private void playImage(MediaInfoRef media) throws InterruptedException
-    {
+    private void playImage(MediaInfoRef media) throws InterruptedException {
 //        Logger.i("Play image '" + media.filePath + "'.");
 
         boolean bIsUseCache = mViewType.contains("Weather") ? false : true;
@@ -688,13 +602,11 @@ public class MultiMediaView extends PosterBaseView
         showPicture(img, media.mode);
     }
 
-    private void playText(MediaInfoRef media) throws InterruptedException
-    {
+    private void playText(MediaInfoRef media) throws InterruptedException {
         Logger.i("Play text '" + media.filePath + "'.");
 
         String strText = getText(media);
-        if (TextUtils.isEmpty(strText))
-        {
+        if (TextUtils.isEmpty(strText)) {
             Logger.i("Text '" + media.filePath + "' is empty.");
             return;
         }
@@ -717,17 +629,14 @@ public class MultiMediaView extends PosterBaseView
 
         // 计算页数
         FontMetrics fm = paint.getFontMetrics();
-        float lineHeight = (float)Math.ceil(fm.descent - fm.ascent); // 每行高度
+        float lineHeight = (float) Math.ceil(fm.descent - fm.ascent); // 每行高度
         int linesPerPage = (int) (nHeight / (lineHeight + fm.leading)); // 每一页的行数
         ArrayList<String> textList = autoSplit(strText, paint, (nWidth - 10)); // 自动分行
         int lineCount = textList.size(); // 总行数
         int pages = 1; // 总页数
-        if ((lineCount % linesPerPage) == 0)
-        {
+        if ((lineCount % linesPerPage) == 0) {
             pages = lineCount / linesPerPage;
-        }
-        else
-        {
+        } else {
             pages = lineCount / linesPerPage + 1;
         }
 
@@ -740,27 +649,21 @@ public class MultiMediaView extends PosterBaseView
         float x = 5;
         float y = lineHeight;
         int nIdx = 0;
-        for (int i = 0; i < pages; i++)
-        {
+        for (int i = 0; i < pages; i++) {
             x = 5;
             y = lineHeight;
             nIdx = i * linesPerPage; // 页的起始行
 
-            if (nIdx >= textList.size() || TextUtils.isEmpty(textList.get(nIdx)))
-            {
+            if (nIdx >= textList.size() || TextUtils.isEmpty(textList.get(nIdx))) {
                 continue; // 空白页则跳过
             }
 
             canvas.drawColor(Color.TRANSPARENT, Mode.CLEAR);
-            for (int j = 0; j < linesPerPage; j++)
-            {
+            for (int j = 0; j < linesPerPage; j++) {
                 nIdx = i * linesPerPage + j;
-                if (nIdx >= textList.size())
-                {
+                if (nIdx >= textList.size()) {
                     break; // 最后一页不满一屏的情况
-                }
-                else if (textList.get(nIdx) != null)
-                {
+                } else if (textList.get(nIdx) != null) {
                     canvas.drawText(textList.get(nIdx), x, y, paint);
                     y = y + lineHeight + fm.leading; // (字高+行间距)
                 }
@@ -774,51 +677,42 @@ public class MultiMediaView extends PosterBaseView
         }
     }
 
-    private final class MyThread extends Thread
-    {
-        private boolean mIsRun      = false;
-        private Object  mPauseLock  = new Object();
-        private boolean mPauseFlag  = false;
+    private final class MyThread extends Thread {
+        private boolean mIsRun = false;
+        private Object mPauseLock = new Object();
+        private boolean mPauseFlag = false;
 
-        public MyThread(String threadName)
-        {
-        	super(threadName);
+        public MyThread(String threadName) {
+            super(threadName);
             mIsRun = true;
         }
 
-        public void cancel()
-        {
+        public void cancel() {
             Logger.i("Cancel the multimedia thread.");
             mIsRun = false;
             this.interrupt();
         }
 
-        public void onPause()
-        {
+        public void onPause() {
             Logger.i("Pause the multimedia thread.");
-            synchronized (mPauseLock)
-            {
+            synchronized (mPauseLock) {
                 mPauseFlag = true;
             }
         }
 
-        public void onResume()
-        {
+        public void onResume() {
             Logger.i("Resume the multimedia thread.");
-            synchronized (mPauseLock)
-            {
+            synchronized (mPauseLock) {
                 mPauseFlag = false;
                 mPauseLock.notify();
             }
         }
 
-        public boolean isPaused()
-        {
+        public boolean isPaused() {
             return mPauseFlag;
         }
 
-        private void updateVideoProgress()
-        {
+        private void updateVideoProgress() {
             int nCurrentPrg = mMediaPlayer.getCurrentPosition();
             int nTime = nCurrentPrg / 1000;
             int minute = nTime / 60;
@@ -858,147 +752,114 @@ public class MultiMediaView extends PosterBaseView
         }
 
         @Override
-        public void run()
-        {
+        public void run() {
             Logger.i("New multimedia thread, id is: " + currentThread().getId());
 
-            int   nPos = 0;
-            long  lastSendSyncInfoTime = 0;
-            MediaInfoRef media          = null;
+            int nPos = 0;
+            long lastSendSyncInfoTime = 0;
+            MediaInfoRef media = null;
 
-            while (mIsRun)
-            {
-                try
-                {
-                    synchronized (mPauseLock)
-                    {
-                        if (mPauseFlag)
-                        {
+            while (mIsRun) {
+                try {
+                    synchronized (mPauseLock) {
+                        if (mPauseFlag) {
                             mPauseLock.wait();
                         }
                     }
 
-                    if (mMediaList == null)
-                    {
+                    if (mMediaList == null) {
                         Logger.i("Media list is null, thread exit.");
                         return;
-                    }
-                    else if (mMediaList.isEmpty())
-                    {
+                    } else if (mMediaList.isEmpty()) {
                         Logger.i("No media in the list, thread exit.");
                         return;
-                    }
-                    else if ((mCurrentIdx < -1) || (mCurrentIdx >= mMediaList.size()))
-                    {
+                    } else if ((mCurrentIdx < -1) || (mCurrentIdx >= mMediaList.size())) {
                         Logger.i("mCurrentIdx (" + mCurrentIdx + ") is invalid, thread exit.");
                         return;
                     }
 
-                    if (mCurrentIdx == -1 && (mCurrentShowType != SHOWTYPE_PROGBAR) && noMediaValid())
-                    {
+                    if (mCurrentIdx == -1 && (mCurrentShowType != SHOWTYPE_PROGBAR) && noMediaValid()) {
                         showProgressBar();
                     }
 
-                    if (!mIsPlayingVideo)
-                    {
-                    	media = findNextOrSyncMedia();
+                    if (!mIsPlayingVideo) {
+                        media = findNextOrSyncMedia();
 
-                        if (media == null)
-                        {
+                        if (media == null) {
                             Logger.i("No media can be found, current index is: " + mCurrentIdx);
                             Thread.sleep(DEFAULT_THREAD_QUICKPERIOD);
                             continue;
-                        }
-                        else if (FileUtils.mediaIsFile(media) && !FileUtils.isExist(media.filePath) &&
-                        		!media.filePath.equals(PosterApplication.getStandbyScreenImgPath()))
-                        {
+                        } else if (FileUtils.mediaIsFile(media) && !FileUtils.isExist(media.filePath) &&
+                                !media.filePath.equals(PosterApplication.getStandbyScreenImgPath())) {
                             Logger.i(media.filePath + " didn't exist, skip it.");
 //                            downloadMedia(media);
                             Thread.sleep(DEFAULT_THREAD_QUICKPERIOD);
                             continue;
                         }
 
-                        if (FileUtils.mediaIsVideo(media))
-                        {
-                        	mCurrentMedia = media;
+                        if (FileUtils.mediaIsVideo(media)) {
+                            mCurrentMedia = media;
 
 
                             mIsPlayingVideo = true;
-                            if (mViewType.contains("Main"))
-                            {
+                            if (mViewType.contains("Main")) {
                                 informStopAudio();
                             }
-                            if (mCurrentShowType != SHOWTYPE_VIDEO)
-                            {
+                            if (mCurrentShowType != SHOWTYPE_VIDEO) {
                                 showSurfaceView();
-                                while (!mSurfaceIsReady)
-                                {
+                                while (!mSurfaceIsReady) {
                                     Thread.sleep(DEFAULT_THREAD_QUICKPERIOD);
                                 }
                             }
                             playVideo(mCurrentMedia);
-                        }
-                        else if (FileUtils.mediaIsGifFile(media))
-                        {
+                        } else if (FileUtils.mediaIsGifFile(media)) {
                             mCurrentMedia = media;
 
 
-                            if (mViewType.contains("Main"))
-                            {
+                            if (mViewType.contains("Main")) {
                                 informStartAudio();
                             }
 
-                            if (mGifDecodeInfoMap == null)
-                            {
+                            if (mGifDecodeInfoMap == null) {
                                 mGifDecodeInfoMap = new HashMap<String, GifDecodeInfo>();
                             }
 
                             mCurrentMedia.playedtimes++;   // if media has error, the played times will increase.
                             continue;
-                        }
-                        else if (FileUtils.mediaIsPicFromFile(media) || FileUtils.mediaIsPicFromNet(media))
-                        {
-                        	if (mCurrentMedia != null &&
-                        		FileUtils.mediaIsFile(media) &&
-                        		mCurrentMedia.filePath.equals(media.filePath))
-                        	{
+                        } else if (FileUtils.mediaIsPicFromFile(media) || FileUtils.mediaIsPicFromNet(media)) {
+                            if (mCurrentMedia != null &&
+                                    FileUtils.mediaIsFile(media) &&
+                                    mCurrentMedia.filePath.equals(media.filePath)) {
                                 Thread.sleep(DEFAULT_THREAD_QUICKPERIOD);
-                        		continue;
-                        	}
+                                continue;
+                            }
 
-                        	 mCurrentMedia = media;
+                            mCurrentMedia = media;
 
 
-                            if (mViewType.contains("Main"))
-                            {
+                            if (mViewType.contains("Main")) {
                                 informStartAudio();
                             }
-                            if (media.filePath.equals(PosterApplication.getStandbyScreenImgPath()) && !FileUtils.isExist(media.filePath))
-                        	{
-                        		// 如果待机画面不存在，则播放默认的待机画面
+                            if (media.filePath.equals(PosterApplication.getStandbyScreenImgPath()) && !FileUtils.isExist(media.filePath)) {
+                                // 如果待机画面不存在，则播放默认的待机画面
 //                        		Bitmap img = PosterApplication.getInstance().getDefaultScreenImg();
                                 Resources resources = mContext.getResources();
                                 Drawable drawable = resources.getDrawable(R.drawable.del);
                                 BitmapDrawable bd = (BitmapDrawable) drawable;
                                 Bitmap img = bd.getBitmap();
                                 showPicture(img, media.mode);
-                        	}
-                            else
-                            {
+                            } else {
                                 playImage(mCurrentMedia);
                             }
                             mCurrentMedia.playedtimes++;
                             //TODO
                             sleep(PICTURE_DURING);
                             continue;
-                        }
-                        else if (FileUtils.mediaIsTextFromFile(media) || FileUtils.mediaIsTextFromNet(media))
-                        {
-                        	mCurrentMedia = media;
+                        } else if (FileUtils.mediaIsTextFromFile(media) || FileUtils.mediaIsTextFromNet(media)) {
+                            mCurrentMedia = media;
 
 
-                            if (mViewType.contains("Main"))
-                            {
+                            if (mViewType.contains("Main")) {
                                 informStartAudio();
                             }
                             playText(mCurrentMedia);
@@ -1006,24 +867,19 @@ public class MultiMediaView extends PosterBaseView
                             continue;
                         }
 
-                    }
-                    else
-                    {
+                    } else {
 
-                        if (mMediaPlayer != null && mMediaPlayer.isPlaying() && mControlWindow.isShowing())
-                        {
+                        if (mMediaPlayer != null && mMediaPlayer.isPlaying() && mControlWindow.isShowing()) {
                             updateVideoProgress();
                             Thread.sleep(DEFAULT_THREAD_QUICKPERIOD);
                             continue;
                         }
                         Thread.sleep(DEFAULT_THREAD_PERIOD);
                     }
-                }
-                catch (InterruptedException e)
-                {
+                } catch (InterruptedException e) {
                     break;
-                }catch(Exception e){
-                	e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -1032,26 +888,20 @@ public class MultiMediaView extends PosterBaseView
         }
     }
 
-    private void informStartAudio()
-    {
-        if (mContext instanceof MainActivity)
-        {
+    private void informStartAudio() {
+        if (mContext instanceof MainActivity) {
             ((MainActivity) mContext).startAudio();
         }
     }
 
-    private void informStopAudio()
-    {
-        if (mContext instanceof MainActivity)
-        {
+    private void informStopAudio() {
+        if (mContext instanceof MainActivity) {
             ((MainActivity) mContext).stopAudio();
         }
     }
 
-    private void doShowProgressBar()
-    {
-        if (mCurrentShowType != SHOWTYPE_PROGBAR)
-        {
+    private void doShowProgressBar() {
+        if (mCurrentShowType != SHOWTYPE_PROGBAR) {
             mProgressbar.setVisibility(View.VISIBLE);
             mSurfaceView.setVisibility(View.GONE);
             mImageSwitcher.setVisibility(View.GONE);
@@ -1059,16 +909,13 @@ public class MultiMediaView extends PosterBaseView
         }
     }
 
-    private void stopVideo()
-    {
-        if (mMediaPlayer != null && mMediaPlayer.isPlaying())
-        {
+    private void stopVideo() {
+        if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
             mMediaPlayer.stop();
         }
     }
 
-    private void doHideAllViews()
-    {
+    private void doHideAllViews() {
         hideController();
         mProgressbar.setVisibility(View.GONE);
         mSurfaceView.setVisibility(View.GONE);
@@ -1076,31 +923,27 @@ public class MultiMediaView extends PosterBaseView
         mCurrentShowType = SHOWTYPE_NONE;
     }
 
-    private void doShowSurfaceView()
-    {
+    private void doShowSurfaceView() {
         mProgressbar.setVisibility(View.GONE);
         mSurfaceView.setVisibility(View.VISIBLE);
         mImageSwitcher.setVisibility(View.GONE);
         mCurrentShowType = SHOWTYPE_VIDEO;
     }
 
-    private void doPlayVideo(MediaInfoRef media)
-    {
+    private void doPlayVideo(MediaInfoRef media) {
         // Tell the music playback service to pause
         Intent i = new Intent("com.android.music.musicservicecommand");
         i.putExtra("command", "pause");
         mContext.sendBroadcast(i);
 
-        if (mMediaPlayer == null)
-        {
+        if (mMediaPlayer == null) {
             mMediaPlayer = new MediaPlayer();
             mMediaPlayer.setOnPreparedListener(mMediaPlayerPreparedListener);
             mMediaPlayer.setOnCompletionListener(mMediaPlayerCompletionListener);
             mMediaPlayer.setOnErrorListener(mMediaPlayerErrorListener);
         }
 
-        try
-        {
+        try {
             stopVideo();
             mMediaPlayer.reset();
             mMediaPlayer.setDisplay(mSurfaceHolder);
@@ -1110,121 +953,113 @@ public class MultiMediaView extends PosterBaseView
             mMediaPlayer.prepareAsync();
 
             // 截屏用(流媒体不支持截屏)
-            if (FileUtils.mediaIsFile(media) && FileUtils.isExist(media.filePath))
-            {
+            if (FileUtils.mediaIsFile(media) && FileUtils.isExist(media.filePath)) {
                 mMediaRetriever = new MediaMetadataRetriever();
                 mMediaRetriever.setDataSource(media.filePath);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             mIsPlayingVideo = false;
         }
     }
 
-    private void updateAnimation(int mode)
-    {
+    private void updateAnimation(int mode) {
         Animation inanimation;
-        switch (mode)
-        {
-        case NONE:
-            mImageSwitcher.setInAnimation(null);
-            mImageSwitcher.setOutAnimation(null);
+        switch (mode) {
+            case NONE:
+                mImageSwitcher.setInAnimation(null);
+                mImageSwitcher.setOutAnimation(null);
 
-            break;
-        case LAND_PUSH:
-        case MOVE_LEFTTORIGHT:
-            inanimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, -1.0f, Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 0);
-            inanimation.setDuration(DEFAULT_ANIMATION_DURATION);
+                break;
+            case LAND_PUSH:
+            case MOVE_LEFTTORIGHT:
+                inanimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, -1.0f, Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 0);
+                inanimation.setDuration(DEFAULT_ANIMATION_DURATION);
 
-            mImageSwitcher.setInAnimation(inanimation);
-            mImageSwitcher.setOutAnimation(null);
+                mImageSwitcher.setInAnimation(inanimation);
+                mImageSwitcher.setOutAnimation(null);
 
-            break;
-        case MOVE_RIGHTTOLEFT:
-            inanimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 1.0f, Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 0);
-            inanimation.setDuration(DEFAULT_ANIMATION_DURATION);
+                break;
+            case MOVE_RIGHTTOLEFT:
+                inanimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 1.0f, Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 0);
+                inanimation.setDuration(DEFAULT_ANIMATION_DURATION);
 
-            mImageSwitcher.setInAnimation(inanimation);
-            mImageSwitcher.setOutAnimation(null);
+                mImageSwitcher.setInAnimation(inanimation);
+                mImageSwitcher.setOutAnimation(null);
 
-            break;
-        case VERT_PUSH:
-        case MOVE_TOPTOBOTTOM:
-            inanimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, -1.0f, Animation.RELATIVE_TO_PARENT, 0);
-            inanimation.setDuration(DEFAULT_ANIMATION_DURATION);
+                break;
+            case VERT_PUSH:
+            case MOVE_TOPTOBOTTOM:
+                inanimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, -1.0f, Animation.RELATIVE_TO_PARENT, 0);
+                inanimation.setDuration(DEFAULT_ANIMATION_DURATION);
 
-            mImageSwitcher.setInAnimation(inanimation);
-            mImageSwitcher.setOutAnimation(null);
+                mImageSwitcher.setInAnimation(inanimation);
+                mImageSwitcher.setOutAnimation(null);
 
-            break;
-        case MOVE_BOTTOMTOTOP:
-            inanimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 1.0f, Animation.RELATIVE_TO_PARENT, 0);
-            inanimation.setDuration(DEFAULT_ANIMATION_DURATION);
+                break;
+            case MOVE_BOTTOMTOTOP:
+                inanimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, 1.0f, Animation.RELATIVE_TO_PARENT, 0);
+                inanimation.setDuration(DEFAULT_ANIMATION_DURATION);
 
-            mImageSwitcher.setInAnimation(inanimation);
-            mImageSwitcher.setOutAnimation(null);
+                mImageSwitcher.setInAnimation(inanimation);
+                mImageSwitcher.setOutAnimation(null);
 
-            break;
-        case MOVE_LEFTTOPTORIGHTBOTTOM:
-            inanimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, -1.0f, Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, -1.0f, Animation.RELATIVE_TO_PARENT, 0);
-            inanimation.setDuration(DEFAULT_ANIMATION_DURATION);
+                break;
+            case MOVE_LEFTTOPTORIGHTBOTTOM:
+                inanimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, -1.0f, Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, -1.0f, Animation.RELATIVE_TO_PARENT, 0);
+                inanimation.setDuration(DEFAULT_ANIMATION_DURATION);
 
-            mImageSwitcher.setInAnimation(inanimation);
-            mImageSwitcher.setOutAnimation(null);
+                mImageSwitcher.setInAnimation(inanimation);
+                mImageSwitcher.setOutAnimation(null);
 
-            break;
-        case MOVE_RIGHTTOPTOLEFTBOTTON:
-            inanimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 1.0f, Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, -1.0f, Animation.RELATIVE_TO_PARENT, 0);
-            inanimation.setDuration(DEFAULT_ANIMATION_DURATION);
+                break;
+            case MOVE_RIGHTTOPTOLEFTBOTTON:
+                inanimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 1.0f, Animation.RELATIVE_TO_PARENT, 0, Animation.RELATIVE_TO_PARENT, -1.0f, Animation.RELATIVE_TO_PARENT, 0);
+                inanimation.setDuration(DEFAULT_ANIMATION_DURATION);
 
-            mImageSwitcher.setInAnimation(inanimation);
-            mImageSwitcher.setOutAnimation(null);
+                mImageSwitcher.setInAnimation(inanimation);
+                mImageSwitcher.setOutAnimation(null);
 
-            break;
-        case INSIDETOSIDE:
-            inanimation = new ScaleAnimation(0f, 1.0f, 0f, 1.0f, Animation.RELATIVE_TO_PARENT, 0.5f, Animation.RELATIVE_TO_PARENT, 0.5f);
-            inanimation.setDuration(DEFAULT_ANIMATION_DURATION);
+                break;
+            case INSIDETOSIDE:
+                inanimation = new ScaleAnimation(0f, 1.0f, 0f, 1.0f, Animation.RELATIVE_TO_PARENT, 0.5f, Animation.RELATIVE_TO_PARENT, 0.5f);
+                inanimation.setDuration(DEFAULT_ANIMATION_DURATION);
 
-            mImageSwitcher.setInAnimation(inanimation);
-            mImageSwitcher.setOutAnimation(null);
+                mImageSwitcher.setInAnimation(inanimation);
+                mImageSwitcher.setOutAnimation(null);
 
-            break;
-        case SIDETOINSIDE:
-            inanimation = new ScaleAnimation(3.0f, 1.0f, 3.0f, 1.0f, Animation.RELATIVE_TO_PARENT, 0.5f, Animation.RELATIVE_TO_PARENT, 0.5f);
-            inanimation.setDuration(DEFAULT_ANIMATION_DURATION);
+                break;
+            case SIDETOINSIDE:
+                inanimation = new ScaleAnimation(3.0f, 1.0f, 3.0f, 1.0f, Animation.RELATIVE_TO_PARENT, 0.5f, Animation.RELATIVE_TO_PARENT, 0.5f);
+                inanimation.setDuration(DEFAULT_ANIMATION_DURATION);
 
-            mImageSwitcher.setInAnimation(inanimation);
-            mImageSwitcher.setOutAnimation(null);
+                mImageSwitcher.setInAnimation(inanimation);
+                mImageSwitcher.setOutAnimation(null);
 
-            break;
-        case LAND_LOUVER:
+                break;
+            case LAND_LOUVER:
 
-            break;
-        case VERT_LOUBER:
+                break;
+            case VERT_LOUBER:
 
-            break;
-        case RANDOM:
-            updateAnimation(new Random().nextInt(VERT_PUSH));
+                break;
+            case RANDOM:
+                updateAnimation(new Random().nextInt(VERT_PUSH));
 
-            break;
-        default:
-            Logger.i("Invalid mode, mode = " + mode + ".");
+                break;
+            default:
+                Logger.i("Invalid mode, mode = " + mode + ".");
 
-            mImageSwitcher.setInAnimation(null);
-            mImageSwitcher.setOutAnimation(null);
+                mImageSwitcher.setInAnimation(null);
+                mImageSwitcher.setOutAnimation(null);
 
-            break;
+                break;
         }
     }
 
-    private void doShowPicture(Bitmap img, int mode)
-    {
-        if (img != null && !img.isRecycled())
-        {
-            if (mCurrentShowType != SHOWTYPE_PICTURE)
-            {
+    private void doShowPicture(Bitmap img, int mode) {
+        if (img != null && !img.isRecycled()) {
+            if (mCurrentShowType != SHOWTYPE_PICTURE) {
                 mProgressbar.setVisibility(View.GONE);
                 mSurfaceView.setVisibility(View.GONE);
                 mImageSwitcher.setVisibility(View.VISIBLE);
@@ -1232,16 +1067,14 @@ public class MultiMediaView extends PosterBaseView
 
             mCurrentShowType = SHOWTYPE_PICTURE;
             BitmapDrawable imgdwb = new BitmapDrawable(mContext.getResources(), img);
-            if (imgdwb != null && mImageSwitcher.getNextView() != null)
-            {
+            if (imgdwb != null && mImageSwitcher.getNextView() != null) {
                 updateAnimation(mode);
                 mImageSwitcher.setImageDrawable(imgdwb);
             }
         }
     }
 
-    private void clearImageView()
-    {
+    private void clearImageView() {
         mImageSwitcher.clearAnimation();
         mImageSwitcher.removeAllViews();
     }
@@ -1251,63 +1084,59 @@ public class MultiMediaView extends PosterBaseView
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-            case EVENT_SHOWPROGBAR:
-                doShowProgressBar();
+                case EVENT_SHOWPROGBAR:
+                    doShowProgressBar();
 
-                break;
+                    break;
 
-            case EVENT_SHOWSURFACEVIEW:
-                doShowSurfaceView();
+                case EVENT_SHOWSURFACEVIEW:
+                    doShowSurfaceView();
 
-                break;
-            case EVENT_PLAYVIDEO:
-                doPlayVideo((MediaInfoRef)msg.obj);
+                    break;
+                case EVENT_PLAYVIDEO:
+                    doPlayVideo((MediaInfoRef) msg.obj);
 
-                break;
-            case EVENT_SHOWPICTURE:
-                doShowPicture((Bitmap)msg.obj, msg.arg1);
+                    break;
+                case EVENT_SHOWPICTURE:
+                    doShowPicture((Bitmap) msg.obj, msg.arg1);
 
-                break;
+                    break;
 
-            case EVENT_HIDE_CONTROLER:
-                hideController();
+                case EVENT_HIDE_CONTROLER:
+                    hideController();
 
-                break;
+                    break;
 
-            case EVENT_PROGRESS_CHANGED:
-                if (mControlWindow.isShowing())
-                {
-                    // set Seek bar value
-                    mControlView.setSeekBarProgress(msg.getData().getInt("CurrentPostion"));
+                case EVENT_PROGRESS_CHANGED:
+                    if (mControlWindow.isShowing()) {
+                        // set Seek bar value
+                        mControlView.setSeekBarProgress(msg.getData().getInt("CurrentPostion"));
 
-                    // set Seek bar secondary value
-                    mControlView.setSeekBarSecondaryProgress(0);
+                        // set Seek bar secondary value
+                        mControlView.setSeekBarSecondaryProgress(0);
 
-                    // Update the Played time on Control bar
-                    mControlView.setPlayedText(msg.getData().getString("PlayedTime"));
-                    mControlView.setDurationText(msg.getData().getString("DurationTime"));
-                }
-                break;
+                        // Update the Played time on Control bar
+                        mControlView.setPlayedText(msg.getData().getString("PlayedTime"));
+                        mControlView.setDurationText(msg.getData().getString("DurationTime"));
+                    }
+                    break;
 
-            default:
-                Logger.i("Unknown event, msg.what = " + msg.what + ".");
-                break;
+                default:
+                    Logger.i("Unknown event, msg.what = " + msg.what + ".");
+                    break;
             }
 
             super.handleMessage(msg);
         }
     };
 
-    public boolean needCombineCap()
-    {
+    public boolean needCombineCap() {
         return (mCurrentMedia != null && mCurrentMedia.vType != null && !mCurrentMedia.vType.endsWith("BroadcastVideo") && mMediaPlayer != null && mMediaPlayer.isPlaying());
     }
 
-    public Bitmap getVideoCap()
-    {
+    public Bitmap getVideoCap() {
         Bitmap bitmap = mMediaRetriever.getFrameAtTime(mMediaPlayer.getCurrentPosition(), MediaMetadataRetriever.OPTION_NEXT_SYNC);
-        if (bitmap != null)
-        {
+        if (bitmap != null) {
             int swidth = bitmap.getWidth();
             int sheight = bitmap.getHeight();
             float scaleWidht = (float) mWidth / swidth;
@@ -1319,12 +1148,10 @@ public class MultiMediaView extends PosterBaseView
         return null;
     }
 
-/////////////////////////////////////////////////////////////////////////////////////////
-    private void decodeGifPicture(final MediaInfoRef picInfo)
-    {
+    /////////////////////////////////////////////////////////////////////////////////////////
+    private void decodeGifPicture(final MediaInfoRef picInfo) {
         // add decode info to the hash map
-        if ((mDecodeInfo = getGifDecodeInfo(picInfo)) == null)
-        {
+        if ((mDecodeInfo = getGifDecodeInfo(picInfo)) == null) {
             mDecodeInfo = new GifDecodeInfo();
             mGifDecodeInfoMap.put(picInfo.verifyCode, mDecodeInfo);
         }
@@ -1336,28 +1163,19 @@ public class MultiMediaView extends PosterBaseView
         InputStream isImgBuff = createImgInputStream(picInfo);
 
         // start decoder GIF file
-        if (isImgBuff != null)
-        {
-            mGifDecoder = new GifDecoder(isImgBuff, new GifAction()
-            {
+        if (isImgBuff != null) {
+            mGifDecoder = new GifDecoder(isImgBuff, new GifAction() {
                 @Override
-                public void parseOk(boolean parseStatus, int frameIndex)
-                {
-                    if (mDecodeInfo != null && mGifDecoder != null)
-                    {
-                        if (frameIndex == -1)
-                        {
+                public void parseOk(boolean parseStatus, int frameIndex) {
+                    if (mDecodeInfo != null && mGifDecoder != null) {
+                        if (frameIndex == -1) {
                             mDecodeInfo.setFrameCount(mGifDecoder.getFrameCount());
                             mDecodeInfo.setDecodeState(GifDecodeInfo.DECODE_COMPLATED);
-                        }
-                        else
-                        {
+                        } else {
                             mDecodeInfo.setDecodeState(GifDecodeInfo.DECODING_STATE);
-                            if (parseStatus)
-                            {
+                            if (parseStatus) {
                                 GifFrame frame = mGifDecoder.getFrame(frameIndex - 1);
-                                if (frame != null && frame.image != null)
-                                {
+                                if (frame != null && frame.image != null) {
                                     Bitmap tmpBmp = frame.image;
                                     mDecodeInfo.addFrameDelay(frame.delay);
                                     StringBuilder sbFileName = new StringBuilder();
@@ -1377,68 +1195,55 @@ public class MultiMediaView extends PosterBaseView
         }
     }
 
-    private GifDecodeInfo getGifDecodeInfo(MediaInfoRef gifInfo)
-    {
-        synchronized (mGifDecodeInfoMap)
-        {
-            if (mGifDecodeInfoMap != null && !mGifDecodeInfoMap.isEmpty())
-            {
+    private GifDecodeInfo getGifDecodeInfo(MediaInfoRef gifInfo) {
+        synchronized (mGifDecodeInfoMap) {
+            if (mGifDecodeInfoMap != null && !mGifDecodeInfoMap.isEmpty()) {
                 return mGifDecodeInfoMap.get(gifInfo.verifyCode);
             }
         }
         return null;
     }
 
-    private boolean isDecodeComplated(MediaInfoRef gifInfo)
-    {
+    private boolean isDecodeComplated(MediaInfoRef gifInfo) {
         GifDecodeInfo decodeInfo = getGifDecodeInfo(gifInfo);
         return (decodeInfo != null && decodeInfo.getDecodeState() == GifDecodeInfo.DECODE_COMPLATED);
     }
 
-    private void releaseGifDecoder()
-    {
-        if (mGifDecoder != null)
-        {
+    private void releaseGifDecoder() {
+        if (mGifDecoder != null) {
             mGifDecoder.free();
             mGifDecoder = null;
         }
     }
 
-    private boolean gifImgIsExsit(MediaInfoRef gifInfo)
-    {
+    private boolean gifImgIsExsit(MediaInfoRef gifInfo) {
         GifDecodeInfo decodeInfo = getGifDecodeInfo(gifInfo);
         String imgPath = PosterApplication.getGifImagePath(gifInfo.verifyCode);
-        if (decodeInfo != null && FileUtils.isExist(imgPath))
-        {
+        if (decodeInfo != null && FileUtils.isExist(imgPath)) {
             int nFrameCnt = decodeInfo.getFrameCount();
-            if (new File(imgPath).listFiles().length == nFrameCnt)
-            {
+            if (new File(imgPath).listFiles().length == nFrameCnt) {
                 return true;
             }
         }
         return false;
     }
 
-    private void terminateGifDecode()
-    {
-        if (mGifDecoder != null)
-        {
+    private void terminateGifDecode() {
+        if (mGifDecoder != null) {
             mGifDecoder.terminate();
         }
     }
 
-    private GifDecodeInfo getCurrentDecodeInfo()
-    {
+    private GifDecodeInfo getCurrentDecodeInfo() {
         return mDecodeInfo;
     }
 
-    private boolean playGif(MediaInfoRef picInfo) throws InterruptedException
-    {
+    private boolean playGif(MediaInfoRef picInfo) throws InterruptedException {
         // decode for GIF
         boolean isComplated = isDecodeComplated(picInfo);
         GifDecodeInfo decodeInfo = getGifDecodeInfo(picInfo);
         if ((decodeInfo == null) ||
-            (isComplated && !gifImgIsExsit(picInfo)))   // 未解码或已解码但文件不存在，则启动解码
+                (isComplated && !gifImgIsExsit(picInfo)))   // 未解码或已解码但文件不存在，则启动解码
         {
             // Start decode
             decodeGifPicture(picInfo);
@@ -1447,23 +1252,19 @@ public class MultiMediaView extends PosterBaseView
             decodeInfo = getCurrentDecodeInfo();
 
             // Wait for decode
-            while (decodeInfo.getDecodeState() != GifDecodeInfo.DECODE_COMPLATED)
-            {
+            while (decodeInfo.getDecodeState() != GifDecodeInfo.DECODE_COMPLATED) {
                 Thread.sleep(DEFAULT_THREAD_QUICKPERIOD);
             }
 
             // release resource for decoder
             releaseGifDecoder();
-        }
-        else if (decodeInfo != null && !isComplated)
-        {
+        } else if (decodeInfo != null && !isComplated) {
             return false;   // decoding by other view
         }
 
         // Show GIF
         boolean ret = false;
-        if (decodeInfo != null)
-        {
+        if (decodeInfo != null) {
             MediaInfoRef tempMedia = new MediaInfoRef();
             tempMedia.mediaType = "Image";
             tempMedia.source = "File";
@@ -1485,22 +1286,17 @@ public class MultiMediaView extends PosterBaseView
             Bitmap srcBmp = null;
             StringBuilder sbImgFile = new StringBuilder();
             String strPath = PosterApplication.getGifImagePath(picInfo.verifyCode);
-            for (int i = 0; i < decodeInfo.getFrameCount(); i++)
-            {
+            for (int i = 0; i < decodeInfo.getFrameCount(); i++) {
                 sbImgFile.setLength(0);
                 sbImgFile.append(strPath);
                 sbImgFile.append(File.separator);
                 sbImgFile.append(i).append(".jpg");
                 tempMedia.filePath = sbImgFile.toString();
-                if ((srcBmp = getBitMap(tempMedia, true)) != null)
-                {
-                    try
-                    {
+                if ((srcBmp = getBitMap(tempMedia, true)) != null) {
+                    try {
                         ret = true;
                         showPicture(srcBmp, NONE);
-                    }
-                    catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         e.printStackTrace();
                         continue;
                     }

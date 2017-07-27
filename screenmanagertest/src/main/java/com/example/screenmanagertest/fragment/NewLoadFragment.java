@@ -42,18 +42,24 @@ public class NewLoadFragment extends SupportFragment {
     private FrameLayout mMainLayout = null;
     private Context context = null;
     private Set<PosterBaseView> mSubWndCollection = null; // 屏幕布局信息
+    private boolean misFirst=false;
 
+    public static NewLoadFragment newInstance(ArrayList<SubWindowInfoRef> subWndList, Context context,boolean isFirst) {
+        if(context!=null){
+            //        this.context=context;
+            NewLoadFragment fragment = new NewLoadFragment();
+            Bundle bundle = new Bundle();
+            ArrayList list = new ArrayList(); //这个list用于在budnle中传递 需要传递的ArrayList<Object>
+            list.add(subWndList);
+            list.add(context);
+            list.add(isFirst);
+            bundle.putParcelableArrayList("bundleKey", list);
+            fragment.setArguments(bundle);
+            return fragment;
+        }else {
+            return null;
+        }
 
-    public static NewLoadFragment newInstance(ArrayList<SubWindowInfoRef> subWndList, Context context) {
-//        this.context=context;
-        NewLoadFragment fragment = new NewLoadFragment();
-        Bundle bundle = new Bundle();
-        ArrayList list = new ArrayList(); //这个list用于在budnle中传递 需要传递的ArrayList<Object>
-        list.add(subWndList);
-        list.add(context);
-        bundle.putParcelableArrayList("bundleKey", list);
-        fragment.setArguments(bundle);
-        return fragment;
     }
 
 
@@ -68,6 +74,7 @@ public class NewLoadFragment extends SupportFragment {
 
                 loadList = (ArrayList<SubWindowInfoRef>) list.get(0);//强转成你自己定义的list，这样list2就是你传过来的那个list了。
                 this.context = (Context) list.get(1);
+                this.misFirst=(boolean) list.get(2);
             } else {
                 Log.i("jialei", "loadList.size=0");
             }
@@ -259,16 +266,47 @@ public class NewLoadFragment extends SupportFragment {
     @Override
     public void onDetach() {
         super.onDetach();
-
+        if(misFirst){
         try {
             Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
             childFragmentManager.setAccessible(true);
             childFragmentManager.set(this, null);
-
         } catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+        }
+
+
     }
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//        Log.i("jialei","onDetach");
+//        try {
+//            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+//            childFragmentManager.setAccessible(true);
+//            childFragmentManager.set(this, null);
+//        } catch (NoSuchFieldException e) {
+//            throw new RuntimeException(e);
+//        } catch (IllegalAccessException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//@Override
+//public void onDestroyView() {
+//// TODO Auto-generated method stub
+//    super.onDestroyView();
+//    try {
+//        Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+//        childFragmentManager.setAccessible(true);
+//        childFragmentManager.set(this, null);
+//
+//    } catch (NoSuchFieldException e) {
+//        throw new RuntimeException(e);
+//    } catch (IllegalAccessException e) {
+//        throw new RuntimeException(e);
+//    }
+//}
 }

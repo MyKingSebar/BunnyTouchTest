@@ -120,11 +120,18 @@ public class MainActivity extends SupportActivity {
         return screenWidth;
     }
     public void loadNewProgram2(ArrayList<SubWindowInfoRef> subWndList) {
-        start(NewLoadFragment.newInstance(subWndList,this));
+        start(NewLoadFragment.newInstance(subWndList,this,false));
     }
     // 加载新节目
     public void loadNewProgram(ArrayList<SubWindowInfoRef> subWndList) {
-        loadRootFragment(R.id.fl, NewLoadFragment.newInstance(subWndList,this))  ;
+//        firstNewLoadFragment nf= firstNewLoadFragment.newInstance(subWndList,this);
+//        if(nf!=null){
+//            Log.i("jialei","nf!=null");
+//            loadRootFragment(R.id.fl,nf)  ;
+//        }else{
+//            Log.i("jialei","nf==null");
+//        }
+        loadRootFragment(R.id.fl, NewLoadFragment.newInstance(subWndList,this,true));
 //        start(NewLoadFragment.newInstance(subWndList,this));
     }
 
