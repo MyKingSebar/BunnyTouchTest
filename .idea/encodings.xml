@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/ControllerTouch" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/common/FileUtils.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/gifdecode/GifAction.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/gifdecode/GifDecodeInfo.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/gifdecode/GifDecoder.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/gifdecode/GifFrame.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/power/PowerOnOffManager.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/power/SysCtrlService.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/power/common/CommonActions.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/power/onoffserver/SysCtrlReceiver.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/screenmanagertest/src/main/java/com/example/screenmanagertest/power/onoffserver/SysCtrlService.java" charset="UTF-8" />

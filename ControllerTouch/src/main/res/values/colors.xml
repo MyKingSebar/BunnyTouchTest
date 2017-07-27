@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="c_clock">#ffbb60bb</color>
+    <color name="white">#FFFFFF</color><!--白色 -->
+    <!-- 半背景透明度(高) -->
+    <color name="half_transparent">#55ffffff</color>
+    <color name="gray">#808080</color><!--灰色 -->
+
+    <color name="black_overlay">#66000000</color>
+
+    <color name="bg_view_gray">#F0F0F0</color>
+    <color name="btn_gray">#F9F9F9</color>
+    <color name="btn_gray_pressed">#E3E3E3</color>
+
+    <color name="text_color_white">#FFFFFF</color>
+
+    <color name="text_color_gray">#767D91</color>
+    <color name="text_color_black">#43484C</color>
+
+
+</resources>

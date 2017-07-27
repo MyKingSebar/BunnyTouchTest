@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/clock_onOffTime"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:singleLine="true"
+        android:layout_marginRight="30dp"
+        android:text="--"
+        android:textSize="24sp" />
+
+    <CheckBox
+        android:id="@+id/check_sunday"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:clickable="false"
+        android:checked="false"
+        android:text="@string/week_sunday" />
+
+    <CheckBox
+        android:id="@+id/check_monday"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:checked="false"
+        android:clickable="false"
+        android:text="@string/week_monday" />
+
+    <CheckBox
+        android:id="@+id/check_tuesday"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:checked="false"
+        android:clickable="false"
+        android:text="@string/week_tuesday" />
+
+    <CheckBox
+        android:id="@+id/check_wedsday"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:checked="false"
+        android:clickable="false"
+        android:text="@string/week_wednesday" />
+
+    <CheckBox
+        android:id="@+id/check_thirsday"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:checked="false"
+        android:clickable="false"
+        android:text="@string/week_thursday" />
+
+    <CheckBox
+        android:id="@+id/check_friday"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:checked="false"
+        android:clickable="false"
+        android:text="@string/week_friday" />
+
+    <CheckBox
+        android:id="@+id/check_staday"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:checked="false"
+        android:clickable="false"
+        android:text="@string/week_saturday" />
+
+</LinearLayout>

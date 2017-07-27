@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clock_boottime"
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/et_clock_onTime"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:digits="1234567890:"
+                android:inputType="datetime"
+                android:maxLength="8"
+                android:singleLine="true" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clock_Shutdowntime"
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/et_clock_offTime"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:digits="1234567890:"
+                android:inputType="datetime"
+                android:maxLength="8"
+                android:singleLine="true" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="2" >
+
+                <TableRow>
+
+                    <CheckBox
+                        android:id="@+id/osd_onoffTime_mon_dgcbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/week_monday"
+                        android:textSize="18sp"
+                        android:textColor="@color/gray" />
+
+                    <CheckBox
+                        android:id="@+id/osd_onoffTime_tue_dgcbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/week_tuesday"
+                        android:textSize="18sp"
+                        android:textColor="@color/gray" />
+
+                    <CheckBox
+                        android:id="@+id/osd_onoffTime_wed_dgcbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/week_wednesday"
+                        android:textSize="18sp"
+                        android:textColor="@color/gray" />
+
+                    <CheckBox
+                        android:id="@+id/osd_onoffTime_thu_dgcbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/week_thursday"
+                        android:textSize="18sp"
+                        android:textColor="@color/gray" />
+
+                    <CheckBox
+                        android:id="@+id/osd_onoffTime_fri_dgcbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/week_friday"
+                        android:textSize="18sp"
+                        android:textColor="@color/gray" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <CheckBox
+                        android:id="@+id/osd_onoffTime_sat_dgcbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/week_saturday"
+                        android:textSize="18sp"
+                        android:textColor="@color/gray" />
+
+                    <CheckBox
+                        android:id="@+id/osd_onoffTime_sun_dgcbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/week_sunday"
+                        android:textSize="18sp"
+                        android:textColor="@color/gray" />
+
+                </TableRow>
+
+            </TableLayout>
+
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

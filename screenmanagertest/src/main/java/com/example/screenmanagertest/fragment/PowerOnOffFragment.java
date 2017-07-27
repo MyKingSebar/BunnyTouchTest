@@ -24,6 +24,7 @@ import com.example.screenmanagertest.PosterApplication;
 import com.example.screenmanagertest.R;
 import com.example.screenmanagertest.common.DialogUtil;
 import com.example.screenmanagertest.common.Logger;
+import com.example.screenmanagertest.power.PowerOnOffManager;
 import com.example.screenmanagertest.power.SysParamManager;
 import com.example.screenmanagertest.power.adapter.ClockAdapter;
 import com.example.screenmanagertest.power.adapter.ClockItem;
@@ -101,6 +102,12 @@ public class PowerOnOffFragment extends SupportFragment {
     @Override
     public void onSupportInvisible() {
         super.onSupportInvisible();
+        saveOsdParam();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
         saveOsdParam();
     }
 
@@ -444,7 +451,8 @@ public class PowerOnOffFragment extends SupportFragment {
     private void saveOsdParam() {
         Log.i("jialei","saveOsdParam");
         saveClockParam();
-        context.sendBroadcast(new Intent().setAction("com.ys.powerservice.updatedatabase"));
+        PowerOnOffManager.getInstance().checkAndSetOnOffTime(PowerOnOffManager.AUTOSCREENOFF_COMMON);
+//        context.sendBroadcast(new Intent().setAction("com.ys.powerservice.updatedatabase"));
     }
 
 

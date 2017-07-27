@@ -1,0 +1,54 @@
+<resources>
+
+    <string name="app_name">A</string>
+
+    <!-- clock -->
+    <string name="clock_title_top">(长按条目增加/更改/删除时间段)</string>
+    <string name="clock_header">开机时间--关机时间</string>
+    <string name="clock_boottime">开机时间：</string>
+    <string name="clock_Shutdowntime">关机时间：</string>
+    <string name="clock_addbtn">新增时间</string>
+    <!-- 设置界面的四项大分类 -->
+    <string name="str_server">服务器设置</string>
+    <string name="str_clock">定时开关机</string>
+    <string name="str_about">关于产品</string>
+    <string name="str_tools">系统工具</string>
+    <string name="str_on">定时开机了</string>
+    <string name="str_off">定时关机了</string>
+
+    <string name="week_sunday">日</string>
+    <string name="week_monday">一</string>
+    <string name="week_tuesday">二</string>
+    <string name="week_wednesday">三</string>
+    <string name="week_thursday">四</string>
+    <string name="week_friday">五</string>
+    <string name="week_saturday">六</string>
+
+
+    <!-- 自动关屏提示 -->
+    <string name="autoscreenoff_prompt_title">自动关机</string>
+    <string name="autoscreenoff_prompt_msg">当前时间为关机时间，系统将在三分钟后自动关机！如有需要，请通过服务端APK调整自动开关机时间,并重启</string>
+6
+
+    <!-- clock dialog -->
+    <string name="clock_dialog_header">定时开关机参数设置</string>
+    <string name="clock_dialog_refrech">刷新列表</string>
+    <string name="clock_dialog_add">增加时间段</string>
+    <string name="clock_dialog_modify">修改时间段</string>
+    <string name="clock_dialog_del">删除时间段</string>
+    <string name="clock_dialog_delall">清空所有时间段</string>
+    <string name="clock_dialog_warn_invalidtime">请注意输入正确的时间格式（时:分:秒）！</string>
+    <string name="clock_dialog_warn_format">关机时间必须大于开机时间,请注意输入的格式</string>
+    <string name="clock_dialog_warn_timeconfilct">当前时间与已有的时间段冲突</string>
+    <string name="clock_dialog_warn_timeinvalid">开关机时间间隔必须大于%1$d分钟</string>
+    <string name="clock_dialog_warn_timenumtransfinite">开关机时间段已超出最大组数(10组), 不能继续添加.</string>
+
+    <!-- other -->
+    <string name="enter">确定</string>
+    <string name="retry1">重试</string>
+    <string name="cancel">取消</string>
+    <string name="close">关闭</string>
+    <string name="update">更新</string>
+    <string name="wait1">请稍候...</string>
+    <string name="dialog_quit">退出</string>
+</resources>

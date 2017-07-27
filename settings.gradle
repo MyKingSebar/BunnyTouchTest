@@ -1,1 +1,1 @@
-include ':screenmanagertest', 'fragmentation'
+include ':screenmanagertest', 'fragmentation', 'ControllerTouch'

@@ -1,0 +1,50 @@
+[
+    {
+        "outputFile": "F:\\jialei\\githubclone\\BunnyTouchTest\\ControllerTouch\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh-rCN\\values-zh-rCN.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 44,
+                    "endOffset": 95
+                },
+                "from": {
+                    "file": "F:\\jialei\\githubclone\\BunnyTouchTest\\ControllerTouch\\src\\main\\res\\values-zh-rCN\\strings.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 19,
+                        "endColumn": 44,
+                        "endOffset": 59
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "F:\\jialei\\githubclone\\7.5test\\YSSysControllerAD320\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh-rCN\\values-zh-rCN.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 44,
+                    "endOffset": 95
+                },
+                "from": {
+                    "file": "F:\\jialei\\githubclone\\7.5test\\YSSysControllerAD320\\src\\main\\res\\values-zh-rCN\\strings.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 19,
+                        "endColumn": 44,
+                        "endOffset": 59
+                    }
+                }
+            }
+        ]
+    }
+]
