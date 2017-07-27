@@ -51,10 +51,6 @@ public class MainActivity extends SupportActivity {
         // 启动屏幕管理线程
         if (ScreenManager.getInstance() == null) {
             ScreenManager.createInstance(this).startRun();
-            Log.i("jialei","ScreenManager.getInstance() == null");
-        }else{
-            Log.i("jialei","ScreenManager.getInstance() != null");
-            ScreenManager.getInstance().startRun();
         }
 //        PosterApplication.getInstance().initAppParam();
         PowerOnOffManager.getInstance().checkAndSetOnOffTime(PowerOnOffManager.AUTOSCREENOFF_COMMON);
@@ -65,25 +61,6 @@ public class MainActivity extends SupportActivity {
         super.onResume();
         initService();
         PowerOnOffManager.getInstance().checkAndSetOnOffTime(PowerOnOffManager.AUTOSCREENOFF_COMMON);
-    }
-
-    @Override
-    protected void onDestroy() {
-        Log.i("jialei","ActivityDestoy");
-        super.onDestroy();
-        // 结束屏幕管理线程
-        if (ScreenManager.getInstance() != null) {
-            ScreenManager.getInstance().stopRun();
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i("jialei","ActivityonStop");
-//        if (ScreenManager.getInstance() != null) {
-//            ScreenManager.getInstance().stopRun();
-//        }
     }
 
     private void initScreen() {

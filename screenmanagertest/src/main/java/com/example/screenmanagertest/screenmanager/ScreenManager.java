@@ -33,22 +33,7 @@ import java.util.List;
  */
 
 public class ScreenManager {
-    private BroadcastReceiver broadcastReceiver= new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.hasExtra("xml")) {
-                receiveXML = intent.getStringExtra("xml");
-                Log.i("jialei", "receiveXML:" + receiveXML);
-                if (receiveXML != null && !TextUtils.isEmpty(receiveXML)) {
-//                        load(receiveXML);
-//                        handler.sendEmptyMessage(1);
-//                        aThread.start();
-                    receiverun=true;
-                }
 
-            }
-        }
-    };;
     private boolean receiverun=false;
     private static final int IDLE_STATE = 0;
     private static final int PLAYING_NORMAL_PROGRAM = 1;
@@ -567,7 +552,22 @@ public class ScreenManager {
             ((MainActivity) mContext).registerReceiver(broadcastReceiver, udpRcvIntentFilter);
         }
 
+        private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.hasExtra("xml")) {
+                    receiveXML = intent.getStringExtra("xml");
+                    Log.i("jialei", "receiveXML:" + receiveXML);
+                    if (receiveXML != null && !TextUtils.isEmpty(receiveXML)) {
+//                        load(receiveXML);
+//                        handler.sendEmptyMessage(1);
+//                        aThread.start();
+                        receiverun=true;
+                    }
 
+                }
+            }
+        };
         Thread aThread = new Thread() {
             @Override
             public void run() {
@@ -930,8 +930,6 @@ public class ScreenManager {
             mScreenDaemonThread.setRunFlag(false);
             mScreenDaemonThread.interrupt();
             mScreenDaemonThread = null;
-            IntentFilter udpRcvIntentFilter = new IntentFilter("touchBroadcast");
-            ((MainActivity) mContext).unregisterReceiver(broadcastReceiver);
         }
 
 

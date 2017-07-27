@@ -1,7 +1,6 @@
 package com.example.screenmanagertest.fragment;
 
 
-import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -24,7 +23,6 @@ import com.example.screenmanagertest.view.MultiMediaView;
 import com.example.screenmanagertest.view.PosterBaseView;
 import com.example.screenmanagertest.view.TimerView;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -119,60 +117,60 @@ public class NewLoadFragment extends SupportFragment {
         }
     }
 
-//    @Override
-//    public void onDestroy() {
-//        Log.i("jialei1", "onDestroy");
-//        super.onDestroy();
-//    }
-//
-//    @Override
-//    public void onStart() {
-//        Log.i("jialei1", "onStart");
-//        super.onStart();
-//    }
-//
-//    @Override
-//    public void onDestroyView() {
-//        Log.i("jialei1", "onDestroyView");
-//        super.onDestroyView();
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        Log.i("jialei1", "onStop");
-//        super.onStop();
-//    }
-//
-//    @Override
-//    public void onResume() {
-//        Log.i("jialei1", "onResume");
-//        if (mSubWndCollection != null) {
-//            if (mMainLayout.getChildCount() > 0) {
-//                for (PosterBaseView wnd : mSubWndCollection) {
-//                    wnd.onViewResume();
-//                }
-//            } else {
-//                for (PosterBaseView wnd : mSubWndCollection) {
-//                    mMainLayout.addView(wnd);
-//                    wnd.onViewResume();
-//                }
-//            }
-//
-//        }
-//        super.onResume();
-//    }
-//
-//    @Override
-//    public void onPause() {
-//        Log.i("jialei1", "onPause");
-//        if (mSubWndCollection != null) {
-//            for (PosterBaseView wnd : mSubWndCollection) {
-//                wnd.onViewPause();
-//            }
-//        }
-//        mMainLayout.removeAllViews();
-//        super.onPause();
-//    }
+    @Override
+    public void onDestroy() {
+        Log.i("jialei1", "onDestroy");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onStart() {
+        Log.i("jialei1", "onStart");
+        super.onStart();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.i("jialei1", "onDestroyView");
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onStop() {
+        Log.i("jialei1", "onStop");
+        super.onStop();
+    }
+
+    @Override
+    public void onResume() {
+        Log.i("jialei1", "onResume");
+        if (mSubWndCollection != null) {
+            if (mMainLayout.getChildCount() > 0) {
+                for (PosterBaseView wnd : mSubWndCollection) {
+                    wnd.onViewResume();
+                }
+            } else {
+                for (PosterBaseView wnd : mSubWndCollection) {
+                    mMainLayout.addView(wnd);
+                    wnd.onViewResume();
+                }
+            }
+
+        }
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Log.i("jialei1", "onPause");
+        if (mSubWndCollection != null) {
+            for (PosterBaseView wnd : mSubWndCollection) {
+                wnd.onViewPause();
+            }
+        }
+        mMainLayout.removeAllViews();
+        super.onPause();
+    }
 
     // 加载新节目
     public void loadNewProgram(ArrayList<SubWindowInfoRef> subWndList) {
@@ -256,19 +254,5 @@ public class NewLoadFragment extends SupportFragment {
         }
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
 
-        try {
-            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
-            childFragmentManager.setAccessible(true);
-            childFragmentManager.set(this, null);
-
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
