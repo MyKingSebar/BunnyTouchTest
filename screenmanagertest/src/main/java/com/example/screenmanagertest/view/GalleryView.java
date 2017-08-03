@@ -26,12 +26,18 @@ public class GalleryView extends PosterBaseView
     @SuppressWarnings("unused")
     private ImageButton right = null;
 
-    public GalleryView(Context context)
+    public GalleryView(Context context,boolean issun)
     {
         super(context);
         initView(context);
+        setIssun(issun);
     }
-    
+//    public GalleryView(Context context)
+//    {
+//        super(context);
+//        initView(context);
+//    }
+
     public GalleryView(Context context, AttributeSet attrs)
     {
         super(context, attrs);

@@ -30,10 +30,15 @@ public class AudioView extends PosterBaseView {
 
     private UpdateThread mUpdateThreadHandle = null;
 
-    public AudioView(Context context) {
+    public AudioView(Context context,boolean issun) {
         super(context);
         initView(context);
+        setIssun(issun);
     }
+//    public AudioView(Context context) {
+//        super(context);
+//        initView(context);
+//    }
 
     public AudioView(Context context, AttributeSet attrs) {
         super(context, attrs);

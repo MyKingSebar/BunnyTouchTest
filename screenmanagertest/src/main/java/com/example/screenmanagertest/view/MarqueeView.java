@@ -56,11 +56,17 @@ public class MarqueeView extends PosterBaseView
     private final static int        EVENT_SHOWPROGRESSBAR   = 0x6001;
     private final static int        EVENT_MARQUEE_TEXT      = 0x6002;
 
-    public MarqueeView(Context context)
+    public MarqueeView(Context context,boolean issun)
     {
         super(context);
         initView(context);
+        setIssun(issun);
     }
+//    public MarqueeView(Context context)
+//    {
+//        super(context);
+//        initView(context);
+//    }
 
     public MarqueeView(Context context, AttributeSet attrs)
     {

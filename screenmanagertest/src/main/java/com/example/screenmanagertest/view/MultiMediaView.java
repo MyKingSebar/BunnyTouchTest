@@ -69,6 +69,8 @@ import com.example.screenmanagertest.screenmanager.MediaInfoRef;
 import com.example.screenmanagertest.screenmanager.ScreenManager;
 
 public class MultiMediaView extends PosterBaseView {
+
+
     private Intent intent = null;
     private Context context = null;
     private final static int EVENT_BASE = 0x9000;
@@ -137,10 +139,15 @@ public class MultiMediaView extends PosterBaseView {
     private GifDecodeInfo mDecodeInfo = null;
     private HashMap<String, GifDecodeInfo> mGifDecodeInfoMap = null;
 
-    public MultiMediaView(Context context) {
+    public MultiMediaView(Context context,boolean issun) {
         super(context);
         initView(context, false);
+        setIssun(issun);
     }
+//    public MultiMediaView(Context context) {
+//        super(context);
+//        initView(context, false);
+//    }
 
     public MultiMediaView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -152,10 +159,15 @@ public class MultiMediaView extends PosterBaseView {
         initView(context, false);
     }
 
-    public MultiMediaView(Context context, boolean hasSurface) {
+    public MultiMediaView(Context context, boolean hasSurface,boolean issun) {
         super(context);
+        setIssun(issun);
         initView(context, hasSurface);
     }
+//    public MultiMediaView(Context context, boolean hasSurface) {
+//        super(context);
+//        initView(context, hasSurface);
+//    }
 
     private void initView(Context context, boolean isShowSurface) {
         this.context = context;

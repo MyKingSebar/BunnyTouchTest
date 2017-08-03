@@ -24,6 +24,16 @@ public class SubWindowInfoRef implements Serializable
     private List<MediaInfoRef> mMediaList = null;
     private String touch=null;
 
+    public String getLayout() {
+        return layout;
+    }
+
+    public void setLayout(String layout) {
+        this.layout = layout;
+    }
+
+    private String layout=null;
+
     public String getTouch() {
         return touch;
     }

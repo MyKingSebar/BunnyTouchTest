@@ -40,17 +40,17 @@ import com.example.screenmanagertest.screenmanager.MediaInfoRef;
 import com.example.screenmanagertest.screenmanager.ScreenManager;
 
 public abstract class PosterBaseView extends FrameLayout {
+    protected  boolean issun=false;
+
+
+
     protected Context            mContext      = null;
 
     protected  String Touch=null;
 
-    public String getViewTouch() {
-        return Touch;
-    }
+    protected  String smallLayout=null;
 
-    public void setViewTouch(String touch) {
-        Touch = touch;
-    }
+
 
     // View attributes
     protected int                mXPos         = 0;
@@ -91,7 +91,27 @@ public abstract class PosterBaseView extends FrameLayout {
         super(context, attrs, defStyle);
         mContext = context;
     }
+    public String getSmallLayout() {
+        return smallLayout;
+    }
 
+    public void setSmallLayout(String viewLayout) {
+        smallLayout = viewLayout;
+    }
+    public boolean getissun() {
+        return issun;
+    }
+
+    public void setIssun(boolean issun) {
+        this.issun = issun;
+    }
+    public String getViewTouch() {
+        return Touch;
+    }
+
+    public void setViewTouch(String touch) {
+        Touch = touch;
+    }
     public void setViewName(String viewName)
     {
         mViewName = viewName;

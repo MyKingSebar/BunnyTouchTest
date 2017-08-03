@@ -23,9 +23,10 @@ import java.util.Set;
 import me.yokeyword.fragmentation.SupportActivity;
 
 public class MainActivity extends SupportActivity {
-    private float mouseX=0;
-    private float mouseY=0;
+    private float mouseX = 0;
+    private float mouseY = 0;
 
+private ScreenManager screenManager=null;
 
     private Context mContext = null;
     private FrameLayout mMainLayout = null;
@@ -48,13 +49,22 @@ public class MainActivity extends SupportActivity {
         mMainLayout = ((FrameLayout) findViewById(R.id.fl));
         mMainLayout.setBackgroundColor(Color.BLACK);
 
+//        // 启动屏幕管理线程
+//        if (ScreenManager.getInstance() == null) {
+//            ScreenManager.createInstance(this).startRun();
+//            Log.i("jialei", "ScreenManager.getInstance() == null");
+//        } else {
+//            Log.i("jialei", "ScreenManager.getInstance() != null");
+//            ScreenManager.getInstance().startRun();
+//        }
         // 启动屏幕管理线程
-        if (ScreenManager.getInstance() == null) {
-            ScreenManager.createInstance(this).startRun();
-            Log.i("jialei","ScreenManager.getInstance() == null");
-        }else{
-            Log.i("jialei","ScreenManager.getInstance() != null");
-            ScreenManager.getInstance().startRun();
+        if (screenManager == null) {
+            screenManager=new ScreenManager(this,null,null);
+            screenManager.startRun();
+            Log.i("jialei", "ScreenManager.getInstance() == null");
+        } else {
+            Log.i("jialei", "ScreenManager.getInstance() != null");
+            screenManager.startRun();
         }
 //        PosterApplication.getInstance().initAppParam();
         PowerOnOffManager.getInstance().checkAndSetOnOffTime(PowerOnOffManager.AUTOSCREENOFF_COMMON);
@@ -69,11 +79,15 @@ public class MainActivity extends SupportActivity {
 
     @Override
     protected void onDestroy() {
-        Log.i("jialei","ActivityDestoy");
+        Log.i("jialei", "ActivityDestoy");
         super.onDestroy();
+//        // 结束屏幕管理线程
+//        if (ScreenManager.getInstance() != null) {
+//            ScreenManager.getInstance().stopRun();
+//        }
         // 结束屏幕管理线程
-        if (ScreenManager.getInstance() != null) {
-            ScreenManager.getInstance().stopRun();
+        if (screenManager!= null) {
+            screenManager.stopRun();
         }
         pop();
     }
@@ -81,7 +95,7 @@ public class MainActivity extends SupportActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i("jialei","ActivityonStop");
+        Log.i("jialei", "ActivityonStop");
 //        if (ScreenManager.getInstance() != null) {
 //            ScreenManager.getInstance().stopRun();
 //        }
@@ -92,7 +106,7 @@ public class MainActivity extends SupportActivity {
         PosterApplication.setScreenWidth(getScreenWidth());
     }
 
-    private void initService(){
+    private void initService() {
         Intent service = new Intent();
         service.setAction("com.ys.powerservice.sysctrlservice");
         startService(service);
@@ -105,24 +119,23 @@ public class MainActivity extends SupportActivity {
         DisplayMetrics metric = new DisplayMetrics();
         this.getWindowManager().getDefaultDisplay().getMetrics(metric);
         screenHeight = metric.heightPixels;
-
-
         return screenHeight;
     }
 
     public int getScreenWidth() {
         int screenWidth = 0;
-
         // 获取屏幕实际大小(以像素为单位)
         DisplayMetrics metric = new DisplayMetrics();
         this.getWindowManager().getDefaultDisplay().getMetrics(metric);
         screenWidth = metric.widthPixels;
-
         return screenWidth;
     }
+
+
     public void loadNewProgram2(ArrayList<SubWindowInfoRef> subWndList) {
-        start(NewLoadFragment.newInstance(subWndList,this,false));
+        start(NewLoadFragment.newInstance(subWndList, this, false));
     }
+
     // 加载新节目
     public void loadNewProgram(ArrayList<SubWindowInfoRef> subWndList) {
 //        firstNewLoadFragment nf= firstNewLoadFragment.newInstance(subWndList,this);
@@ -132,7 +145,7 @@ public class MainActivity extends SupportActivity {
 //        }else{
 //            Log.i("jialei","nf==null");
 //        }
-        loadRootFragment(R.id.fl, NewLoadFragment.newInstance(subWndList,this,true));
+        loadRootFragment(R.id.fl, NewLoadFragment.newInstance(subWndList, this, true));
 //        start(NewLoadFragment.newInstance(subWndList,this));
     }
 
@@ -271,23 +284,22 @@ public class MainActivity extends SupportActivity {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-switch (event.getAction()){
-    case MotionEvent.ACTION_DOWN:
-        mouseX=event.getX();
-        mouseY=event.getY();
-        break;
-    case MotionEvent.ACTION_UP:
-        if((event.getX()-mouseX)>200|(mouseX-event.getX())>200){
-            start(PowerOnOffFragment.newInstance(this));
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                mouseX = event.getX();
+                mouseY = event.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                if ((event.getX() - mouseX) > 200 | (mouseX - event.getX()) > 200) {
+                    start(PowerOnOffFragment.newInstance(this));
+                }
+
+                break;
+            case MotionEvent.ACTION_MOVE:
+
+                break;
+
         }
-
-        break;
-    case MotionEvent.ACTION_MOVE:
-
-        break;
-
-}
-
 
 
         return super.onTouchEvent(event);

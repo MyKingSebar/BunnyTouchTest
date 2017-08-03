@@ -55,11 +55,17 @@ public class DateTimeView extends PosterBaseView
     private static final int DATE_FORMAT_DAY_WEEK_TIME_CHINA = 10;
     private static final int DATE_FORMAT_TIME_WEEK_DAY_CHINA = 11;
 
-    public DateTimeView(Context context)
+    public DateTimeView(Context context,boolean issun)
     {
         super(context);
         initView(context);
+        setIssun(issun);
     }
+//    public DateTimeView(Context context)
+//    {
+//        super(context);
+//        initView(context);
+//    }
 
     public DateTimeView(Context context, AttributeSet attrs)
     {
@@ -131,7 +137,12 @@ public class DateTimeView extends PosterBaseView
                     Log.i("jialei","touch2:"+getViewTouch());
                     intent = new Intent();
                     intent.setAction("touchBroadcast");
-                    intent.putExtra("xml",getViewTouch());
+                    if(issun){
+                        intent.putExtra("sunxml",getViewTouch());
+
+                    }else{
+                        intent.putExtra("xml",getViewTouch());
+                    }
                     context.sendBroadcast(intent);
                 }
             });

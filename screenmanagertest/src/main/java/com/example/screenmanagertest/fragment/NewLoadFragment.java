@@ -23,6 +23,7 @@ import com.example.screenmanagertest.view.MarqueeView;
 import com.example.screenmanagertest.view.MultiMediaView;
 import com.example.screenmanagertest.view.PosterBaseView;
 import com.example.screenmanagertest.view.TimerView;
+import com.example.screenmanagertest.view.Window;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -71,7 +72,6 @@ public class NewLoadFragment extends SupportFragment {
         if (bundle != null) {
             ArrayList list = bundle.getParcelableArrayList("bundleKey");
             if (list.size() > 0) {
-
                 loadList = (ArrayList<SubWindowInfoRef>) list.get(0);//强转成你自己定义的list，这样list2就是你传过来的那个list了。
                 this.context = (Context) list.get(1);
                 this.misFirst=(boolean) list.get(2);
@@ -192,6 +192,7 @@ public class NewLoadFragment extends SupportFragment {
 
             // initialize
             String touch = null;
+            String viewLayout=null;
 
             int xPos = 0;
             int yPos = 0;
@@ -215,7 +216,8 @@ public class NewLoadFragment extends SupportFragment {
                 wndName = subWndInfo.getSubWindowName();
 
                 touch = subWndInfo.getTouch();
-                Log.i("jialei", "loadNewProgram.touch:" + touch);
+                viewLayout = subWndInfo.getLayout();
+
                 // 窗体位置
                 xPos = subWndInfo.getXPos();
                 yPos = subWndInfo.getYPos();
@@ -227,24 +229,29 @@ public class NewLoadFragment extends SupportFragment {
 
                 // 创建窗口
                 if (wndType.contains("Main") || wndType.contains("StandbyScreen")) {
-                    tempSubWnd = new MultiMediaView(context, true);
+                    tempSubWnd = new MultiMediaView(context, true,false);
                 } else if (wndType.contains("Image") || wndType.contains("Weather")) {
-                    tempSubWnd = new MultiMediaView(context);
+                    tempSubWnd = new MultiMediaView(context,false);
                 } else if (wndType.contains("Audio")) {
-                    tempSubWnd = new AudioView(context);
+                    tempSubWnd = new AudioView(context,false);
                 } else if (wndType.contains("Scroll")) {
-                    tempSubWnd = new MarqueeView(context);
+                    tempSubWnd = new MarqueeView(context,false);
                 } else if (wndType.contains("Clock")) {
-                    tempSubWnd = new DateTimeView(context);
+                    tempSubWnd = new DateTimeView(context,false);
                 } else if (wndType.contains("Gallery")) {
-                    tempSubWnd = new GalleryView(context);
+                    tempSubWnd = new GalleryView(context,false);
                 } else if (wndType.contains("Timer")) {
-                    tempSubWnd = new TimerView(context);
+                    tempSubWnd = new TimerView(context,false);
+                }else if(wndType.contains("Window")){
+                    tempSubWnd = new Window(context,false);
+                    Log.i("jialei","wndType.contains(\"Window\"),Layout="+viewLayout);
                 }
-
+//                Log.i("jialei", "loadNewProgram.touch:" + touch+"tempSubWnd != null"+(tempSubWnd != null));
+//                Log.i("jialei", "loadNewProgram.viewLayout:" + viewLayout+"tempSubWnd != null"+(tempSubWnd != null));
                 // 设置窗口参数，并添加
                 if (tempSubWnd != null) {
                     tempSubWnd.setViewTouch(touch);
+                    tempSubWnd.setSmallLayout(viewLayout);
                     tempSubWnd.setViewName(wndName);
                     tempSubWnd.setViewType(wndType);
                     tempSubWnd.setMediaList(mediaList);

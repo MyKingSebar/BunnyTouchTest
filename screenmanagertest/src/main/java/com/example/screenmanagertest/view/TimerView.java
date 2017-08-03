@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.format.Time;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 
 import com.example.screenmanagertest.R;
@@ -39,12 +40,18 @@ public class TimerView extends PosterBaseView
     private static final int TIMER_MODE_COUNTDOWN = 0;
     private static final int TIMER_MODE_ELAPSE = 1;
 
-    public TimerView(Context context)
+    public TimerView(Context context,Boolean issun)
     {
         super(context);
         initView(context);
+        setIssun(issun);
     }
-    
+//    public TimerView(Context context)
+//    {
+//        super(context);
+//        initView(context);
+//    }
+
     public TimerView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
@@ -59,6 +66,7 @@ public class TimerView extends PosterBaseView
     
     private void initView(Context context)
     {
+        Log.i("timeview","gettouch"+getViewTouch());
         Logger.d("Timer View initialize......");
 
         // Get layout from XML file

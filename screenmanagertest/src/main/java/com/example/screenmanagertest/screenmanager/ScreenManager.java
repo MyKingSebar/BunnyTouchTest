@@ -13,12 +13,14 @@ import android.text.TextUtils;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.example.screenmanagertest.MainActivity;
 import com.example.screenmanagertest.PosterApplication;
 import com.example.screenmanagertest.XMLpaser.XmlParser;
 import com.example.screenmanagertest.common.FileUtils;
 import com.example.screenmanagertest.common.Logger;
+import com.example.screenmanagertest.view.Window;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,10 +35,23 @@ import java.util.List;
  */
 
 public class ScreenManager {
+    private int screenManagerType=0;
+    private FrameLayout fl=null;
+    private String firstsmalllayout=null;
+
     private BroadcastReceiver broadcastReceiver= new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.hasExtra("xml")) {
+            if (intent.hasExtra("sunxml")){
+                receiveXML = intent.getStringExtra("sunxml");
+                Log.i("jialei", "receivesunXML:" + receiveXML);
+                if (receiveXML != null && !TextUtils.isEmpty(receiveXML)) {
+//                        load(receiveXML);
+//                        handler.sendEmptyMessage(1);
+//                        aThread.start();
+                    sunreceiverun=true;
+                }
+            }else if (intent.hasExtra("xml")) {
                 receiveXML = intent.getStringExtra("xml");
                 Log.i("jialei", "receiveXML:" + receiveXML);
                 if (receiveXML != null && !TextUtils.isEmpty(receiveXML)) {
@@ -49,7 +64,10 @@ public class ScreenManager {
             }
         }
     };;
+
+
     private boolean receiverun=false;
+    private boolean sunreceiverun=false;
     private static final int IDLE_STATE = 0;
     private static final int PLAYING_NORMAL_PROGRAM = 1;
 
@@ -104,24 +122,33 @@ public class ScreenManager {
     }
 
 
-    private ScreenManager(Context context) {
+    public ScreenManager(Context context, FrameLayout fl,String firstsmalllayout) {
         /*
          * This Class is a single instance mode, and define a private constructor to avoid external use the 'new'
          * keyword to instantiate a objects directly.
          */
         mContext = context;
+        this.fl=fl;
+        this.firstsmalllayout=firstsmalllayout;
     }
+//    private ScreenManager(Context context) {
+//        /*
+//         * This Class is a single instance mode, and define a private constructor to avoid external use the 'new'
+//         * keyword to instantiate a objects directly.
+//         */
+//        mContext = context;
+//    }
 
-    public static ScreenManager createInstance(Context context) {
-        if (mScreenManagerInstance == null && context != null) {
-            mScreenManagerInstance = new ScreenManager(context);
-        }
-        return mScreenManagerInstance;
-    }
-
-    public static ScreenManager getInstance() {
-        return mScreenManagerInstance;
-    }
+//    public static ScreenManager createInstance(Context context) {
+//        if (mScreenManagerInstance == null && context != null) {
+//            mScreenManagerInstance = new ScreenManager(context);
+//        }
+//        return mScreenManagerInstance;
+//    }
+//
+//    public static ScreenManager getInstance() {
+//        return mScreenManagerInstance;
+//    }
 
 
     private final class ScreenDaemon extends Thread {
@@ -149,6 +176,7 @@ public class ScreenManager {
             sb.append(LOCAL_NORMAL_PLAYLIST_FILENAME);
             return sb.toString();
         }
+
 
         private String obtainNormalPgmListsPath(String path) {
             StringBuilder sb = new StringBuilder();
@@ -344,13 +372,22 @@ public class ScreenManager {
         @Override
         public void run() {
             bindReceiver();
-            mNormalPgmFilePath = obtainNormalPgmFilePath();
-            Log.i("jialei", "mNormalPgmFilePath:" + mNormalPgmFilePath);
-//            mNormalProgramInfoList = getProgramScheduleFromXml(mNormalPgmFilePath);
-            firstPlayListPath = ((xmlpath) XmlFileParse(mNormalPgmFilePath, xmlpath.class)).start;
-            Log.i("jialei", "firstPlayListPath:" + firstPlayListPath);
-            load(firstPlayListPath);
-            aThread.start();
+            if(fl==null){
+                mNormalPgmFilePath = obtainNormalPgmFilePath();
+                Log.i("jialei", "fl==null mNormalPgmFilePath:" + mNormalPgmFilePath);
+                //            mNormalProgramInfoList = getProgramScheduleFromXml(mNormalPgmFilePath);
+                firstPlayListPath = ((xmlpath) XmlFileParse(mNormalPgmFilePath, xmlpath.class)).start;
+                Log.i("jialei", "firstPlayListPath:" + firstPlayListPath);
+                load(firstPlayListPath);
+                aThread.start();
+            }else{
+                load(firstsmalllayout);
+                sunaThread.start();
+                Log.i("jialei", "fl!=nullfirstsmalllayout:" + firstsmalllayout);
+            }
+
+
+
 //            while (mIsRun) {
 //                try {
 //                    if (!pgmPathIsAvalible()) {
@@ -507,7 +544,13 @@ public class ScreenManager {
                  * 服务器通知节目改变的原因之一
                  * 有可能是因为本地的节目列表丢失了，所以需要检查外部存储是否被拔走
                  */
-                mNormalPgmFilePath = obtainNormalPgmFilePath();
+
+                if(fl==null){
+                    mNormalPgmFilePath = obtainNormalPgmFilePath();
+                }else{
+                    mNormalPgmFilePath=obtainNormalPgmListsPath(firstsmalllayout);
+                }
+
                 mNormalProgramInfoList = getProgramScheduleFromXml(mNormalPgmFilePath);
                 Logger.i("loadProgramContent(): Stroge has been lost, can't load program.");
                 return false;
@@ -577,6 +620,29 @@ public class ScreenManager {
                         load2(receiveXML);
 //                    load(firstPlayListPath);
                         receiverun=false;
+                    }
+                    try
+                    {
+                        Thread.sleep(100);
+                    }
+                    catch (InterruptedException e)
+                    {
+                        break;
+                    }
+                }
+
+//                load(receiveXML);
+            }
+        };
+        Thread sunaThread = new Thread() {
+            @Override
+            public void run() {
+                while(true){
+                    if(sunreceiverun){
+
+                        load2(receiveXML);
+//                    load(firstPlayListPath);
+                        sunreceiverun=false;
                     }
                     try
                     {
@@ -703,6 +769,10 @@ public class ScreenManager {
                     if (area.Touch != null) {
                         Log.i("jialei", "area.Touch!=null");
                         tmpSubWndInfo.setTouch(area.Touch);
+                    }
+                    if (area.Layoutlist != null) {
+                        Log.i("jialei", "area.Layoutlist!=null");
+                        tmpSubWndInfo.setLayout(area.Layoutlist);
                     }
 
                     // Play List
@@ -883,14 +953,27 @@ public class ScreenManager {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case EVENT_SHOW_NORMAL_PROGRAM:
-                    if (mContext instanceof MainActivity) {
-                        ((MainActivity) mContext).loadNewProgram((ArrayList<SubWindowInfoRef>) msg.getData().getSerializable("subwindowlist"));
+                    if(fl==null){
+                        Log.i("jialei","EVENT_SHOW_NORMAL_PROGRAM fl==null");
+                        if (mContext instanceof MainActivity) {
+                            ((MainActivity) mContext).loadNewProgram((ArrayList<SubWindowInfoRef>) msg.getData().getSerializable("subwindowlist"));
+                        }
+                    }else {
+                        Log.i("jialei","EVENT_SHOW_NORMAL_PROGRAM fl!=null");
+                        ((Window)fl).loadNewProgram((ArrayList<SubWindowInfoRef>) msg.getData().getSerializable("subwindowlist"));
                     }
+
                     mLoadProgramDone = true;
                     return;
                 case EVENT_NEW:
-                    if (mContext instanceof MainActivity) {
-                        ((MainActivity) mContext).loadNewProgram2((ArrayList<SubWindowInfoRef>) msg.getData().getSerializable("subwindowlist"));
+                    if(fl==null){
+                        Log.i("jialei","EVENT_NEW fl==null");
+                        if (mContext instanceof MainActivity) {
+                            ((MainActivity) mContext).loadNewProgram2((ArrayList<SubWindowInfoRef>) msg.getData().getSerializable("subwindowlist"));
+                        }
+                    }else {
+                        Log.i("jialei","EVENT_NEW fl!=null");
+                        ((Window)fl).loadNewProgram2((ArrayList<SubWindowInfoRef>) msg.getData().getSerializable("subwindowlist"));
                     }
                     mLoadProgramDone = true;
                     return;
@@ -898,8 +981,14 @@ public class ScreenManager {
                 case EVENT_SHOW_IDLE_PROGRAM:
                 case EVENT_MEDIA_READY_SHOW_PROGRAM:
 
-                    if (mContext instanceof MainActivity) {
-                        ((MainActivity) mContext).loadNewProgram((ArrayList<SubWindowInfoRef>) msg.getData().getSerializable("subwindowlist"));
+                    if(fl==null){
+                        Log.i("jialei","EVENT_MEDIA_READY_SHOW_PROGRAM fl==null");
+                        if (mContext instanceof MainActivity) {
+                            ((MainActivity) mContext).loadNewProgram((ArrayList<SubWindowInfoRef>) msg.getData().getSerializable("subwindowlist"));
+                        }
+                    }else {
+                        Log.i("jialei","EVENT_MEDIA_READY_SHOW_PROGRAM fl!=null");
+                        ((Window)fl).loadNewProgram((ArrayList<SubWindowInfoRef>) msg.getData().getSerializable("subwindowlist"));
                     }
                     mLoadProgramDone = true;
                     return;
